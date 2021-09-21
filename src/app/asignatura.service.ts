@@ -8,7 +8,7 @@ export class AsignaturaService {
 
   constructor(private apiCallService: ApiCallServiceService) { 
   }
-  getAsignaturas(codigo:number){
+  getAsignaturas(){
     return this.apiCallService.get('intensificaciones');
   }
 
