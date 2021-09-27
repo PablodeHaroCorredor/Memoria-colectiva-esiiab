@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { IngenieriaswComponent } from './intensificaciones/ingenieriasw/ingenieriasw.component';
-import { IntensificacionesComponent} from './intensificaciones/intensificaciones.component';
+import { IntensificacionComponent } from './lista-intensificaciones/intensificacion/intensificacion.component';
+import { ListaIntensificacionesComponent } from './lista-intensificaciones/lista-intensificaciones.component';
+
 
 const routes: Routes = [
-  { path: 'intensificaciones', component: IntensificacionesComponent }
+  { path: 'lista-intensificaciones', component: ListaIntensificacionesComponent },
+  {path: 'lista-intensificaiones/:codigo', component: IntensificacionComponent}
 ];
 
 @NgModule({

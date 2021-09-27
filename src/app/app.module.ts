@@ -4,21 +4,20 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
-import { IntensificacionesComponent } from './intensificaciones/intensificaciones.component';
-import { IntensificacionesModule } from "./intensificaciones/intensificaciones-routing-module";
-import { DesarrollodbComponent } from './intensificaciones/ingenieriasw/desarrollodb/desarrollodb.component';
+import { ListaIntensificacionesComponent } from './lista-intensificaciones/lista-intensificaciones.component';
+import { IntensificacionComponent } from './lista-intensificaciones/intensificacion/intensificacion.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    IntensificacionesComponent,
-    DesarrollodbComponent
+    ListaIntensificacionesComponent,
+    IntensificacionComponent
+    
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
-    AppRoutingModule,
-    IntensificacionesModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

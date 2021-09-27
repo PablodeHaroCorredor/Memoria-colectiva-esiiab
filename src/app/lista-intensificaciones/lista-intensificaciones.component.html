@@ -1,0 +1,10 @@
+<div class="centered-content">
+    <button (click)="abrirIntensificacion('sw')">Ingeniería del Software</button>
+    <button (click)="abrirIntensificacion('co')">Computación</button>
+    <button (click)="abrirIntensificacion('ic')">Ingeniería de Computadores</button>
+    <button (click)="abrirIntensificacion('ti')">Tecnologías de la información</button>
+</div>
+
+<app-intensificacion #intesificacionId *ngIf="flag"></app-intensificacion>
+
+<router-outlet></router-outlet>
