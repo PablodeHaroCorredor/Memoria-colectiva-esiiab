@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AsignaturaService } from 'src/app/asignatura.service';
 
@@ -7,22 +7,21 @@ import { AsignaturaService } from 'src/app/asignatura.service';
   templateUrl: './intensificacion.component.html',
   styleUrls: ['./intensificacion.component.css']
 })
-export class IntensificacionComponent implements OnInit {
+export class IntensificacionComponent implements AfterViewInit {
   [x: string]: any;
 
   intensificaciones:any;
   constructor(private asignaturaService:AsignaturaService, private route: ActivatedRoute) {
     this.intensificaciones=[null];
    }
-
-  ngOnInit(): void {
-
+  ngAfterViewInit(): void {
     this.route.params.subscribe(
       (params:Params)=>{
         console.log(params);
       }
     )
   }
+
   actualizarInterfaz(intensificacion:string){
     return this.asignaturaService.getIntensificacion(intensificacion).subscribe((intensificaciones:any)=>{
       this.intensificaciones=intensificaciones;

@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { IntensificacionComponent } from './intensificacion/intensificacion.component';
 
 @Component({
@@ -8,15 +8,19 @@ import { IntensificacionComponent } from './intensificacion/intensificacion.comp
 })
 export class ListaIntensificacionesComponent implements AfterViewInit {
 
-  @ViewChild(IntensificacionComponent) private intComponent!: IntensificacionComponent;
+  @ViewChildren(IntensificacionComponent) intComponent!: IntensificacionComponent;
   flag=false;
+  inte:string ="";
   constructor() { 
   }
   ngAfterViewInit(){
+    this.abrirIntensificacion(this.inte);
   }
-  
+
   abrirIntensificacion(inte:string){
     this.flag=true;
     this.intComponent.actualizarInterfaz(inte);
   }
+  
+  
 }
