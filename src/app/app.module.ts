@@ -6,12 +6,16 @@ import { AppComponent } from './app.component';
 import {HttpClientModule} from '@angular/common/http';
 import { ListaIntensificacionesComponent } from './lista-intensificaciones/lista-intensificaciones.component';
 import { IntensificacionComponent } from './lista-intensificaciones/intensificacion/intensificacion.component';
+import { ListaOptativasComponent } from './lista-optativas/lista-optativas.component';
+import { AsignaturaComponent } from './lista-intensificaciones/intensificacion/asignatura/asignatura.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     ListaIntensificacionesComponent,
-    IntensificacionComponent
+    IntensificacionComponent,
+    ListaOptativasComponent,
+    AsignaturaComponent
     
   ],
   imports: [

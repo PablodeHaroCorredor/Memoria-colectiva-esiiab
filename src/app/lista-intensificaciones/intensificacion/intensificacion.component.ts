@@ -7,14 +7,13 @@ import { AsignaturaService } from 'src/app/asignatura.service';
   templateUrl: './intensificacion.component.html',
   styleUrls: ['./intensificacion.component.css']
 })
-export class IntensificacionComponent implements AfterViewInit {
-  [x: string]: any;
-
-  intensificaciones:any;
+export class IntensificacionComponent implements OnInit {
+  
+  intens: any;
   constructor(private asignaturaService:AsignaturaService, private route: ActivatedRoute) {
-    this.intensificaciones=[null];
+    
    }
-  ngAfterViewInit(): void {
+  ngOnInit(){
     this.route.params.subscribe(
       (params:Params)=>{
         console.log(params);
@@ -22,9 +21,9 @@ export class IntensificacionComponent implements AfterViewInit {
     )
   }
 
-  actualizarInterfaz(intensificacion:string){
-    return this.asignaturaService.getIntensificacion(intensificacion).subscribe((intensificaciones:any)=>{
-      this.intensificaciones=intensificaciones;
+  public actualizarInterfaz(intensificacion:string){
+    return this.asignaturaService.getIntensificacion(intensificacion).subscribe((intens: any)=>{
+      this.intens=intens;
     })
      
   }

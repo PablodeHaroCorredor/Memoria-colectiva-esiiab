@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const AsignaturaSchema = new mongoose.Schema({
-    codigo:{
+    codigoAsig:{
       type:Number,
       required:true  
     },
@@ -13,10 +13,6 @@ const AsignaturaSchema = new mongoose.Schema({
     },
     descripcion:{
         type: String,
-        required:true
-    },
-    intensificacionId:{
-        type: mongoose.Schema.Types.ObjectId, ref:'Intensificacion',
         required:true
     },
     valoraciones:[{

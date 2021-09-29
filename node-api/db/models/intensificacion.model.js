@@ -1,12 +1,11 @@
 const mongoose = require('mongoose');
 
 const IntensificacionSchema = new mongoose.Schema({
-    codigo:{
+    codigoInt:{
       type:Number,
       min: 1,
       max:4,
       required:true
-
     },
     nombre:{
         type: String,
@@ -18,8 +17,11 @@ const IntensificacionSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    asignaturaId:[{
+    asignaturas:[{
         type: mongoose.Schema.Types.ObjectId, ref:'Asignatura'
+    }],
+    valoraciones:[{
+        type: mongoose.Schema.Types.ObjectId, ref:'Valoracion'
     }]
     
 })

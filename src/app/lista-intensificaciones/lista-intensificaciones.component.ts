@@ -1,4 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
+import { AsignaturaService } from '../asignatura.service';
 import { IntensificacionComponent } from './intensificacion/intensificacion.component';
 
 @Component({
@@ -6,17 +8,24 @@ import { IntensificacionComponent } from './intensificacion/intensificacion.comp
   templateUrl: './lista-intensificaciones.component.html',
   styleUrls: ['./lista-intensificaciones.component.css']
 })
-export class ListaIntensificacionesComponent implements AfterViewInit {
+export class ListaIntensificacionesComponent implements OnInit {
 
-  @ViewChildren(IntensificacionComponent) intComponent!: IntensificacionComponent;
+  @ViewChild('intensificacionId',{static:false}) intComponent!: IntensificacionComponent;
   flag=false;
-  inte:string ="";
-  constructor() { 
+  intens:any;
+  constructor(private asignaturaService: AsignaturaService, private route: ActivatedRoute) { 
   }
-  ngAfterViewInit(){
-    this.abrirIntensificacion(this.inte);
+  ngOnInit(){
+    this.route.params.subscribe(
+      (params: Params) => {
+          this.asignaturaService.getListaIntensificaciones().subscribe((intens: any) => {
+            this.intens = intens;
+         
+          }
+          )}
+    )
   }
-
+    
   abrirIntensificacion(inte:string){
     this.flag=true;
     this.intComponent.actualizarInterfaz(inte);

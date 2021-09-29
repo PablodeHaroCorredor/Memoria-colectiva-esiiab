@@ -6,7 +6,7 @@ import { ListaIntensificacionesComponent } from './lista-intensificaciones/lista
 
 const routes: Routes = [
   { path: 'lista-intensificaciones', component: ListaIntensificacionesComponent },
-  {path: 'lista-intensificaiones/:codigo', component: IntensificacionComponent}
+  {path: 'lista-intensificaiones/:id', component: IntensificacionComponent}
 ];
 
 @NgModule({

@@ -1,10 +1,10 @@
-<div class="centered-content">
-    <button (click)="abrirIntensificacion('sw')">Ingeniería del Software</button>
-    <button (click)="abrirIntensificacion('co')">Computación</button>
-    <button (click)="abrirIntensificacion('ic')">Ingeniería de Computadores</button>
-    <button (click)="abrirIntensificacion('ti')">Tecnologías de la información</button>
+<div class="centered-content list-menu">
+    <a class="list-menu-item button" *ngFor="let inte of intens" routerLink="/lista-intensificaciones/{{inte.id}}" (click)="abrirIntensificacion(inte._id)">
+        {{ inte.nombre }}
+    </a>
+    
 </div>
-
-<app-intensificacion #intesificacionId *ngIf="flag"></app-intensificacion>
+<!-- *ngIf="flag" -->
+<app-intensificacion #intensificacionId ></app-intensificacion>
 
 <router-outlet></router-outlet>
