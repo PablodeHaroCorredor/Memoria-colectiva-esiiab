@@ -18,5 +18,13 @@ export class AsignaturaService {
     return this.apiCallService.get(`lista-intensificaciones/${intensificacion}`);
   }
   
+  getListaAsignaturas(){
+    console.log("hago cosas");
+    return this.apiCallService.get('asignaturas');
+  }
+  getAsignatura(asignatura:string){
+    console.log("hago cosas");
+    return this.apiCallService.get(`asignaturas/${asignatura}`);
+  }
   
 }

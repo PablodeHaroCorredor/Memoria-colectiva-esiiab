@@ -1,13 +1,14 @@
-<div class="centered-content container" *ngFor="let inte of intens" routerLink="/lista-intensificaciones/{{inte.id}}">
+<div class="centered-content container" *ngFor="let inte of intens" routerLink="/lista-intensificaciones/{{inte._id}}">
    <h1>
     {{ inte.nombre }} 
    <br>
     {{ inte.descripcion }}
     <br>
-    <div *ngFor="let asig of inte.asignaturas" >
-        {{asig._id}}
+    <h2>-------Asignaturas-------</h2>
+    <div class="button" *ngFor="let asig of inte.asignaturas"  (click)="abrirAsignatura(asig._id)" routerLink="/lista-intensificaciones/{{inte._id}}/asignaturas/{{asig._id}}">
+        {{asig.nombre}}
     </div>
 </h1>
-    
 </div>
-
+<app-asignatura #asignaturaId></app-asignatura>
+<router-outlet></router-outlet>

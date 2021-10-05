@@ -1,1 +1,13 @@
-<p>asignatura works!</p>
+<div class="centered-content container" *ngFor="let asig of asigs" >
+    <h1>
+     {{ asig.nombre }} 
+    <br>
+     {{ asig.descripcion }}
+     <br>
+    <h2>-------Opiniones---------</h2>
+     <div *ngFor="let valoracion of asig.valoraciones" >
+         {{valoracion.comentario}}
+         {{valoracion.puntuacion}}
+     </div>
+ </h1>
+ </div>

@@ -1,6 +1,7 @@
-import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AsignaturaService } from 'src/app/asignatura.service';
+import { AsignaturaComponent } from './asignatura/asignatura.component';
 
 @Component({
   selector: 'app-intensificacion',
@@ -9,7 +10,9 @@ import { AsignaturaService } from 'src/app/asignatura.service';
 })
 export class IntensificacionComponent implements OnInit {
   
+  @ViewChild('asignaturaId',{static:false}) asigComponent!: AsignaturaComponent;
   intens: any;
+  flag2=false;
   constructor(private asignaturaService:AsignaturaService, private route: ActivatedRoute) {
     
    }
@@ -17,11 +20,9 @@ export class IntensificacionComponent implements OnInit {
     this.route.params.subscribe(
       (params:Params)=>{
         console.log(params);
-        this.asignaturaService.getIntensificacion(params._id).subscribe((intens: any)=>{
-          this.intens=intens;
+       
         })
-      }
-    )
+      
   }
 
   public actualizarInterfaz(intensificacion:string){
@@ -31,7 +32,10 @@ export class IntensificacionComponent implements OnInit {
     })
      
   }
-
+  abrirAsignatura(asig:string){
+    this.flag2=true;
+    this.asigComponent.actualizarInterfaz(asig);
+  }
  
 
 }

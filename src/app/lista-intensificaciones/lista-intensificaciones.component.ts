@@ -1,6 +1,7 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { AsignaturaService } from '../asignatura.service';
+import { AsignaturaComponent } from './intensificacion/asignatura/asignatura.component';
 import { IntensificacionComponent } from './intensificacion/intensificacion.component';
 
 @Component({
@@ -12,7 +13,9 @@ export class ListaIntensificacionesComponent implements OnInit {
 
   @ViewChild('intensificacionId',{static:false}) intComponent!: IntensificacionComponent;
   flag=false;
+  flag2=false;
   intens:any;
+  asigs:any;
   constructor(private asignaturaService: AsignaturaService, private route: ActivatedRoute) { 
   }
   ngOnInit(){
@@ -22,9 +25,22 @@ export class ListaIntensificacionesComponent implements OnInit {
             this.intens = intens;
          
           }
+          
           )}
+          
+    )
+    this.route.params.subscribe(
+      (params: Params) => {
+    this.asignaturaService.getListaAsignaturas().subscribe((asigs: any) => {
+      this.asigs = asigs;
+   
+    }
+    )}
     )
   }
+  
+
+  
     
   abrirIntensificacion(inte:string){
     this.flag=true;
