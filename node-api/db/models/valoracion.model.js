@@ -8,8 +8,11 @@ const ValoracionSchema = new mongoose.Schema({
     comentario:{
         type:String,
         required:true
+    },
+    correoUsuario:{
+        type:String,
+        required:true
     }
-    
 })
 
 const Valoracion = mongoose.model('Valoracion', ValoracionSchema);

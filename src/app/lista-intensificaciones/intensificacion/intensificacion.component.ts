@@ -17,6 +17,9 @@ export class IntensificacionComponent implements OnInit {
     this.route.params.subscribe(
       (params:Params)=>{
         console.log(params);
+        this.asignaturaService.getIntensificacion(params._id).subscribe((intens: any)=>{
+          this.intens=intens;
+        })
       }
     )
   }
@@ -24,10 +27,13 @@ export class IntensificacionComponent implements OnInit {
   public actualizarInterfaz(intensificacion:string){
     return this.asignaturaService.getIntensificacion(intensificacion).subscribe((intens: any)=>{
       this.intens=intens;
+      
     })
      
   }
-        
+
+ 
+
 }
 
 

@@ -2,10 +2,11 @@
    <h1>
     {{ inte.nombre }} 
    <br>
-   
     {{ inte.descripcion }}
-    {{ inte.asignaturas }}
-
+    <br>
+    <div *ngFor="let asig of inte.asignaturas" >
+        {{asig._id}}
+    </div>
 </h1>
     
 </div>

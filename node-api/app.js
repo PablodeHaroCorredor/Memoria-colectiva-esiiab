@@ -46,36 +46,23 @@ app.post('/lista-intensificaciones', (req, res)=> {
     })
 })
 
-app.post('/lista-intensificaciones/:id/asignaturas', (req, res)=> {
+app.post('/asignaturas', (req, res)=> {
     let newAsignatura = new Asignatura({
         codigoAsig:req.body.codigoAsig,
         nombre:req.body.nombre,
         descripcion:req.body.descripcion,
-        _intensificacionId :req.params.id
+        valoraciones:req.body.valoraciones
     });
     newAsignatura.save().then((asignaturaDoc) =>{
         res.send(asignaturaDoc);
     })
 })
 
-app.post('/lista-intensificaciones/:codigoInt/asignaturas/:id/valoraciones', (req, res)=> {
-        
+app.post('/valoraciones', (req, res)=> {
     let newValoracion = new Valoracion({
         comentario:req.body.comentario,
         puntuacion:req.body.puntuacion,
-        _asignaturaId: req.params.id
-    });
-    newValoracion.save().then((valoracionDoc) =>{
-        res.send(valoracionDoc);
-    })
-})
-
-
-app.post('/lista-intensificaciones/:id/valoraciones', (req, res)=> {
-    let newValoracion = new Valoracion({
-        comentario:req.body.comentario,
-        puntuacion:req.body.puntuacion,
-        _intensificacionId: req.params.id
+        correoUsuario:req.body.correoUsuario
     });
     newValoracion.save().then((valoracionDoc) =>{
         res.send(valoracionDoc);
