@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AsignaturaService } from 'src/app/asignatura.service';
+import { AsignaturaService } from 'src/app/servicios/asignatura.service';
 
 @Component({
   selector: 'app-asignatura',
@@ -12,6 +12,7 @@ export class AsignaturaComponent implements OnInit {
   constructor(private asignaturaService:AsignaturaService) { }
 
   ngOnInit(): void {
+
   }
 
 
@@ -20,6 +21,11 @@ export class AsignaturaComponent implements OnInit {
       this.asigs=asigs;
       
     })
-     
+    
+  }
+
+  public calcularValoracionMedia(asignaturas:string){
+    let media= 4
+    return media
   }
 }
