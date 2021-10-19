@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { AsignaturaService } from '../asignatura.service';
+import { AsignaturaService } from '../servicios/asignatura.service';
 import { AsignaturaComponent } from './intensificacion/asignatura/asignatura.component';
 import { IntensificacionComponent } from './intensificacion/intensificacion.component';
 

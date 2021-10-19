@@ -9,8 +9,8 @@ const ValoracionSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    correoUsuario:{
-        type:String,
+    usuario:{
+        type: mongoose.Schema.Types.ObjectId, ref:'Usuario',
         required:true
     }
 })

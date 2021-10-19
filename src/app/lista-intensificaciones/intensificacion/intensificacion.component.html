@@ -4,9 +4,17 @@
    <br>
     {{ inte.descripcion }}
     <br>
+    
+    
     <h2>-------Asignaturas-------</h2>
     <div class="button" *ngFor="let asig of inte.asignaturas"  (click)="abrirAsignatura(asig._id)" routerLink="/lista-intensificaciones/{{inte._id}}/asignaturas/{{asig._id}}">
         {{asig.nombre}}
+    </div>
+    <br>
+    <h2>-------Comentarios-------</h2>
+    <div *ngFor="let valo of inte.valoraciones">
+        {{valo.nombre}}
+        {{valo.puntuacion}}
     </div>
 </h1>
 </div>

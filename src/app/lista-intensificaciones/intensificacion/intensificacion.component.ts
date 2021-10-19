@@ -1,6 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { AsignaturaService } from 'src/app/asignatura.service';
+import { AsignaturaService } from 'src/app/servicios/asignatura.service';
 import { AsignaturaComponent } from './asignatura/asignatura.component';
 
 @Component({
