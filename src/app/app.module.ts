@@ -13,6 +13,7 @@ import { IPublicClientApplication, PublicClientApplication } from '@azure/msal-b
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { HomeComponent } from './home/home.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //app.module.ts
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -45,7 +46,8 @@ export function MSALInstanceFactory(): IPublicClientApplication{
     AppRoutingModule,
     MsalModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    FontAwesomeModule
   ],
   providers: [
     {

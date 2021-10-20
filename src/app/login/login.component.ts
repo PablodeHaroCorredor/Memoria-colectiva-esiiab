@@ -16,8 +16,8 @@ export class LoginComponent implements OnInit {
   }
 
 
-  onLoginButtonClicked(email: string, password: string) {
-    this.loginService.login(email, password).subscribe((res: HttpResponse<any>) => {
+  onLoginButtonClicked(email: string, contraseña: string) {
+    this.loginService.login(email, contraseña).subscribe((res: HttpResponse<any>) => {
       if (res.status === 200) {
         // we have logged in successfully
         this.router.navigate(['/home']);

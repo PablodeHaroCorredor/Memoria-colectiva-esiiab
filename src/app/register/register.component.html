@@ -1,23 +1,17 @@
 <div class="centered-content">
-  <form [formGroup]="signupForm">
     <div class="white-box">
-  
       <h1 class="title has-text-primary">Regístrate</h1>
       <div class="field">
         <p class="control has-icons-left">
-          <input #unInput class="input has-background-light" type="username" placeholder="Nombre de Usuario">
+          <input #unInput class="input has-background-light"  type="username" placeholder="Nombre de Usuario">
           <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
+            <i class="fas fa-user"></i>
           </span>
         </p>
       </div>
       <div class="field">
         <p class="control has-icons-left has-icons-right">
-          
-          <input #emailInput class="input has-background-light" type="email" placeholder="Email" formControlName="email" type="email" class="form-control"> 
-          <span class="error" *ngIf="email?.invalid && email?.touched">
-            Email is invalid
-          </span>
+          <input #emailInput class="input has-background-light" type="email" placeholder="Email"> 
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
@@ -40,10 +34,9 @@
       </div>
       <br>
   
-      <p class="has-text-grey">¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a> ya!</p>
+      <p class="has-text-grey">¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a> ahora!</p>
   
     </div>
-  </form>
 </div>
 <!--  REGEX correos alu : @luu\.lcmm\.[a-zA-Z]+ -->
 

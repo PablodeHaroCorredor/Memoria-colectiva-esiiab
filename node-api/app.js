@@ -214,9 +214,9 @@ app.post('/usuarios', (req, res) => {
  */
 app.post('/usuarios/login', (req, res) => {
     let email = req.body.email;
-    let password = req.body.password;
+    let contraseña = req.body.contraseña;
 
-    Usuario.findByCredentials(email, password).then((user) => {
+    Usuario.findByCredentials(email, contraseña).then((user) => {
         return user.createSession().then((refreshToken) => {
             // Session created successfully - refreshToken returned.
             // now we geneate an access auth token for the user

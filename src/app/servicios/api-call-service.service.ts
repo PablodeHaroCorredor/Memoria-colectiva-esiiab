@@ -22,22 +22,27 @@ export class ApiCallServiceService {
     return this.http.post(`${this.ROOT_URL}/${uri}`, payload);
   }
 
-  login(email: string, password: string) {
+  login(email: string, contraseña: string) {
     return this.http.post(`${this.ROOT_URL}/usuarios/login`, {
       email,
-      password
+      contraseña
     }, {
         observe: 'response'
       });
   }
 
-  signup(email: string, password: string, username:string) {
+  signup(email: string, contraseña: string, username:string) {
+    
     return this.http.post(`${this.ROOT_URL}/usuarios`, {
+      
       email,
-      password,
+      contraseña,
       username,
+      
     }, {
         observe: 'response'
+        
       });
+      
   }
 }

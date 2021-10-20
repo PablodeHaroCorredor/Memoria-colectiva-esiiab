@@ -14,7 +14,8 @@ const UsuarioSchema = new mongoose.Schema({
         required: true,
         minlength: 1,
         trim: true,
-        unique: true
+        unique: true,
+        
     },
     username:{
       type: String,
@@ -23,10 +24,13 @@ const UsuarioSchema = new mongoose.Schema({
         trim: true,
         unique: true
     },
-    password: {
+    contraseña: {
         type: String,
         required: true,
         minlength: 8
+    },
+    rol:{
+        type: String, enum: ['Estudiante', 'Administrador', 'Revisor']
     },
     sessions: [{
         token: {
@@ -48,7 +52,7 @@ UsuarioSchema.methods.toJSON = function () {
     const userObject = user.toObject();
 
     // return the document except the password and sessions (these shouldn't be made available)
-    return _.omit(userObject, ['password', 'sessions']);
+    return _.omit(userObject, ['contraseña', 'sessions']);
 }
 
 UsuarioSchema.methods.generateAccessAuthToken = function () {
@@ -117,13 +121,13 @@ UsuarioSchema.statics.findByIdAndToken = function (_id, token) {
 }
 
 
-UsuarioSchema.statics.findByCredentials = function (email, password) {
+UsuarioSchema.statics.findByCredentials = function (email, contraseña) {
     let User = this;
     return User.findOne({ email }).then((user) => {
         if (!user) return Promise.reject();
 
         return new Promise((resolve, reject) => {
-            bcrypt.compare(password, user.password, (err, res) => {
+            bcrypt.compare(contraseña, user.contraseña, (err, res) => {
                 if (res) {
                     resolve(user);
                 }
@@ -153,13 +157,13 @@ UsuarioSchema.pre('save', function (next) {
     let user = this;
     let costFactor = 10;
 
-    if (user.isModified('password')) {
+    if (user.isModified('contraseña')) {
         // if the password field has been edited/changed then run this code.
-
+        
         // Generate salt and hash password
         bcrypt.genSalt(costFactor, (err, salt) => {
-            bcrypt.hash(user.password, salt, (err, hash) => {
-                user.password = hash;
+            bcrypt.hash(user.contraseña, salt, (err, hash) => {
+                user.contraseña = hash;
                 next();
             })
         })
@@ -191,6 +195,9 @@ let generateRefreshTokenExpiryTime = () => {
     let secondsUntilExpire = ((daysUntilExpire * 24) * 60) * 60;
     return ((Date.now() / 1000) + secondsUntilExpire);
 }
+
+
+
 
 const Usuario = mongoose.model('Usuario', UsuarioSchema);
 

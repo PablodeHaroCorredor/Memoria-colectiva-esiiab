@@ -1,38 +1,39 @@
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
+
+nav a {
+  padding: 1rem;
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #c75a5a;
+  color: #ffffff;
+  border-radius: 4px;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+
+}
+
 h1 {
-    margin-bottom: 0;
-    font-size: 70px;
-   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-  }
-  nav a {
-    padding: 1rem;
-    text-decoration: none;
-    margin-top: 10px;
-    display: inline-block;
-    background-color: #c75a5a;
-    color: #ffffff;
-    border-radius: 4px;
-    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  margin-bottom: 0;
+  font-size: 70px;
+ font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+nav a:hover {
+  color: #c75a5a;
+  background-color: #ffffff;
+}
+nav a.active {
+  background-color: rgb(230, 56, 56);
+}
 
-  }
-  
-  nav a:hover {
-    color: #c75a5a;
-    background-color: #ffffff;
-  }
-  nav a.active {
-    background-color: rgb(230, 56, 56);
-  }
+.centered-content{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+}
 
-  .centered-content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-  }
+.is-outlined{
+  color: black;
   
-  .is-outlined{
-    color: black;
-    
-  }
+}

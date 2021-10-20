@@ -12,8 +12,8 @@ export class LoginService {
 
   constructor(private webService: ApiCallServiceService, private router: Router, private http: HttpClient) { }
 
-  login(email: string, password: string) {
-    return this.webService.login(email, password).pipe(
+  login(email: string, contraseña: string) {
+    return this.webService.login(email, contraseña).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
@@ -24,8 +24,9 @@ export class LoginService {
   }
 
 
-  signup(email: string, password: string, username: string) {
-    return this.webService.signup(email, password, username).pipe(
+  signup(email: string, contraseña: string, username: string) {
+    console.log("fallo")
+    return this.webService.signup(email, contraseña, username).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response

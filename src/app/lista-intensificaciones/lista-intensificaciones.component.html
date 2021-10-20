@@ -1,5 +1,5 @@
 <div class="centered-content list-menu">
-    <a class="list-menu-item button" *ngFor="let inte of intens" routerLink="/lista-intensificaciones/{{inte._id}}" (click)="abrirIntensificacion(inte._id)">
+    <a class="list-menu-item button" *ngFor="let inte of intens" (click)="abrirIntensificacion(inte._id)">
         {{ inte.nombre }}
     </a>
     
