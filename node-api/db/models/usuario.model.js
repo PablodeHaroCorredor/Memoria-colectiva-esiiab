@@ -3,10 +3,13 @@ const _ = require('lodash');
 const jwt = require('jsonwebtoken');
 const crypto = require('crypto');
 const bcrypt = require('bcryptjs');
+require('dotenv').config;
 
-
+//"51778657246321226641fsdklafjasdkljfsklfjd7148924065"
 // JWT Secret
-const jwtSecret = "51778657246321226641fsdklafjasdkljfsklfjd7148924065";
+//const jwtSecret = process.env['JWTSECRET'];
+const jwtSecret= "51778657246321226641fsdklafjasdkljfsklfjd7148924066"
+console.log(jwtSecret)
 
 const UsuarioSchema = new mongoose.Schema({
     email: {
@@ -30,7 +33,8 @@ const UsuarioSchema = new mongoose.Schema({
         minlength: 8
     },
     rol:{
-        type: String, enum: ['Estudiante', 'Administrador', 'Revisor']
+        type: String, enum: ['Estudiante', 'Administrador', 'Revisor'],
+        default:"Estudiante"
     },
     sessions: [{
         token: {
@@ -47,7 +51,7 @@ const UsuarioSchema = new mongoose.Schema({
 
 // *** Instance methods ***
 
-UsuarioSchema.methods.toJSON = function () {
+/* UsuarioSchema.methods.toJSON = function () {
     const user = this;
     const userObject = user.toObject();
 
@@ -59,7 +63,7 @@ UsuarioSchema.methods.generateAccessAuthToken = function () {
     const user = this;
     return new Promise((resolve, reject) => {
         // Create the JSON Web Token and return that
-        jwt.sign({ _id: user._id.toHexString() }, jwtSecret, { expiresIn: "15m" }, (err, token) => {
+        jwt.sign({ _id: user._id.toHexString() }, jwtSecret, { expiresIn: "60m" }, (err, token) => {
             if (!err) {
                 resolve(token);
             } else {
@@ -68,9 +72,9 @@ UsuarioSchema.methods.generateAccessAuthToken = function () {
             }
         })
     })
-}
+} */
 
-UsuarioSchema.methods.generateRefreshAuthToken = function () {
+/* UsuarioSchema.methods.generateRefreshAuthToken = function () {
     // This method simply generates a 64byte hex string - it doesn't save it to the database. saveSessionToDatabase() does that.
     return new Promise((resolve, reject) => {
         crypto.randomBytes(64, (err, buf) => {
@@ -96,19 +100,19 @@ UsuarioSchema.methods.createSession = function () {
     }).catch((e) => {
         return Promise.reject('Failed to save session to database.\n' + e);
     })
-}
+} */
 
 
 
 /* MODEL METHODS (static methods) */
 
-UsuarioSchema.statics.getJWTSecret = () => {
+/* UsuarioSchema.statics.getJWTSecret = () => {
     return jwtSecret;
-}
+} */
 
 
 
-UsuarioSchema.statics.findByIdAndToken = function (_id, token) {
+/* UsuarioSchema.statics.findByIdAndToken = function (_id, token) {
     // finds user by id and token
     // used in auth middleware (verifySession)
 
@@ -118,10 +122,10 @@ UsuarioSchema.statics.findByIdAndToken = function (_id, token) {
         _id,
         'sessions.token': token
     });
-}
+} */
 
 
-UsuarioSchema.statics.findByCredentials = function (email, contraseña) {
+ UsuarioSchema.statics.findByCredentials = function (email, contraseña) {
     let User = this;
     return User.findOne({ email }).then((user) => {
         if (!user) return Promise.reject();
@@ -137,9 +141,9 @@ UsuarioSchema.statics.findByCredentials = function (email, contraseña) {
             })
         })
     })
-}
+} 
 
-UsuarioSchema.statics.hasRefreshTokenExpired = (expiresAt) => {
+/* UsuarioSchema.statics.hasRefreshTokenExpired = (expiresAt) => {
     let secondsSinceEpoch = Date.now() / 1000;
     if (expiresAt > secondsSinceEpoch) {
         // hasn't expired
@@ -149,7 +153,7 @@ UsuarioSchema.statics.hasRefreshTokenExpired = (expiresAt) => {
         return true;
     }
 }
-
+ */
 
 /* MIDDLEWARE */
 // Before a user document is saved, this code runs
@@ -174,7 +178,7 @@ UsuarioSchema.pre('save', function (next) {
 
 
 /* HELPER METHODS */
-let saveSessionToDatabase = (user, refreshToken) => {
+/* let saveSessionToDatabase = (user, refreshToken) => {
     // Save session to database
     return new Promise((resolve, reject) => {
         let expiresAt = generateRefreshTokenExpiryTime();
@@ -194,7 +198,7 @@ let generateRefreshTokenExpiryTime = () => {
     let daysUntilExpire = "10";
     let secondsUntilExpire = ((daysUntilExpire * 24) * 60) * 60;
     return ((Date.now() / 1000) + secondsUntilExpire);
-}
+} */
 
 
 

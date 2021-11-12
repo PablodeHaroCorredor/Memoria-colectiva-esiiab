@@ -1,14 +1,19 @@
 const express = require('express');
 const app = express();
 const { mongoose } = require('./db/mongoose');
+const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const bcrypt = require("bcryptjs")
 const {Asignatura, Valoracion, Intensificacion, Usuario} = require('./db/models'); 
 const { get } = require('http');
+const { send } = require('process');
+const nodemailer = require('nodemailer');
+const details = require("./details.json");
 
 app.use(bodyParser.json());
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
+    res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
     res.header(
         'Access-Control-Expose-Headers',
@@ -19,11 +24,12 @@ app.use(function(req, res, next) {
   });
 
 
-let authenticate = (req, res, next) => {
+
+/* let authenticate = (req, res, next) => {
     let token = req.header('x-access-token');
 
     // verify the JWT
-    jwt.verify(token, User.getJWTSecret(), (err, decoded) => {
+    jwt.verify(token, Usuario.getJWTSecret(), (err, decoded) => {
         if (err) {
             // there was an error
             // jwt is invalid - * DO NOT AUTHENTICATE *
@@ -65,7 +71,7 @@ let verifySession = (req, res, next) => {
         user.sessions.forEach((session) => {
             if (session.token === refreshToken) {
                 // check if the session has expired
-                if (User.hasRefreshTokenExpired(session.expiresAt) === false) {
+                if (Usuario.hasRefreshTokenExpired(session.expiresAt) === false) {
                     // refresh token has not expired
                     isSessionValid = true;
                 }
@@ -84,8 +90,8 @@ let verifySession = (req, res, next) => {
 
     }).catch((e) => {
         res.status(401).send(e);
-    })
-}
+    }) */
+//}
 
 
 
@@ -93,7 +99,7 @@ let verifySession = (req, res, next) => {
 
 
   //GET lista de intensificaciones
-  app.get('/lista-intensificaciones', (req,res)=>{
+  app.get('/lista-intensificaciones',(req,res)=>{
     Intensificacion.find({}).populate('asignaturas').then((intensificaciones)=>{
         res.send(intensificaciones);
     });
@@ -101,12 +107,21 @@ let verifySession = (req, res, next) => {
 })
 
 //GET una intensificacion de la lista
-app.get('/lista-intensificaciones/:id', (req,res)=>{
-    Intensificacion.find({_id:req.params.id}).populate('asignaturas').then((intensificaciones)=>{
+app.get('/lista-intensificaciones/:id',(req,res)=>{
+    Intensificacion.find({_id:req.params.id}).populate('asignaturas').populate('valoraciones').then((intensificaciones)=>{
         res.send(intensificaciones);
     });
     
 })
+//UPDATE intes
+app.put('/lista-intensificaciones/:id', (req, res)=> {
+    Intensificacion.findOneAndUpdate({_id:req.params.id},{
+        $push:req.body
+    }).then(()=>{
+        res.sendStatus(200)
+    });
+})
+
 
 //GET lista de asignaturas
 app.get('/asignaturas', (req,res)=>{
@@ -117,7 +132,7 @@ app.get('/asignaturas', (req,res)=>{
 })
 
 //GET una asignatura de la lista
-app.get('/asignaturas/:id', (req,res)=>{
+app.get('/asignaturas/:id',(req,res)=>{
     Asignatura.find({_id:req.params.id}).populate('valoraciones').then((asignaturas)=>{
         res.send(asignaturas);
     });
@@ -168,44 +183,71 @@ app.post('/asignaturas', (req, res)=> {
     })
 })
 
+app.put('/asignaturas/:id', (req, res)=> {
+    Asignatura.findOneAndUpdate({_id:req.params.id},{
+        $push:req.body
+    }).then(()=>{
+        res.sendStatus(200)
+    });
+})
+
+
+
+
 //POST valoraciones
 app.post('/valoraciones', (req, res)=> {
     let newValoracion = new Valoracion({
         comentario:req.body.comentario,
         puntuacion:req.body.puntuacion,
-        correoUsuario:req.body.correoUsuario
+        usuario:req.body.usuario
     });
     newValoracion.save().then((valoracionDoc) =>{
         res.send(valoracionDoc);
     })
 })
 
-app.post('/usuarios', (req, res) => {
+app.patch('/valoraciones/:id', (req, res)=> {
+    Valoracion.findOneAndUpdate({_id:req.params.id},{
+        $set:req.body
+    }).then(()=>{
+        res.sendStatus(200)
+    });
+})
+
+app.delete('/valoraciones/:id',(req, res)=> {
+    Valoracion.findOneAndRemove({
+        _id:req.params.id
+    }).then((removedValoracionDoc)=>{
+        res.sendStatus(removedValoracionDoc)
+    });
+})
+
+app.post('/usuarios',(req, res) => {
     // User sign up
 
     let body = req.body;
     let newUser = new Usuario(body);
 
     newUser.save().then(() => {
-        return newUser.createSession();
+        //return newUser.createSession();
     }).then((refreshToken) => {
         // Session created successfully - refreshToken returned.
         // now we geneate an access auth token for the user
 
-        return newUser.generateAccessAuthToken().then((accessToken) => {
+       // return newUser.generateAccessAuthToken().then((accessToken) => {
             // access auth token generated successfully, now we return an object containing the auth tokens
-            return { accessToken, refreshToken }
-        });
-    }).then((authTokens) => {
+         //   return { accessToken, refreshToken }
+        }).catch((e) => {
+            res.status(400).send(e);
+        })
+    })/* .then((authTokens) => {
         // Now we construct and send the response to the user with their auth tokens in the header and the user object in the body
         res
             .header('x-refresh-token', authTokens.refreshToken)
             .header('x-access-token', authTokens.accessToken)
             .send(newUser);
-    }).catch((e) => {
-        res.status(400).send(e);
-    })
-})
+    }) */
+
 
 
 /**
@@ -215,9 +257,8 @@ app.post('/usuarios', (req, res) => {
 app.post('/usuarios/login', (req, res) => {
     let email = req.body.email;
     let contraseña = req.body.contraseña;
-
-    Usuario.findByCredentials(email, contraseña).then((user) => {
-        return user.createSession().then((refreshToken) => {
+     Usuario.findByCredentials(email, contraseña).then((user) => {
+        /* return user.createSession().then((refreshToken) => {
             // Session created successfully - refreshToken returned.
             // now we geneate an access auth token for the user
 
@@ -231,14 +272,15 @@ app.post('/usuarios/login', (req, res) => {
                 .header('x-refresh-token', authTokens.refreshToken)
                 .header('x-access-token', authTokens.accessToken)
                 .send(user);
-        })
+        })  */
+        res.send(user);
     }).catch((e) => {
         res.status(400).send(e);
     });
 })
 
 
-app.get('/usuarios/me/access-token', verifySession, (req, res) => {
+/* app.get('/usuarios/me/access-token', (req, res) => {
     // we know that the user/caller is authenticated and we have the user_id and user object available to us
     req.userObject.generateAccessAuthToken().then((accessToken) => {
         res.header('x-access-token', accessToken).send({ accessToken });
@@ -246,6 +288,46 @@ app.get('/usuarios/me/access-token', verifySession, (req, res) => {
         res.status(400).send(e);
     });
 })
+ */
+
+//SEND EMAIL
+
+
+
+app.post("/sendmail", (req, res) => {
+    console.log("request came");
+    let transporter = nodemailer.createTransport({
+        host: "smtp.gmail.com",
+        port: 465,
+        secure: true, 
+        requireTLS: true,// true for 465, false for other ports
+        auth: {
+          user: details.email,
+          pass: details.password
+        }
+    });
+    let mailOptions = {
+        from: 'pablodeharocorredor@gmail.com', // sender address
+        to: req.body.email, // list of receivers
+        subject: "Registro Completado", // Subject line
+        text: "Tu contraseña es: "+req.body.contraseña
+      };
+
+      // send mail with defined transport object
+    transporter.sendMail(mailOptions, (error, info)=>{
+        if(error){
+            res.status(500).send(error.message);
+        }else{
+            console.log("Email enviado")
+            res.status(200).jsonp(req.body)
+        }
+    });
+  });
+  
+    
+  
+    
+  
 
 
 

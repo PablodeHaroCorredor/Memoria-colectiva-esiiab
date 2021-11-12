@@ -14,13 +14,26 @@ export class ApiCallServiceService {
   
 
   get(uri:string){
-    return this.http.get(`${this.ROOT_URL}/${uri}`);
+    return this.http.get(`${this.ROOT_URL}/${uri}` );
   }
   
 
   post(uri:string, payload: Object){
     return this.http.post(`${this.ROOT_URL}/${uri}`, payload);
   }
+
+  patch(uri:string, payload: Object){
+    return this.http.patch(`${this.ROOT_URL}/${uri}`, payload);
+  }
+
+  put(uri:string, payload: Object){
+    return this.http.put(`${this.ROOT_URL}/${uri}`, payload);
+  }
+
+  delete(uri: string) {
+    return this.http.delete(`${this.ROOT_URL}/${uri}`);
+  }
+
 
   login(email: string, contraseña: string) {
     return this.http.post(`${this.ROOT_URL}/usuarios/login`, {
@@ -31,7 +44,7 @@ export class ApiCallServiceService {
       });
   }
 
-  signup(email: string, contraseña: string, username:string) {
+  signup(email: string, contraseña:string, username:string) {
     
     return this.http.post(`${this.ROOT_URL}/usuarios`, {
       
@@ -39,10 +52,17 @@ export class ApiCallServiceService {
       contraseña,
       username,
       
+      
     }, {
         observe: 'response'
         
       });
       
   }
+
+  sendEmail( payload:{}) {
+    return this.http.post(`${this.ROOT_URL}/sendmail`, payload);
+  }
+
+   
 }

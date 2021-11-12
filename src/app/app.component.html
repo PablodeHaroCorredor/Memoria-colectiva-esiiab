@@ -1,3 +1,14 @@
 <button  (click)="cerrarSesion()">Cerrar Sesión</button>
 
+
+
 <router-outlet></router-outlet>
+<footer>
+    <div class="container">
+      <a class="logo-font" routerLink="/">Memoria Colectiva Esiiab</a>
+      <span class="attribution">
+        &copy; {{ today | date: 'yyyy' }}.
+        Un proyecto de <a href="https://github.com/PablodeHaroCorredor/Memoria-colectiva-esiiab">Pablo de Haro Corredor</a>.
+      </span>
+    </div>
+  </footer>

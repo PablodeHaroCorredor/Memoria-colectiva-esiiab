@@ -1,10 +1,20 @@
-<div class="centered-content list-menu">
+<!-- <div class="centered-content list-menu">
     <a class="list-menu-item button" *ngFor="let inte of intens" (click)="abrirIntensificacion(inte._id)">
         {{ inte.nombre }}
     </a>
     
     
-</div>
+</div> -->
+<router-outlet></router-outlet>
+<table class="centered-content">
+    <div class="card text-center " style="width: 18rem;" *ngFor="let inte of intens" (click)="abrirIntensificacion(inte._id)">
+        <div class="card-body">
+          <h5 class="card-title"> {{ inte.nombre }}</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="btn btn-primary" routerLink="/lista-intensificaciones">Ver</a>
+        </div>
+    </div>
+</table>
 <!-- *ngIf="flag" -->
 <app-intensificacion #intensificacionId ></app-intensificacion>
-<router-outlet></router-outlet>
+

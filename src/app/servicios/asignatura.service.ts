@@ -17,14 +17,31 @@ export class AsignaturaService {
     console.log("hago cosas");
     return this.apiCallService.get(`lista-intensificaciones/${intensificacion}`);
   }
+
+  updateInte(intensificacion:string, valoraciones:string[]){
+    return this.apiCallService.put(`lista-intensificaciones/${intensificacion}`, {valoraciones});
+  }
   
   getListaAsignaturas(){
-    console.log("hago cosas");
     return this.apiCallService.get('asignaturas');
   }
   getAsignatura(asignatura:string){
-    console.log("hago cosas");
     return this.apiCallService.get(`asignaturas/${asignatura}`);
   }
+
+  postValoracion(comentario:string, puntuacion:string, usuario:string|null){
+    return this.apiCallService.post(`valoraciones`, {comentario,puntuacion,usuario});
+  } 
+
+  updateAsignatura(asignatura:string, valoraciones:string[]){
+    return this.apiCallService.put(`asignaturas/${asignatura}`, {valoraciones});
+  }
+
+  borrarComentario(valoracion:string){
+   return this.apiCallService.delete(`valoraciones/${valoracion}`);
+  }
+
+ 
+
   
 }

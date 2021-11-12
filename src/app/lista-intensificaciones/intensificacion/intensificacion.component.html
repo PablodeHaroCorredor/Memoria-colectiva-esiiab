@@ -1,22 +1,26 @@
-<div class="centered-content container" *ngFor="let inte of intens">
-   <h1>
+<div class="centered-content" *ngFor="let inte of intens">
+   <h1 >
     {{ inte.nombre }} 
    <br>
     {{ inte.descripcion }}
     <br>
-
-    
     <h2>-------Asignaturas-------</h2>
     <div class="button" *ngFor="let asig of inte.asignaturas"  (click)="abrirAsignatura(asig._id)">
         {{asig.nombre}}
     </div>
     <br>
     <h2>-------Comentarios-------</h2>
-    <div *ngFor="let valo of inte.valoraciones">
-        {{valo.nombre}}
-        {{valo.puntuacion}}
+    <div *ngFor="let valoracion of inte.valoraciones">
+        {{valoracion.comentario}}
+        {{valoracion.puntuacion}}
+        <button class="fas fa-trash" (click)="borrarComentario(valoracion._id)" max="5"></button>
     </div>
-</h1>
+    <div *ngIf="!isShown">
+    <input #inputComentario class="input has-background-light is-medium" type="text" placeholder="Escribe tu comentario...">
+     <input #inputPuntuacion class="input has-background-light is-medium" type="number" placeholder="">
+     <button (click)="createComentario(inputComentario.value, inputPuntuacion.value, inte._id)" max="5">Enviar</button>
+    </div>
+    </h1>
 </div>
 <app-asignatura #asignaturaId></app-asignatura>
 <router-outlet></router-outlet>

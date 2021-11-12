@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+/* import { Injectable } from '@angular/core';
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, empty, Subject } from 'rxjs';
 import { LoginService } from '../servicios/login.service';
@@ -87,4 +87,4 @@ export class WebReqInterceptor implements HttpInterceptor {
     return request;
   }
 
-}
+} */

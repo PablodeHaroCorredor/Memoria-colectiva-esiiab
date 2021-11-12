@@ -17,17 +17,9 @@
           </span>
         
       </div>
-      <div class="field">
-        <p class="control has-icons-left">
-          <input #pwInput class="input has-background-light" type="password" placeholder="Contraseña">
-          <span class="icon is-small is-left">
-            <i class="fas fa-lock"></i>
-          </span>
-        </p>
-      </div>
       <div class="field" style="display: flex; justify-content: flex-end;">
         <p class="control">
-          <button class="button is-success has-text-white" (click)="onSignupButtonClicked(emailInput.value, pwInput.value, unInput.value)">
+          <button class="button is-success has-text-white" (click)="register(emailInput.value, unInput.value)">
             Regístrate
           </button>
         </p>

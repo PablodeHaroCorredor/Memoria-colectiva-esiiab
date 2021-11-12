@@ -14,6 +14,7 @@ import { LoginService } from './servicios/login.service';
 export class AppComponent {
   title = 'Memoria Colectiva Esiiab';
   router: any;
+  today: number = Date.now();
 
   constructor(private loginService: LoginService){
   }

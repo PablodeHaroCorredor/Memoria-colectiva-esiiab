@@ -6,9 +6,40 @@
      <br>
      
     <h2>-------Opiniones---------</h2>
-     <div *ngFor="let valoracion of asig.valoraciones" >
+     <div type="" *ngFor="let valoracion of asig.valoraciones" >
+         
          {{valoracion.comentario}}
          {{valoracion.puntuacion}}
+         <!-- <button class="fas fa-pencil" (click)="editarComentario(inputComentario.value, inputPuntuacion.value, asig._id)" max="5"></button> -->
+         <button class="fas fa-trash" (click)="borrarComentario(valoracion._id)" max="5"></button>
      </div>
+     <input #inputComentario class="input has-background-light is-medium" type="text" placeholder="Escribe tu comentario...">
+     <input #inputPuntuacion class="input has-background-light is-medium" type="number" placeholder="Puntúa">
+     <button (click)="createComentario(inputComentario.value, inputPuntuacion.value, asig._id)" max="5">Enviar</button>
+    
  </h1>
  </div>
+
+ <!-- <div class="card">
+    <div class="card-block">
+      <p class="card-text">
+        {{ comment.body }}
+      </p>
+    </div>
+    <div class="card-footer">
+      <a class="comment-author" [routerLink]="['/profile', comment.author.username]">
+        <img [src]="comment.author.image" class="comment-author-img" />
+      </a>
+      &nbsp;
+      <a class="comment-author" [routerLink]="['/profile', comment.author.username]">
+        {{ comment.author.username }}
+      </a>
+      <span class="date-posted">
+        {{ comment.createdAt | date: 'longDate' }}
+      </span>
+      <span class="mod-options" [hidden]="!canModify">
+        <i class="ion-trash-a" (click)="deleteClicked()"></i>
+      </span>
+    </div>
+  </div> -->
+ <router-outlet></router-outlet>

@@ -10,31 +10,42 @@ import { shareReplay, tap } from 'rxjs/operators';
 })
 export class LoginService {
 
-  constructor(private webService: ApiCallServiceService, private router: Router, private http: HttpClient) { }
+  generatePassword() {
+    var length = 8,
+        charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789",
+        retVal = "";
+    for (var i = 0, n = charset.length; i < length; ++i) {
+        retVal += charset.charAt(Math.floor(Math.random() * n));
+    }
+    return retVal;
+}
 
+  constructor(private webService: ApiCallServiceService, private router: Router, private http: HttpClient) { }
+//res.headers.get('x-access-token')||'{}', res.headers.get('x-refresh-token')||'{}'
   login(email: string, contraseña: string) {
     return this.webService.login(email, contraseña).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token')||'{}', res.headers.get('x-refresh-token')||'{}');
+        this.setSession(res.body._id);
         console.log("LOGGED IN!");
       })
     )
   }
 
 
-  signup(email: string, contraseña: string, username: string) {
-    console.log("fallo")
+  signup(email: string, contraseña: string, username:string) {
     return this.webService.signup(email, contraseña, username).pipe(
       shareReplay(),
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
-        this.setSession(res.body._id, res.headers.get('x-access-token')||'{}', res.headers.get('x-refresh-token')||'{}');
+        this.setSession(res.body._id);
         console.log("Successfully signed up and now logged in!");
       })
     )
   }
+
+  
 
 
 
@@ -53,24 +64,28 @@ export class LoginService {
   }
 
   getUserId() {
+    console.log(localStorage.getItem('user-id'))
     return localStorage.getItem('user-id');
+    
   }
 
   setAccessToken(accessToken: string) {
     localStorage.setItem('x-access-token', accessToken)
   }
   
-  private setSession(userId: string, accessToken: string, refreshToken: string) {
+  private setSession(userId: string) {
     localStorage.setItem('user-id', userId);
-    localStorage.setItem('x-access-token', accessToken);
-    localStorage.setItem('x-refresh-token', refreshToken);
+   /*  localStorage.setItem('x-access-token', accessToken);
+    localStorage.setItem('x-refresh-token', refreshToken); */
   }
 
   private removeSession() {
-    localStorage.removeItem('user-id');
+    localStorage.removeItem('user-id');/* 
     localStorage.removeItem('x-access-token');
-    localStorage.removeItem('x-refresh-token');
+    localStorage.removeItem('x-refresh-token'); */
   }
+
+  
 
   getNewAccessToken() {
     return this.http.get(`${this.webService.ROOT_URL}/users/me/access-token`, {
