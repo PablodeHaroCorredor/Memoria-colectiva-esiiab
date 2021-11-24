@@ -1,26 +1,47 @@
-<div class="centered-content" *ngFor="let inte of intens">
-   <h1 >
-    {{ inte.nombre }} 
+<div class="container" *ngFor="let inte of intens">
+    <h2 >
+        {{ inte.nombre }}
+    </h2>
    <br>
     {{ inte.descripcion }}
     <br>
-    <h2>-------Asignaturas-------</h2>
-    <div class="button" *ngFor="let asig of inte.asignaturas"  (click)="abrirAsignatura(asig._id)">
+    <div class="row">
+      <div class="col">
+        <h2>Asignaturas</h2>
+
+      </div>
+      <div class="col">
+        <h2 >Comentarios</h2>
+      </div>
+    </div>
+    <div class="row" *ngFor="let inte of intens">
+      <div class="col-3"*ngFor="let asig of inte.asignaturas"  >
+        <button (click)="abrirAsignatura(asig._id)">
         {{asig.nombre}}
-    </div>
-    <br>
-    <h2>-------Comentarios-------</h2>
-    <div *ngFor="let valoracion of inte.valoraciones">
+        <br>
+        </button>
+        
+        <app-asignatura #asignaturaId></app-asignatura>
+      </div>
+      <div class="col">
+        <div class="col" *ngFor="let valoracion of inte.valoraciones">
         {{valoracion.comentario}}
+        
         {{valoracion.puntuacion}}
-        <button class="fas fa-trash" (click)="borrarComentario(valoracion._id)" max="5"></button>
-    </div>
-    <div *ngIf="!isShown">
-    <input #inputComentario class="input has-background-light is-medium" type="text" placeholder="Escribe tu comentario...">
-     <input #inputPuntuacion class="input has-background-light is-medium" type="number" placeholder="">
-     <button (click)="createComentario(inputComentario.value, inputPuntuacion.value, inte._id)" max="5">Enviar</button>
-    </div>
-    </h1>
-</div>
-<app-asignatura #asignaturaId></app-asignatura>
-<router-outlet></router-outlet>
+        <br>
+        Fecha: {{valoracion.fechaCreacion | date: 'dd-mm-yyyy'}}
+        
+        <button  (click)="borrarComentario(valoracion._id)" max="5"><i class="fa fa-trash" aria-hidden="true"></i></button>
+        <hr>
+      </div>
+      <input #inputComentario class="input has-background-light is-medium" type="text" placeholder="Escribe tu comentario...">
+        <input #inputPuntuacion class="input has-background-light is-medium" type="number" placeholder="">
+        <button (click)="createComentario(inputComentario.value, inputPuntuacion.value, inte._id)" max="5">Enviar</button>
+      </div>
+      
+      </div>
+  </div>
+
+  
+
+  <router-outlet></router-outlet>

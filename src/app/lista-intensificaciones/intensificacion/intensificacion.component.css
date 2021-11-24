@@ -1,13 +1,66 @@
+
+@import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 .centered-content{
-    display: flex;
+    display: black;
     justify-content: center;
-    align-items: center;
+    align-items:flex-start;
     width: 100%;
     height: 100%;
     margin-left: 100px;
     margin-right: 100px;
   }
 
-h1{
-    font-size: xx-large;
-}  
+li {
+  display: inline;
+}
+
+hr{
+  
+  background-color: #C75A5A;
+}
+h2{
+  font-size: xx-large;
+}
+
+p{
+  color: black;
+}
+
+
+button {
+  text-decoration: none;
+  margin-top: 10px;
+  display: inline-block;
+  background-color: #c75a5a;
+  color: #ffffff;
+  border-radius: 4px;
+  
+  border-color: white;
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+button:active {
+position:relative;
+top:1px;
+}
+
+input{
+  border-radius: 10px;
+  border-color: #C75A5A;
+  border-width: 4px;
+  margin-bottom: 5px;
+}
+
+div{
+  color: black;
+}
+
+.container{
+  background-color: white;
+  padding: 30px;
+  border-radius: 6px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border-width: 4px;
+  border-color: green;
+}

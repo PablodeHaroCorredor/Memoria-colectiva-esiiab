@@ -36,6 +36,9 @@ const UsuarioSchema = new mongoose.Schema({
         type: String, enum: ['Estudiante', 'Administrador', 'Revisor'],
         default:"Estudiante"
     },
+    valoraciones:[{
+        type: mongoose.Schema.Types.ObjectId, ref:'Valoracion'
+    }],
     sessions: [{
         token: {
             type: String,

@@ -1,6 +1,6 @@
 <div class="centered-content">
     <div class="white-box">
-      <h1 class="title has-text-primary">Regístrate</h1>
+      <h1 class="title ">Regístrate</h1>
       <div class="field">
         <p class="control has-icons-left">
           <input #unInput class="input has-background-light"  type="username" placeholder="Nombre de Usuario">
@@ -19,17 +19,26 @@
       </div>
       <div class="field" style="display: flex; justify-content: flex-end;">
         <p class="control">
-          <button class="button is-success has-text-white" (click)="register(emailInput.value, unInput.value)">
+          <button class="button has-text-white" (click)="register(emailInput.value, unInput.value)">
             Regístrate
           </button>
         </p>
       </div>
       <br>
   
-      <p class="has-text-grey">¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a> ahora!</p>
+      <p >¿Ya tienes una cuenta? <a routerLink="/login">Inicia sesión</a> ahora!</p>
   
     </div>
+    
 </div>
+
+
+
+
+
+
+
+
 <!--  REGEX correos alu : @luu\.lcmm\.[a-zA-Z]+ -->
 
 
