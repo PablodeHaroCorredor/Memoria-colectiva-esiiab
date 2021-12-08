@@ -12,7 +12,7 @@ import { IntensificacionComponent } from './intensificacion/intensificacion.comp
 export class ListaIntensificacionesComponent implements OnInit {
 
   @ViewChild('intensificacionId',{static:false}) intComponent!: IntensificacionComponent;
-  flag=false;
+  flag=true;
   flag2=false;
   intens:any;
   asigs:any;
@@ -43,7 +43,7 @@ export class ListaIntensificacionesComponent implements OnInit {
   
     
   abrirIntensificacion(inte:string){
-    this.flag=true;
+    this.flag=false;
     this.intComponent.actualizarInterfaz(inte);
   }
   
