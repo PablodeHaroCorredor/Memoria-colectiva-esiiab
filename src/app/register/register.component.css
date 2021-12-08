@@ -13,20 +13,7 @@ body {
   border-radius: 10px;
 }
 
-button{
-  text-decoration: none;
-  margin-top: 10px;
-  display: inline-block;
-  background-color: #c75a5a;
-  color: #ffffff;
-  
-  border-radius: 4px;
-  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-}
 
-button:hover{
-  width: 100%;
-}
 p{
   color: black;
 }

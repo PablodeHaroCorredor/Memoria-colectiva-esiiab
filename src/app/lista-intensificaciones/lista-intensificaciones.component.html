@@ -10,11 +10,12 @@
     <div class="card text-center " style="width: 18rem;" *ngFor="let inte of intens" >
         <div class="card-body">
           <h5 class="card-title"> {{ inte.nombre }}</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="btn btn-primary" routerLink="/intensificacion" (click)="abrirIntensificacion(inte._id)">Ver</a>
+          <button class="btn btn-primary" routerLink="/intensificacion" (click)="abrirIntensificacion(inte._id)">Ver</button>
         </div>
     </div>
 </table>
 <!-- *ngIf="flag" -->
 <app-intensificacion #intensificacionId ></app-intensificacion>
+
+
 

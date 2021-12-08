@@ -7,11 +7,11 @@ h1 {
   }
  
 
-  nav{
-    position:relative;
+  .nav{
+    position:static;
     width:100%;
-    border-color: violet;
     border-width: 20px;
+    margin-bottom: 50px;
   }
   
   .centered-content{
@@ -40,9 +40,6 @@ h1 {
   color: black;
 }
 
-header{
-  margin-bottom: 40px;
-}
 
 li{
   margin: 3px;

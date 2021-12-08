@@ -2,7 +2,7 @@
 
  body{
         width: 100%;
-        background: #c75a5a;
+        background-color: #0d6efd;
         color: #555; 
 	      font: 400 1rem/1.625rem "Open Sans", sans-serif;
         height: 200%;
@@ -24,7 +24,7 @@
 
 
 .card{
-  color: #c75a5a;
+  color: #e27a7a;
 }
 
 

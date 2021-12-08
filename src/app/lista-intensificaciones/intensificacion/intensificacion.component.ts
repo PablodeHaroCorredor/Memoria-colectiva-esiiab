@@ -16,6 +16,8 @@ export class IntensificacionComponent implements OnInit {
   flag2=false;
   id:string=""
   isShown: boolean= false;
+  
+  currentRate = 8;
 
   constructor(private asignaturaService:AsignaturaService, private route: ActivatedRoute, private loginService:LoginService) {
    }
@@ -59,6 +61,7 @@ export class IntensificacionComponent implements OnInit {
     this.asignaturaService.postValoracion(comentario, puntuacion, this.loginService.getUserId()).subscribe((valoracion: any) => {
       console.log(valoracion);
     this.updateInte(inte, valoracion._id)
+    this.actualizarInterfaz(inte)
     /* if(inte){
       if(valoracion.usuario.lenght() >1){
          this.toggleShow() 

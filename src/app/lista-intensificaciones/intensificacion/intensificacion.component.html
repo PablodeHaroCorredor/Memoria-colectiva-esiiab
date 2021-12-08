@@ -1,47 +1,66 @@
-<div class="container" *ngFor="let inte of intens">
-    <h2 >
-        {{ inte.nombre }}
-    </h2>
-   <br>
-    {{ inte.descripcion }}
-    <br>
+<div class="container shadow-lg p-3 mb-5 bg-white rounded" *ngFor="let inte of intens">
+  
     <div class="row">
       <div class="col">
-        <h2>Asignaturas</h2>
-
-      </div>
-      <div class="col">
-        <h2 >Comentarios</h2>
-      </div>
-    </div>
-    <div class="row" *ngFor="let inte of intens">
-      <div class="col-3"*ngFor="let asig of inte.asignaturas"  >
-        <button (click)="abrirAsignatura(asig._id)">
-        {{asig.nombre}}
-        <br>
-        </button>
-        
-        <app-asignatura #asignaturaId></app-asignatura>
-      </div>
-      <div class="col">
-        <div class="col" *ngFor="let valoracion of inte.valoraciones">
-        {{valoracion.comentario}}
+        <h2 >
+          {{ inte.nombre }}
+      </h2>
+     <br>
+      {{ inte.descripcion }}
+      <h2 >Comentarios</h2>
+      <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of inte.valoraciones">
+        <h3 class="font-weight-bold">
+          {{valoracion.comentario}}
         
         {{valoracion.puntuacion}}
+      </h3>
         <br>
-        Fecha: {{valoracion.fechaCreacion | date: 'dd-mm-yyyy'}}
+        Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}
         
-        <button  (click)="borrarComentario(valoracion._id)" max="5"><i class="fa fa-trash" aria-hidden="true"></i></button>
-        <hr>
+        <button class="btn btn-danger" (click)="borrarComentario(valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
       </div>
-      <input #inputComentario class="input has-background-light is-medium" type="text" placeholder="Escribe tu comentario...">
-        <input #inputPuntuacion class="input has-background-light is-medium" type="number" placeholder="">
-        <button (click)="createComentario(inputComentario.value, inputPuntuacion.value, inte._id)" max="5">Enviar</button>
+      <br>
+      <h2 style="font-size: large;"> Escribe aqui tu comentario</h2>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <span class="input-group-text">Opina</span>
+        </div>
+        <textarea #inputComentario class="form-control" aria-label="Opina"></textarea>
       </div>
-      
+      <br>
+
+        <div class="form-group" style="width: 60px;">
+            <select #inputPuntuacion class="form-control" id="exampleFormControlSelect1">
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+          </select>
+        </div>
+        
+        <button  class="btn btn-primary"(click)="createComentario(inputComentario.value, inputPuntuacion.value, inte._id)"><i class="bi bi-chat-square-text"></i> Comentar</button>
+
+        
+
       </div>
+      <div class="col">
+        <h2>Asignaturas</h2>
+        <div *ngFor="let inte of intens">
+          <div *ngFor="let asig of inte.asignaturas"  >
+            <button style="margin: 3px;"class="btn btn-info" (click)="abrirAsignatura(asig._id)">
+            {{asig.nombre}}
+            
+            </button>
+            
+            
+          </div>
+          <app-asignatura #asignaturaId></app-asignatura>
+          </div>
+      </div>
+    </div>
+    
   </div>
 
-  
 
   <router-outlet></router-outlet>
