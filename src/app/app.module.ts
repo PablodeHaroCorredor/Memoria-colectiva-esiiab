@@ -14,6 +14,8 @@ import { HomeComponent } from './home/home.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //app.module.ts
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ListaDirectoresComponent } from './lista-directores/lista-directores.component';
+import { DirectorComponent } from './director/director.component';
 //import { TokenInterceptor } from './Internceptors/token.interceptor';
 
 
@@ -28,7 +30,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AsignaturaComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent
+    HomeComponent,
+    ListaDirectoresComponent,
+    DirectorComponent
     
   ],
   imports: [
@@ -49,6 +53,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     AsignaturaComponent,
     LoginComponent,
     RegisterComponent,
-    HomeComponent]
+    HomeComponent,
+  ListaDirectoresComponent,
+DirectorComponent]
 })
 export class AppModule { }

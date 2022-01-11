@@ -1,7 +1,6 @@
 
 @import "https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css";
 .centered-content{
-    display: black;
     justify-content: center;
     align-items:flex-start;
     width: 100%;
@@ -53,11 +52,12 @@ div{
 }
 
 .container{
-  background-color: white;
-  padding: 30px;
+  position:static;
+  padding: 40px;
   border-radius: 6px;
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-right: 10px;
+  margin-left: 10px;
+  
   
 }
 

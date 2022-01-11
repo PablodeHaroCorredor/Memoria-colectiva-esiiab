@@ -1,7 +1,5 @@
-<div class="container shadow-lg p-3 mb-5 bg-white rounded" *ngFor="let inte of intens">
-  
-    <div class="row">
-      <div class="col">
+<div class=" container centered-content row" *ngFor="let inte of intens">
+<div class=" shadow-lg p-3 mb-5 bg-white rounded col" *ngFor="let inte of intens">
         <h2 >
           {{ inte.nombre }}
       </h2>
@@ -11,11 +9,14 @@
       <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of inte.valoraciones">
         <h3 class="font-weight-bold">
           {{valoracion.comentario}}
-        
-        {{valoracion.puntuacion}}
+          
       </h3>
+      
+      {{valoracion.puntuacion}}
         <br>
-        Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}
+        <h4 style="font-style: italic;">
+          Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}</h4>
+        
         
         <button class="btn btn-danger" (click)="borrarComentario(valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
       </div>
@@ -30,21 +31,26 @@
       <br>
 
         <div class="form-group" style="width: 60px;">
+          <div class="input-group-prepend">
+            <span class="input-group-text"><i class="bi bi-star"></i></span>
+          
             <select #inputPuntuacion class="form-control" id="exampleFormControlSelect1">
-            <option>1</option>
+            <option> 1</option>
             <option>2</option>
             <option>3</option>
             <option>4</option>
             <option>5</option>
           </select>
         </div>
+        </div>
         
         <button  class="btn btn-primary"(click)="createComentario(inputComentario.value, inputPuntuacion.value, inte._id)"><i class="bi bi-chat-square-text"></i> Comentar</button>
 
         
 
-      </div>
-      <div class="col">
+      
+</div>
+  <div class="container shadow-lg p-3 mb-5 bg-white rounded col" *ngFor="let inte of intens">
         <h2>Asignaturas</h2>
         <div *ngFor="let inte of intens">
           <div *ngFor="let asig of inte.asignaturas"  >
@@ -57,10 +63,8 @@
           </div>
           <app-asignatura #asignaturaId></app-asignatura>
           </div>
-      </div>
+      
     </div>
-    
   </div>
-
 
   <router-outlet></router-outlet>
