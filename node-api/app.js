@@ -94,8 +94,7 @@ let verifySession = (req, res, next) => {
     }) */
 //}
 
-app.get('/*',(req, res, next) =>
-    res.set('Cache-Control', 'no-cache, no-store, must-revalidate'),
+app.get('/*',(req, res) =>
     res.sendFile('index.html', {root: './dist/memoria-colectiva-esiiab'}),
 );
 
