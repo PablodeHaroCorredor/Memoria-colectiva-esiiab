@@ -11,7 +11,7 @@ const nodemailer = require('nodemailer');
 const details = require("./details.json");
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, './dist/memoria-colectiva-esiiab')));
+app.use(express.static('./dist/memoria-colectiva-esiiab'));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
@@ -94,10 +94,10 @@ let verifySession = (req, res, next) => {
     }) */
 //}
 
-app.get('*',function(req, res, next){
-    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.sendFile(path.join(__dirname, './dist/memoria-colectiva-esiiab/index.html'));
-});
+app.get('/*',(req, res, next) =>
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate'),
+    res.sendFile('index.html', {root: './dist/memoria-colectiva-esiiab'}),
+);
 
 
 
