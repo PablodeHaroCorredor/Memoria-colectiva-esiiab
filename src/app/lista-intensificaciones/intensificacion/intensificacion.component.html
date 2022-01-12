@@ -12,9 +12,15 @@
           {{valoracion.comentario}}
           
           </h3>
-      
-          {{valoracion.puntuacion}} 
-
+            
+          <!-- {{valoracion.puntuacion}}  -->
+         
+            
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star"></i>
+          <i class="bi bi-star"></i>
+          <i class="bi bi-star"></i>
+          <i class="bi bi-star"></i>
           <br>
           <h4 style="font-style: italic;">
           Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}</h4>
@@ -22,6 +28,7 @@
         
           <button class="btn btn-danger" (click)="borrarComentario(valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
         </div>
+        
       </div>
       <br>
       <h2 style="font-size: large;"> Escribe aqui tu comentario</h2>
@@ -89,4 +96,10 @@
     </div>
   </div>
 
+
+
+
+  <script>
+    
+    </script>
   <router-outlet></router-outlet>

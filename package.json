@@ -7,8 +7,7 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "postinstall": "ng build --aot --prod --outputHashing=all && cd node-api && npm install",
-    "heroku-postbuild": "ng build --prod"
+    "postinstall": "ng build --aot --prod --outputHashing=all && cd node-api && npm install"
   },
   "private": true,
   "dependencies": {
