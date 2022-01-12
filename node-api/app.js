@@ -12,7 +12,7 @@ const details = require("./details.json");
 const path = require('path');
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname,'../dist')));
+app.use(express.static(path.join(__dirname,'../dist/Memoria-colectiva-esiiab')));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
@@ -95,11 +95,12 @@ let verifySession = (req, res, next) => {
     }) */
 //}
 
-/* app.get('*',function(req, res, next){
-    res.sendFile('index.html', {root: '../dist/memoria-colectiva-esiiab'})
-} =>
+ app.get('*',function(req, res, next){
+     
+    res.sendFile(path.join(__dirname, '../dist/Memoria-colectiva-esiiab/index.html'));
+} 
    
-); */
+); 
 
 
 
