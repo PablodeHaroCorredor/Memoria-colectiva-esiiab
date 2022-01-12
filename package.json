@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "cd node-api && node app.js",
+    "start": "cd node-api && npm start",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
