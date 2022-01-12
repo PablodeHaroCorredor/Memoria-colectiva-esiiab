@@ -16,6 +16,8 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ListaDirectoresComponent } from './lista-directores/lista-directores.component';
 import { DirectorComponent } from './director/director.component';
+import { OptativaComponent } from './lista-optativas/optativa/optativa.component';
+import { MuiiComponent } from './muii/muii.component';
 //import { TokenInterceptor } from './Internceptors/token.interceptor';
 
 
@@ -32,7 +34,9 @@ import { DirectorComponent } from './director/director.component';
     RegisterComponent,
     HomeComponent,
     ListaDirectoresComponent,
-    DirectorComponent
+    DirectorComponent,
+    OptativaComponent,
+    MuiiComponent
     
   ],
   imports: [
