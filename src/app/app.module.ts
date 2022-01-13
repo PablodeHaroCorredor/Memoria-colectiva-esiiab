@@ -18,6 +18,7 @@ import { ListaDirectoresComponent } from './lista-directores/lista-directores.co
 import { DirectorComponent } from './director/director.component';
 import { OptativaComponent } from './lista-optativas/optativa/optativa.component';
 import { MuiiComponent } from './muii/muii.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 //import { TokenInterceptor } from './Internceptors/token.interceptor';
 
 
@@ -46,7 +47,8 @@ import { MuiiComponent } from './muii/muii.component';
     MsalModule,
     ReactiveFormsModule,
     FormsModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    NgbModule
   ],
   providers: [
     
