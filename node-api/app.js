@@ -102,12 +102,6 @@ let verifySession = (req, res, next) => {
 //}
 
 
- app.get('*',function(req, res, next){
-     
-    res.sendFile(path.join(__dirname, '../dist/Memoria-colectiva-esiiab/index.html'));
-} 
-   
-); 
 
 
 
@@ -360,7 +354,3 @@ app.listen(port,()=>{
     console.log('Express API is running at port ', port);
 })
   
-const PORT = process.env.PORT || 3000;
-app.listen(PORT,()=>{
-    console.log(`Express API is running at port ${PORT}`);
-});
