@@ -101,17 +101,13 @@ let verifySession = (req, res, next) => {
     }) */
 //}
 
-<<<<<<< HEAD
 
-
-=======
  app.get('*',function(req, res, next){
      
     res.sendFile(path.join(__dirname, '../dist/Memoria-colectiva-esiiab/index.html'));
 } 
    
 ); 
->>>>>>> 5d626be2f3cdf75b33b58bbf4863ec9e241168e3
 
 
 
@@ -350,7 +346,6 @@ app.post("/sendmail", (req, res) => {
     });
   });
   
-<<<<<<< HEAD
   app.get('*',(req, res) => {
     res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
     res.sendFile(path.join(appRoot.path, '../dist/Memoria-colectiva-esiiab/index.html'));
@@ -364,11 +359,8 @@ app.listen(PORT,()=>{
 app.listen(port,()=>{
     console.log('Express API is running at port ', port);
 })
-=======
-    
   
 const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
     console.log(`Express API is running at port ${PORT}`);
 });
->>>>>>> 5d626be2f3cdf75b33b58bbf4863ec9e241168e3
