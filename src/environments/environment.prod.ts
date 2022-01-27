@@ -1,5 +1,6 @@
 export const environment = {
-  production: true
+  production: true,
+  serverUrl:'https://memoria-colectiva-esiiab.herokuapp.com'
 };
 
 

@@ -1,40 +1,33 @@
-
 <router-outlet></router-outlet>
- <div class="container shadow-lg p-3 mb-5 bg-white rounded" *ngFor="let asig of asigs" >
+ <div class="container shadow-lg p-3 mb-5 bg-white rounded" >
   <h2 >
-    {{ asig.nombre }}
+    NOMBRE DE OPTATIVA
   </h2>
- <br>
- {{ asig.descripcion }}
-  
+ 
   <div class="row">
     <div class="col">
       <br>
       <h2>Comentarios</h2>
-
+<br>
     </div>
   </div>
-  
-  <div class="" *ngFor="let asig of asigs">
-    <div class="">
-      <div class=" shadow-lg p-3 mb-5 bg-white rounded" style="overflow-y: scroll; height:300px">
-      <div class=" shadow-lg p-3 mb-5 bg-white rounded" id="coments" *ngFor="let valoracion of asig.valoraciones">
+  <div class="row" >
+    <div class="col">
+      <div class="col shadow-lg p-3 mb-5 bg-white rounded" id="coments">
         <h3 class="font-weight-bold">
-          {{valoracion.comentario}} 
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </h3>
-        {{valoracion.puntuacion}}
+
         
       
       <br>
       <h4 style="font-style: italic;">
-        Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}
+        12/12/2021
       </h4>
       
-      <button class="btn btn-danger" (click)="borrarComentario(valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+      <button class="btn btn-danger"  max="5"><i class="bi bi-trash"></i></button>
 
     </div>
-  </div>
-  </div>
     <br>
     <h2 style="font-size: large;"> Escribe aqui tu comentario</h2>
       <div class="input-group">
@@ -57,13 +50,10 @@
         </div>
         </div>
         
-        <button  class="btn btn-primary"(click)="createComentario(inputComentario.value, inputPuntuacion.value, asig._id)"><i class="bi bi-chat-square-text"></i> Comentar</button>
+        <button  class="btn btn-primary"><i class="bi bi-chat-square-text"></i> Enviar</button>
 
         
     
     </div>
-  
-
+  </div>
 </div>
-
- 

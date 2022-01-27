@@ -9,9 +9,10 @@ const { get } = require('http');
 const { send } = require('process');
 const nodemailer = require('nodemailer');
 const details = require("./details.json");
+const path = require('path');
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname, '../dist/memoria-colectiva-esiiab')))
+app.use(express.static(path.join(__dirname,'../dist/Memoria-colectiva-esiiab')));
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
@@ -94,10 +95,12 @@ let verifySession = (req, res, next) => {
     }) */
 //}
 
-app.get('*',function(req, res, next){
-    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
-    res.sendFile(path.join(__dirname, '../dist/memoria-colectiva-esiiab/index.html'));
-});
+ app.get('*',function(req, res, next){
+     
+    res.sendFile(path.join(__dirname, '../dist/Memoria-colectiva-esiiab/index.html'));
+} 
+   
+); 
 
 
 
@@ -154,6 +157,14 @@ app.get('/lista-intensificaciones/:id/asignaturas', (req,res)=>{
 //GET una asignatura de la una intensificacion
 app.get('/lista-intensificaciones/:id/asignaturas/:id', (req,res)=>{
     Asignatura.find({_id: req.params.id}).then((asignaturas)=>{
+        res.send(asignaturas);
+    });
+    
+})
+
+//GET valoraciones
+app.get('/valoraciones', (req,res)=>{
+    Valoracion.find({_id: req.params.id}).populate('usuario').then((asignaturas)=>{
         res.send(asignaturas);
     });
     
@@ -330,12 +341,7 @@ app.post("/sendmail", (req, res) => {
   
     
   
-    
-  
-
-
-
-
-app.listen(3000,(req, res)=>{
-    console.log('Express API is running at port 3000');
-})
+const PORT = process.env.PORT || 3000;
+app.listen(PORT,()=>{
+    console.log(`Express API is running at port ${PORT}`);
+});
