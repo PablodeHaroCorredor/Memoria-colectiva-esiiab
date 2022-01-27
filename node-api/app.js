@@ -10,9 +10,11 @@ const { send } = require('process');
 const nodemailer = require('nodemailer');
 const details = require("./details.json");
 const path = require('path');
+const appRoot = require('app-root-path');
 
 app.use(bodyParser.json());
-app.use(express.static(path.join(__dirname,'../dist/Memoria-colectiva-esiiab')));
+app.use(express.static(path.join(appRoot.path,'../dist/Memoria-colectiva-esiiab')));
+console.log(__dirname)
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*"); // update to match the domain you will make the request from
     res.header("Access-Control-Allow-Methods", "GET, POST, HEAD, OPTIONS, PUT, PATCH, DELETE");
@@ -95,12 +97,8 @@ let verifySession = (req, res, next) => {
     }) */
 //}
 
- app.get('*',function(req, res, next){
-     
-    res.sendFile(path.join(__dirname, '../dist/Memoria-colectiva-esiiab/index.html'));
-} 
-   
-); 
+
+
 
 
 
@@ -339,9 +337,16 @@ app.post("/sendmail", (req, res) => {
     });
   });
   
-    
+  app.get('*',(req, res) => {
+    res.set('Cache-Control', 'no-cache, no-store, must-revalidate');
+    res.sendFile(path.join(appRoot.path, '../dist/Memoria-colectiva-esiiab/index.html'));
+}); 
   
-const PORT = process.env.PORT || 3000;
+/* const PORT = process.env.PORT || 3000;
 app.listen(PORT,()=>{
     console.log(`Express API is running at port ${PORT}`);
-});
+}); */
+ const port = process.env.PORT || 3000
+app.listen(port,()=>{
+    console.log('Express API is running at port ', port);
+})
