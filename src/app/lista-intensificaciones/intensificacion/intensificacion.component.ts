@@ -19,6 +19,8 @@ export class IntensificacionComponent implements OnInit {
   
   currentRate = 8;
 
+
+  
   constructor(private asignaturaService:AsignaturaService, private route: ActivatedRoute, private loginService:LoginService) {
    }
   ngOnInit(){
@@ -31,6 +33,8 @@ export class IntensificacionComponent implements OnInit {
        
         })
       
+
+
   }
 
   toggleShow() {
@@ -41,6 +45,7 @@ export class IntensificacionComponent implements OnInit {
     return this.asignaturaService.getIntensificacion(intensificacion).subscribe((intens: any)=>{
       this.intens=intens;
       
+      this.calcularMedia(intensificacion)
     })
      
   }
@@ -79,6 +84,22 @@ export class IntensificacionComponent implements OnInit {
   }
  
 
+
+  calcularMedia = (intensificacion:string) => {
+    this.asignaturaService.getIntensificacion(intensificacion).subscribe((intens: any)=>{
+      this.intens=intens;
+      
+    })
+    console.log(this.intens);
+
+  /* var total = 0;
+  for (var i=0; i<; i++) {
+    total +=;
+  }
+    var suma = total;
+    return suma / ; */
+  
+} 
 }
 
 

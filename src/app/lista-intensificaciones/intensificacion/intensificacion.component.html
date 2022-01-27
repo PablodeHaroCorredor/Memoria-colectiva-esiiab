@@ -6,19 +6,29 @@
      <br>
       {{ inte.descripcion }}
       <h2 >Comentarios</h2>
-      <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of inte.valoraciones">
-        <h3 class="font-weight-bold">
+      <div class="col shadow-lg p-3 mb-5 bg-white rounded" style="overflow-y: scroll; height:400px">
+        <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of inte.valoraciones" >
+          <h3 class="font-weight-bold">
           {{valoracion.comentario}}
           
-      </h3>
-      
-      {{valoracion.puntuacion}}
-        <br>
-        <h4 style="font-style: italic;">
+          </h3>
+            
+          <!-- {{valoracion.puntuacion}}  -->
+         
+            
+          <i class="bi bi-star-fill"></i>
+          <i class="bi bi-star"></i>
+          <i class="bi bi-star"></i>
+          <i class="bi bi-star"></i>
+          <i class="bi bi-star"></i>
+          <br>
+          <h4 style="font-style: italic;">
           Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}</h4>
         
         
-        <button class="btn btn-danger" (click)="borrarComentario(valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+          <button class="btn btn-danger" (click)="borrarComentario(valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+        </div>
+        
       </div>
       <br>
       <h2 style="font-size: large;"> Escribe aqui tu comentario</h2>
@@ -30,8 +40,8 @@
       </div>
       <br>
 
-        <div class="form-group" style="width: 60px;">
-          <div class="input-group-prepend">
+        <div class="form-group" >
+           <div class="input-group-prepend">
             <span class="input-group-text"><i class="bi bi-star"></i></span>
           
             <select #inputPuntuacion class="form-control" id="exampleFormControlSelect1">
@@ -41,8 +51,27 @@
             <option>4</option>
             <option>5</option>
           </select>
-        </div>
-        </div>
+        </div> 
+      </div>
+        <form >
+          <p   class="clasificacion">
+               <input  id="radio1" type="radio" name="estrellas" value="5"><!--
+            --><label for="radio1">★</label><!--
+            --><input  id="radio2" type="radio" name="estrellas" value="4"><!--
+            --><label for="radio2">★</label><!--
+            --><input  id="radio3" type="radio" name="estrellas" value="3"><!--
+            --><label for="radio3">★</label><!--
+            --><input  id="radio4" type="radio" name="estrellas" value="2"><!--
+            --><label for="radio4">★</label><!--
+            --><input  id="radio5" type="radio" name="estrellas" value="1"><!--
+            --><label for="radio5">★</label>
+          </p>
+        </form>
+
+
+
+        
+       
         
         <button  class="btn btn-primary"(click)="createComentario(inputComentario.value, inputPuntuacion.value, inte._id)"><i class="bi bi-chat-square-text"></i> Comentar</button>
 
@@ -67,4 +96,10 @@
     </div>
   </div>
 
+
+
+
+  <script>
+    
+    </script>
   <router-outlet></router-outlet>

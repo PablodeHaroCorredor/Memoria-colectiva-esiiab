@@ -28,10 +28,13 @@ export class AsignaturaComponent implements OnInit {
 
 
   public actualizarInterfaz(asignatura:string){
+    
     return this.asignaturaService.getAsignatura(asignatura).subscribe((asigs: any)=>{
       this.asigs=asigs;
-      
+      this.calcularMedia(asignatura)
     })
+    
+
     
   }
 
@@ -54,4 +57,23 @@ export class AsignaturaComponent implements OnInit {
 
     });
   }
+
+
+  calcularMedia = (asignatura:string) => {
+    this.asignaturaService.getAsignatura(asignatura).subscribe((asigs: any)=>{
+      this.asigs=asigs;
+      let valoraciones = this.asigs.valoraciones
+      console.log(valoraciones); 
+    })
+      
+    
+
+  /* var total = 0;
+  for (var i=0; i<; i++) {
+    total +=;
+  }
+    var suma = total;
+    return suma / ; */
+  
+} 
 }
