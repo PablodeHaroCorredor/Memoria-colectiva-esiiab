@@ -15,30 +15,42 @@ export class AsignaturaService {
   }
   getIntensificacion(intensificacion:string){
     console.log("hago cosas");
-    return this.apiCallService.get(`lista-intensificaciones/${intensificacion}`);
+    return this.apiCallService.get(`lista-intensificaciones/intensificacion/${intensificacion}`);
   }
 
   updateInte(intensificacion:string, valoraciones:string[]){
     return this.apiCallService.put(`lista-intensificaciones/${intensificacion}`, {valoraciones});
   }
   
-  getListaAsignaturas(){
-    return this.apiCallService.get('asignaturas');
+  getListaAsignaturas(idInte:string){
+    return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/asignaturas`);
   }
-  getAsignatura(asignatura:string){
-    return this.apiCallService.get(`asignaturas/${asignatura}`);
+  getAsignatura(idInte:string,idAsig:string){
+    return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}`);
   }
 
-  postValoracion(comentario:string, puntuacion:string, usuario:string|null){
-    return this.apiCallService.post(`valoraciones`, {comentario,puntuacion,usuario});
+  getValoracionesInte(idInte:string){
+    return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/valoraciones`);
+  }
+
+  getValoracionesAsig(idInte:string, idAsig:string){
+    return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}/valoraciones`);
+  }
+
+  postValoracionInte(idInte:string, comentario:string, puntuacion:string, usuario:string|null){
+    return this.apiCallService.post(`lista-intensificaciones/intensificacion/${idInte}/valoraciones`, {idInte,comentario,puntuacion,usuario});
+  } 
+
+  postValoracionAsig(idInte:string,idAsig:string, comentario:string, puntuacion:string, usuario:string|null){
+    return this.apiCallService.post(`lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}/valoraciones`, {idAsig,comentario,puntuacion,usuario});
   } 
 
   updateAsignatura(asignatura:string, valoraciones:string[]){
     return this.apiCallService.put(`asignaturas/${asignatura}`, {valoraciones});
   }
 
-  borrarComentario(valoracion:string){
-   return this.apiCallService.delete(`valoraciones/${valoracion}`);
+  borrarComentario(idInte:string, valoracion:string){
+   return this.apiCallService.delete(`lista-intensificaciones/intensificacion/${idInte}/valoraciones/${valoracion}`);
   }
 
  

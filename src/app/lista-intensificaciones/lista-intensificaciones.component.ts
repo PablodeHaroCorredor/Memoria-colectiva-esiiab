@@ -11,7 +11,6 @@ import { IntensificacionComponent } from './intensificacion/intensificacion.comp
 })
 export class ListaIntensificacionesComponent implements OnInit {
 
-  @ViewChild('intensificacionId',{static:false}) intComponent!: IntensificacionComponent;
   flag=true;
   flag2=false;
   intens:any;
@@ -29,23 +28,11 @@ export class ListaIntensificacionesComponent implements OnInit {
           )}
           
     )
-    this.route.params.subscribe(
-      (params: Params) => {
-    this.asignaturaService.getListaAsignaturas().subscribe((asigs: any) => {
-      this.asigs = asigs;
    
-    }
-    )}
-    )
   }
   
 
   
-    
-  abrirIntensificacion(inte:string){
-    this.flag=false;
-    this.intComponent.actualizarInterfaz(inte);
-  }
-  
+ 
   
 }

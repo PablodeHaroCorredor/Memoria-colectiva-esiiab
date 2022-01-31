@@ -1,10 +1,7 @@
 const mongoose = require('mongoose');
 
 const AsignaturaSchema = new mongoose.Schema({
-    codigoAsig:{
-      type:Number,
-      required:true  
-    },
+    
     nombre:{
         type: String,
         required:true,
@@ -15,9 +12,11 @@ const AsignaturaSchema = new mongoose.Schema({
         type: String,
         required:true
     },
-    valoraciones:[{
-        type: mongoose.Schema.Types.ObjectId, ref:'Valoracion'
-    }]
+    inteId:{
+        type: mongoose.Schema.Types.ObjectId, ref:'Intensificacion'
+
+    }
+   
    
     
 })

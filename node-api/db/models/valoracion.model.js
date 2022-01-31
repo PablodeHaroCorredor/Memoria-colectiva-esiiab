@@ -9,8 +9,18 @@ const ValoracionSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    usuario:{
+    userId:{
         type: mongoose.Schema.Types.ObjectId, ref:'Usuario'
+    },
+    asigId:{
+        type: mongoose.Schema.Types.ObjectId, ref:'Asignatura'
+    },
+    inteId:{
+        type: mongoose.Schema.Types.ObjectId, ref:'Intensificacion'
+    },
+    like:{
+        type:Number,
+        default:0
     },
     fechaCreacion:{
         type:Date,

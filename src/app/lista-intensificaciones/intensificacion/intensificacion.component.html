@@ -1,32 +1,49 @@
-<div class=" container centered-content row" *ngFor="let inte of intens">
-<div class=" shadow-lg p-3 mb-5 bg-white rounded col" *ngFor="let inte of intens">
+<div class=" container centered-content" *ngFor="let inte of intens">
+<div class=" shadow-lg p-3 mb-5 bg-white rounded " *ngFor="let inte of intens">
         <h2 >
           {{ inte.nombre }}
       </h2>
      <br>
       {{ inte.descripcion }}
+
+      <div class="container shadow-lg p-3 mb-5 bg-white rounded " *ngFor="let inte of intens">
+        <h2>Asignaturas</h2>
+          <div *ngFor="let asig of asigs">
+            <button style="margin: 3px;"class="btn btn-info" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'asignaturas', asig._id]">
+            {{asig.nombre}}
+            
+            </button>
+            
+            
+          </div>
+      
+    </div>
       <h2 >Comentarios</h2>
       <div class="col shadow-lg p-3 mb-5 bg-white rounded" style="overflow-y: scroll; height:400px">
-        <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of inte.valoraciones" >
+        <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of valoraciones" >
           <h3 class="font-weight-bold">
           {{valoracion.comentario}}
           
           </h3>
             
-          <!-- {{valoracion.puntuacion}}  -->
+          {{valoracion.puntuacion}}  
          
             
-          <i class="bi bi-star-fill"></i>
+         <!--  <i class="bi bi-star-fill"></i>
           <i class="bi bi-star"></i>
           <i class="bi bi-star"></i>
           <i class="bi bi-star"></i>
           <i class="bi bi-star"></i>
-          <br>
+          <br> -->
           <h4 style="font-style: italic;">
           Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}</h4>
         
         
-          <button class="btn btn-danger" (click)="borrarComentario(valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+          <button class="btn btn-danger" (click)="borrarComentario(inte._id, valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+
+
+          <button class="btn btn-primary"  (click)="sumarLike(valoracion.like)" max="5"><i class="bi bi-hand-thumbs-up"></i></button> 
+          {{valoracion.like}}
         </div>
         
       </div>
@@ -73,28 +90,12 @@
         
        
         
-        <button  class="btn btn-primary"(click)="createComentario(inputComentario.value, inputPuntuacion.value, inte._id)"><i class="bi bi-chat-square-text"></i> Comentar</button>
+        <button  class="btn btn-primary" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id]" (click)="createComentario(inputComentario.value, inputPuntuacion.value,inte._id)"><i class="bi bi-chat-square-text"></i> Enviar</button>
 
         
 
       
 </div>
-  <div class="container shadow-lg p-3 mb-5 bg-white rounded col" *ngFor="let inte of intens">
-        <h2>Asignaturas</h2>
-        <div *ngFor="let inte of intens">
-          <div *ngFor="let asig of inte.asignaturas"  >
-            <button style="margin: 3px;"class="btn btn-info" (click)="abrirAsignatura(asig._id)">
-            {{asig.nombre}}
-            
-            </button>
-            
-            
-          </div>
-          <app-asignatura #asignaturaId></app-asignatura>
-          </div>
-      
-    </div>
-  </div>
 
 
 

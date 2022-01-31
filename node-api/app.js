@@ -108,19 +108,51 @@ let verifySession = (req, res, next) => {
 
   //GET lista de intensificaciones
   app.get('/lista-intensificaciones',(req,res)=>{
-    Intensificacion.find({}).populate('asignaturas').then((intensificaciones)=>{
+    Intensificacion.find({}).then((intensificaciones)=>{
         res.send(intensificaciones);
     });
     
 })
 
 //GET una intensificacion de la lista
-app.get('/lista-intensificaciones/:id',(req,res)=>{
-    Intensificacion.find({_id:req.params.id}).populate('asignaturas').populate('valoraciones').then((intensificaciones)=>{
+app.get('/lista-intensificaciones/intensificacion/:id',(req,res)=>{
+    Intensificacion.find({_id:req.params.id}).then((intensificaciones)=>{
         res.send(intensificaciones);
     });
     
 })
+
+//GET asignaturas de la lista
+app.get('/lista-intensificaciones/intensificacion/:inteId/asignaturas',(req,res)=>{
+    Asignatura.find({inteId:req.params.inteId}).then((asignaturas)=>{
+        res.send(asignaturas);
+    });
+    
+})
+
+app.get('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id',(req,res)=>{
+    Asignatura.find({_id:req.params.id}).then((asignaturas)=>{
+        res.send(asignaturas);
+    });
+    
+})
+
+//GET valoraciones de una intensificacion
+app.get('/lista-intensificaciones/intensificacion/:inteId/valoraciones',(req,res)=>{
+    Valoracion.find({inteId:req.params.inteId}).then((valoraciones)=>{
+        res.send(valoraciones);
+    });
+    
+})
+
+//GET valoraciones de una asignatura
+app.get('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id/valoraciones',(req,res)=>{
+    Valoracion.find({asigId:req.params.id}).then((valoraciones)=>{
+        res.send(valoraciones);
+    });
+    
+})
+
 //UPDATE intes
 app.put('/lista-intensificaciones/:id', (req, res)=> {
     Intensificacion.findOneAndUpdate({_id:req.params.id},{
@@ -133,7 +165,7 @@ app.put('/lista-intensificaciones/:id', (req, res)=> {
 
 //GET lista de asignaturas
 app.get('/asignaturas', (req,res)=>{
-    Asignatura.find({}).populate('valoraciones').then((asignaturas)=>{
+    Asignatura.find({}).then((asignaturas)=>{
         res.send(asignaturas);
     });
     
@@ -173,13 +205,10 @@ app.get('/valoraciones', (req,res)=>{
 
 
 //POST intensificacion
-app.post('/lista-intensificaciones', (req, res)=> {
+app.post('/lista-intensificaciones/intensificacion', (req, res)=> {
     let newIntensificacion = new Intensificacion({
-        codigoInt:req.body.codigoInt,
         nombre:req.body.nombre,
-        descripcion:req.body.descripcion,
-        asignaturas:req.body.asignaturas,
-        valoraciones:req.body.valoraciones
+        descripcion:req.body.descripcion
     });
     newIntensificacion.save().then((intensificacionDoc) =>{
         res.send(intensificacionDoc);
@@ -187,12 +216,11 @@ app.post('/lista-intensificaciones', (req, res)=> {
 })
 
 //POST asignatura
-app.post('/asignaturas', (req, res)=> {
+app.post('/lista-intensificaciones/intensificacion/:inteId/asignaturas', (req, res)=> {
     let newAsignatura = new Asignatura({
-        codigoAsig:req.body.codigoAsig,
         nombre:req.body.nombre,
         descripcion:req.body.descripcion,
-        valoraciones:req.body.valoraciones
+        inteId: req.params.inteId
     });
     newAsignatura.save().then((asignaturaDoc) =>{
         res.send(asignaturaDoc);
@@ -210,17 +238,42 @@ app.put('/asignaturas/:id', (req, res)=> {
 
 
 
-//POST valoraciones
-app.post('/valoraciones', (req, res)=> {
+//POST valoraciones de intensificacion
+app.post('/lista-intensificaciones/intensificacion/:inteId/valoraciones', (req, res)=> {
     let newValoracion = new Valoracion({
+        inteId:req.params.inteId,
         comentario:req.body.comentario,
         puntuacion:req.body.puntuacion,
-        usuario:req.body.usuario
+        userId:req.body.usuario
     });
     newValoracion.save().then((valoracionDoc) =>{
         res.send(valoracionDoc);
     })
 })
+
+//patch comentario intensificacion  
+app.patch('/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id', (req, res)=> {
+    Valoracion.findOneAndUpdate({_id:req.params.id,
+            inteId: req.body.inteId},{
+        $set:req.body
+    }).then(()=>{
+        res.sendStatus(200)
+    });
+})
+
+//POST valoraciones de asignatura
+app.post('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asigId/valoraciones', (req, res)=> {
+    let newValoracion = new Valoracion({
+        asigId:req.params.asigId,
+        comentario:req.body.comentario,
+        puntuacion:req.body.puntuacion,
+        userId:req.body.usuario
+    });
+    newValoracion.save().then((valoracionDoc) =>{
+        res.send(valoracionDoc);
+    })
+})
+
 
 app.patch('/valoraciones/:id', (req, res)=> {
     Valoracion.findOneAndUpdate({_id:req.params.id},{
@@ -230,7 +283,7 @@ app.patch('/valoraciones/:id', (req, res)=> {
     });
 })
 
-app.delete('/valoraciones/:id',(req, res)=> {
+app.delete('/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id',(req, res)=> {
     Valoracion.findOneAndRemove({
         _id:req.params.id
     }).then((removedValoracionDoc)=>{

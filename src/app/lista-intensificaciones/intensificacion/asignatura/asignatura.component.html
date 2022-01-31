@@ -18,7 +18,7 @@
   <div class="" *ngFor="let asig of asigs">
     <div class="">
       <div class=" shadow-lg p-3 mb-5 bg-white rounded" style="overflow-y: scroll; height:300px">
-      <div class=" shadow-lg p-3 mb-5 bg-white rounded" id="coments" *ngFor="let valoracion of asig.valoraciones">
+      <div class=" shadow-lg p-3 mb-5 bg-white rounded" id="coments" *ngFor="let valoracion of valoraciones">
         <h3 class="font-weight-bold">
           {{valoracion.comentario}} 
         </h3>
@@ -30,7 +30,7 @@
         Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}
       </h4>
       
-      <button class="btn btn-danger" (click)="borrarComentario(valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+      <button class="btn btn-danger" (click)="borrarComentario(asig._id, valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
 
     </div>
   </div>
@@ -57,7 +57,7 @@
         </div>
         </div>
         
-        <button  class="btn btn-primary"(click)="createComentario(inputComentario.value, inputPuntuacion.value, asig._id)"><i class="bi bi-chat-square-text"></i> Comentar</button>
+        <button  class="btn btn-primary"(click)="createComentario( inputComentario.value, inputPuntuacion.value, asig._id, asig.inteId)"><i class="bi bi-chat-square-text"></i> Comentar</button>
 
         
     

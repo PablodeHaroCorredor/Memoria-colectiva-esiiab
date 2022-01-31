@@ -26,8 +26,10 @@ h1 {
     color: black;
     
   }
+
+  
   footer {
-    position:relative;
+    position:fixed;
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     bottom:0;

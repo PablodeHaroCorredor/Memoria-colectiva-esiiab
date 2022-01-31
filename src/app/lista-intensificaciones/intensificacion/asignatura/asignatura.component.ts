@@ -12,59 +12,56 @@ export class AsignaturaComponent implements OnInit {
 
   asigs:any;
   id:string=""
+  valoraciones:any
 
   constructor(private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) { 
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
-    this.route.params.subscribe(
-      (params: Params) => {
-        this.id = params._id;
+      this.route.params.subscribe(
+        (params:Params)=>{
+          this.asignaturaService.getAsignatura(params.inteId,params.id).subscribe((asigs: any)=>{
+            this.asigs=asigs;
+        }
+  
+        )})
+        this.route.params.subscribe(
+          (params:Params)=>{
+            console.log(params)
+            this.asignaturaService.getValoracionesAsig(params.inteId,params.id).subscribe((valoraciones: any)=>{
+              this.valoraciones=valoraciones;
+          }
+    
+          )})
         
-      }
-    )
+      
   }
 
+  
 
-  public actualizarInterfaz(asignatura:string){
-    
-    return this.asignaturaService.getAsignatura(asignatura).subscribe((asigs: any)=>{
-      this.asigs=asigs;
-      this.calcularMedia(asignatura)
-    })
-    
-
-    
-  }
-
-  public updateAsginatura(asig:string,valoracion:string[]){
-      this.asignaturaService.updateAsignatura(asig, valoracion).subscribe(()=>{
-
-    });
-  }
 
  //metodo para que cuando crees una valoracion se meta en la lista de las asignaturas
-  public createComentario(comentario:string, puntuacion:string, asig:string){
-    this.asignaturaService.postValoracion(comentario, puntuacion, this.loginService.getUserId()).subscribe((valoracion: any) => {
-      console.log(valoracion);
-    this.updateAsginatura(asig, valoracion._id);
+  public createComentario( comentario:string, puntuacion:string, asig:string, inte:string){
+    this.asignaturaService.postValoracionAsig(inte,asig,comentario, puntuacion, this.loginService.getUserId()).subscribe((valoracion: any) => {
    })
+
   }
 
-  public borrarComentario(comentarioId:string){
-    this.asignaturaService.borrarComentario(comentarioId).subscribe(()=>{
+  public borrarComentario(asigId:string, comentarioId:string){
+    this.asignaturaService.borrarComentario(asigId, comentarioId).subscribe(()=>{
 
+      window.location.reload();
     });
   }
 
 
-  calcularMedia = (asignatura:string) => {
+ /*  calcularMedia = (asignatura:string) => {
     this.asignaturaService.getAsignatura(asignatura).subscribe((asigs: any)=>{
       this.asigs=asigs;
       let valoraciones = this.asigs.valoraciones
       console.log(valoraciones); 
-    })
+    }) */
       
     
 
@@ -76,4 +73,4 @@ export class AsignaturaComponent implements OnInit {
     return suma / ; */
   
 } 
-}
+
