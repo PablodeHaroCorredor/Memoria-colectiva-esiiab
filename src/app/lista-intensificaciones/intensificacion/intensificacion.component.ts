@@ -84,7 +84,7 @@ export class IntensificacionComponent implements OnInit {
    
 
   public createComentario( comentario:string, puntuacion:number, asig:string, inte:string){
-    this.asignaturaService.postValoracionAsig(inte, asig,comentario, puntuacion, this.loginService.getUserId()).subscribe(()=>{
+    this.asignaturaService.postValoracion(inte, asig,comentario, puntuacion, this.loginService.getUserId()).subscribe(()=>{
 
     })
       

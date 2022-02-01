@@ -1,102 +1,13 @@
-<br><br><br><br>
+
 <router-outlet></router-outlet>
-<!-- <table class="centered-content" *ngIf="flag">
-    <div class="card text-center " style="width: 18rem;" *ngFor="let dire of directores" >
-        <div class="card-body">
-          <h5 class="card-title"> {{ dire.nombre }}</h5>
-          <button class="btn btn-primary" routerLink="/director" (click)="abrirDirector(dire._id)" >Ver</button>
+
+<table class="centered-content" *ngIf="flag">
+  <h1 class="centered-content" style="font-size:xx-large;">
+    DIRECTORES
+  </h1>
+    <div class=" text-center " style="width: 18rem;" *ngFor="let director of directores" >
+        <div class="body">
+          <button class="btn btn-light" style="width: 70%; margin: 10px;" [routerLink]="['/lista-directores/director', director._id]" >{{director.nombre}}</button>
         </div>
     </div>
 </table>
-*ngIf="flag" 
-<app-intensificacion #directorId ></app-intensificacion> -->
-
-
-<h1 style="margin-left: 10%;font-size:x-large ;">
-  DIRECTORES
-</h1>
-<br>
-    <div style="margin-left: 10%;">
-      <div class="" style="width: 18rem;">
-          <div class="body">
-            
-            <button  class="btn btn-light " href="#"  routerLink="/director">Pablo Bermejo López</button>
-          </div>
-        </div>
-    
-        <br>
-        <div class=" " style="width: 18rem; ">
-          <div class="body">
-            <a  class="btn btn-light" href="#"   routerLink="/director">Guillermo Manjabacas Tendero</a>
-          </div>
-        </div>
-        <br>
-      
-        <div class=" " style="width: 18rem;">
-          <div class="body">
-            <a class="btn btn-light" href="#"  routerLink="/director">Jose Antonio Gámez Martín</a>
-          </div>
-        </div>
-    
-        <br>
-        <div class="" style="width: 18rem;">
-          <div class="body">
-            <a class="btn btn-light" href="#"  routerLink="/director">Aurelio Bermúdez Marín</a>
-          </div>
-        </div>
-    
-        <br>
-        <div class="" style="width: 18rem;">
-          <div class="body">
-            <a class="btn btn-light" href="#"  routerLink="/director">Pascual González López</a>
-          </div>
-        </div>
-      
-
-      <br>
-        <div class="" style="width: 18rem;">
-          <div class="body">
-            <a class="btn btn-light" href="#"  routerLink="/director">Elena María Navarro Martinez</a>
-          </div>
-        </div>
-      
-
-      <br>
-        <div class="" style="width: 18rem;">
-          <div class="body">
-            <a class="btn btn-light" href="#"  routerLink="/director">José Miguel Puerta Callejón</a>
-          </div>
-        </div>
-      
-
-
-      <br>
-        <div class="" style="width: 18rem;">
-          <div class="body">
-            <a class="btn btn-light" href="#"  routerLink="/director">Diego Cazorla López</a>
-          </div>
-        </div>
-      
-
-      <br>
-        <div class="" style="width: 18rem;">
-          <div class="body">
-            <a class="btn btn-light" href="#"  routerLink="/director">María Julia Flores Gallego</a>
-          </div>
-        </div>
-     
-
-      <br>
-        <div class="" style="width: 18rem;">
-          <div class="body">
-            <a class="btn btn-light" href="#"  routerLink="/director">María Teresa López Bonal</a>
-          </div>
-        </div>
-      
-      
-  
-
-
-      </div>
-  <br>
-  <br><br><br><br>

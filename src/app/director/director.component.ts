@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
+import { AsignaturaService } from '../servicios/asignatura.service';
 import { DirectorService } from '../servicios/director.service';
 import { LoginService } from '../servicios/login.service';
 
@@ -14,62 +15,92 @@ export class DirectorComponent implements OnInit {
   flag2=false;
   id:string=""
   isShown: boolean= false;
-  
+  directId:any
+  media:any
+  valoraciones:any
+  director:any
   currentRate = 8;
+  etiquetas:any
 
-  constructor(private directorService:DirectorService, private route: ActivatedRoute, private loginService:LoginService) {
+  constructor(private directorService:DirectorService, private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) {
    }
   ngOnInit(){
 
-    this.isShown = false; //hidden every time subscribe detects change
     this.route.params.subscribe(
       (params:Params)=>{
-        this.id = params._id;
+        this.directId = params.directId;
         console.log(params);
-       
-        })
-      
-  }
+        this.directorService.getDirector(params.directId).subscribe((director: any)=>{
+          this.director=director;
+        }
+        
+    )})
 
-  toggleShow() {
-    this.isShown = ! this.isShown;
-  }
-/* 
-  public actualizarInterfaz(intensificacion:string){
-    return this.directorService.getIntensificacion(intensificacion).subscribe((intens: any)=>{
-      this.intens=intens;
-      
-    })
-     
-  }
-
-  public updateInte(inte:string, valoracion:string[]){
-    return this.directorService.updateInte(inte, valoracion).subscribe(()=>{
-
-    })
-  }
-
-  
-
-  public createComentario(comentario:string, puntuacion:string, inte:string){
-    this.directorService.postValoracion(comentario, puntuacion, this.loginService.getUserId()).subscribe((valoracion: any) => {
-      console.log(valoracion);
-    this.updateInte(inte, valoracion._id)
-    this.actualizarInterfaz(inte)
-    /* if(inte){
-      if(valoracion.usuario.lenght() >1){
-         this.toggleShow() 
+    this.route.params.subscribe(
+      (params:Params)=>{
+        console.log(params)
+        this.directorService.getValoracionesDirector(params.directId).subscribe((valoraciones: any)=>{
+          this.valoraciones=valoraciones;
+          this.media = this.calcularMedia()
       }
-    }  
 
-   })
+      )})
+      
+
+      this.route.params.subscribe(
+        (params:Params)=>{
+          this.directId = params.directId;
+          console.log(params);
+          this.directorService.getEtiquetasDirector(params.directId).subscribe((etiquetas: any)=>{
+            this.etiquetas=etiquetas;
+            console.log(etiquetas)
+          }
+          
+      )})
   }
 
-  
-  public borrarComentario(comentarioId:string){
-    this.directorService.borrarComentario(comentarioId).subscribe((valoracion: any)=>{
 
+
+  public borrarComentario(asigId:string, comentarioId:string){
+    this.asignaturaService.borrarComentario(asigId, comentarioId).subscribe(()=>{
+
+      window.location.reload();
     });
-  } */
+  }
+
+  public actualizarDirector(directorId:string, etiqueta:string){
+    this.directorService.updateDirector(directorId, etiqueta).subscribe(()=>{
+
+      window.location.reload();
+    });
+  }
+
  
+
+
+  public calcularMedia(){
+    var sum = 0
+    var avg = 0
+    var contador = 0
+    for(let valor of this.valoraciones){
+       sum =sum +valor.puntuacion
+       contador++
+        
+    }
+    avg = sum / contador
+    console.log(avg)
+     return avg
+  
+} 
+
+get sortByLastModifiedDesc() {
+  return this.valoraciones.sort((a: any, b: any) => {
+    return <any>new Date(b.fechaCreacion) - <any>new Date(a.fechaCreacion);
+  });
+}
+get sortByLastModifiedAsend() {
+  return this.valoraciones.sort((a: any, b: any) => {
+    return <any>new Date(b.fechaCreacion) - <any>new Date(a.fechaCreacion);
+  });
+} 
 }

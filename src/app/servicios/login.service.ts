@@ -88,7 +88,8 @@ export class LoginService {
   }
 
   private removeSession() {
-    localStorage.removeItem('user-id');/* 
+    localStorage.removeItem('user-id');
+    localStorage.removeItem('username')/* 
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token'); */
   }

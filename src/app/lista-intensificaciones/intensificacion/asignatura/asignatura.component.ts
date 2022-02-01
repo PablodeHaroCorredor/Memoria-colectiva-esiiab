@@ -45,7 +45,7 @@ export class AsignaturaComponent implements OnInit {
 
  //metodo para que cuando crees una valoracion se meta en la lista de las asignaturas
   public createComentario( comentario:string, puntuacion:number,asig:string, inte:string){
-    this.asignaturaService.postValoracionAsig(inte,asig,comentario, puntuacion, this.loginService.getUserId()).subscribe((valoracion: any) => {
+    this.asignaturaService.postValoracion(inte,asig, comentario, puntuacion, this.loginService.getUserId()).subscribe((valoracion: any) => {
    })
 
 

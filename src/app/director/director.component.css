@@ -1,0 +1,79 @@
+.container{
+    display: block;
+    
+    }
+  li {
+    display: inline;
+  }
+  
+  hr{
+    
+    background-color: #e27a7a;
+  }
+  h2{
+    font-size: xx-large;
+    margin-bottom: 10px;
+  }
+  
+  p{
+    color: black;
+  }
+  
+  
+  
+  
+  
+  
+  div{
+    color: black;
+  }
+  
+  .container{
+    position:static;
+    padding: 40px;
+    border-radius: 6px;
+    margin-right: 10px;
+    margin-left: 10px;
+    
+    
+  }
+  
+  #coments{
+    padding: 10px;
+    border-radius: 6px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+  }
+  
+  #form {
+    width: 250px;
+    margin: 0 auto;
+    height: 50px;
+  }
+  
+  #form p {
+    text-align: center;
+  }
+  
+  #form label {
+    font-size: 20px;
+  }
+  
+  input[type="radio"] {
+    display: none;
+  }
+  
+  label {
+    color: grey;
+  }
+  
+  .clasificacion {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+  }
+  
+  label:hover,
+  label:hover ~ label {
+    color: orange;
+  }
+ 

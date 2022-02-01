@@ -4,7 +4,7 @@ const { mongoose } = require('./db/mongoose');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const bcrypt = require("bcryptjs")
-const {Asignatura, Valoracion, Intensificacion, Usuario} = require('./db/models'); 
+const {Asignatura, Valoracion, Intensificacion, Usuario, Director, Etiqueta} = require('./db/models'); 
 const { get } = require('http');
 const { send } = require('process');
 const nodemailer = require('nodemailer');
@@ -153,6 +153,15 @@ app.get('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id/valora
     
 })
 
+
+//GET valoraciones de director
+app.get('/lista-directores/director/:direcId/valoraciones',(req,res)=>{
+    Valoracion.find({directorId:req.params.direcId}).then((valoraciones)=>{
+        res.send(valoraciones);
+    });
+    
+})
+
 //UPDATE intes
 app.put('/lista-intensificaciones/:id', (req, res)=> {
     Intensificacion.findOneAndUpdate({_id:req.params.id},{
@@ -171,11 +180,33 @@ app.get('/asignaturas', (req,res)=>{
     
 })
 
-//GET una asignatura de la lista
-app.get('/asignaturas/:id',(req,res)=>{
-    Asignatura.find({_id:req.params.id}).populate('valoraciones').then((asignaturas)=>{
-        res.send(asignaturas);
+//GET todas las etiquetas
+app.get('/etiquetas', (req,res)=>{
+    Etiqueta.find({}).then((etiquetas)=>{
+        res.send(etiquetas);
     });
+    
+})
+
+
+//GET todas las etiquetas de un director
+app.get('/lista-directores/director/:directId/etiquetas', (req,res)=>{
+    Etiqueta.find({directorId: req.params.directId}).then((etiquetas)=>{
+        res.send(etiquetas);
+    });
+    
+})
+
+
+//POST etiquetas de un director
+app.post('/lista-directores/director/:directId/etiquetas', (req,res)=>{
+    let newEtiqueta = new Etiqueta({
+        nombre:req.body.nombre,
+        directorId:req.params.directId
+    });
+    newEtiqueta.save().then((etiquetaDoc) =>{
+        res.send(etiquetaDoc);
+    })
     
 })
 
@@ -195,14 +226,51 @@ app.get('/lista-intensificaciones/:id/asignaturas/:id', (req,res)=>{
     
 })
 
-//GET valoraciones
-app.get('/valoraciones', (req,res)=>{
-    Valoracion.find({_id: req.params.id}).populate('usuario').then((asignaturas)=>{
-        res.send(asignaturas);
+//GET Directores
+app.get('/lista-directores', (req,res)=>{
+    Director.find({}).then((directores)=>{
+        res.send(directores);
     });
     
 })
 
+//GET Directores
+app.get('/lista-directores/director/:direcId', (req,res)=>{
+    Director.find({_id:req.params.direcId}).then((directores)=>{
+        res.send(directores);
+    });
+    
+})
+
+//POST Directores
+app.post('/lista-directores/director', (req,res)=>{    
+    let newDirector = new Director({
+        nombre:req.body.nombre
+    });
+    newDirector.save().then((directorDoc) =>{
+        res.send(directorDoc);
+    })
+})
+
+
+//PATCH Directores
+app.put('/lista-directores/director/:directId', (req,res)=>{    
+    Director.findOneAndUpdate({_id:req.params.directId},{
+        $push:req.body
+    }).then(()=>{
+        res.send({'message': 'actualiado correctamente'})
+    });
+})
+
+
+//PATCH comentarios directores
+app.patch('/lista-directores/director/:id/valoraciones/:id', (req,res)=>{    
+    Director.findOneAndUpdate({_id:req.params.id},{
+        $set:req.body
+    }).then(()=>{
+        res.send({'message': 'actualiado correctamente'})
+    });
+})
 
 //POST intensificacion
 app.post('/lista-intensificaciones/intensificacion', (req, res)=> {
@@ -251,13 +319,36 @@ app.post('/lista-intensificaciones/intensificacion/:inteId/valoraciones', (req, 
     })
 })
 
+
+
+//POST valoraciones de Director
+app.post('/lista-directores/director/:directId/valoraciones', (req, res)=> {
+    let newValoracion = new Valoracion({
+        directorId:req.params.directId,
+        comentario:req.body.comentario,
+        puntuacion:req.body.puntuacion,
+        userId:req.body.usuario
+    });
+    newValoracion.save().then((valoracionDoc) =>{
+        res.send(valoracionDoc);
+    })
+})
+
 //patch comentario intensificacion  
 app.patch('/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id', (req, res)=> {
-    Valoracion.findOneAndUpdate({_id:req.params.id,
-            inteId: req.body.inteId},{
+    Valoracion.findOneAndUpdate({_id:req.params.id},{
         $set:req.body
     }).then(()=>{
-        res.sendStatus(200)
+        res.send({'message': 'actualiado correctamente'})
+    });
+})
+
+//patch comentario asignatura  
+app.patch('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asigId/valoraciones/:id', (req, res)=> {
+    Valoracion.findOneAndUpdate({_id:req.params.id},{
+        $set:req.body
+    }).then(()=>{
+        res.send({'message': 'actualiado correctamente'})
     });
 })
 

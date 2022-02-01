@@ -31,7 +31,9 @@
         Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}
       </h4>
       
-      <button class="btn btn-danger" (click)="borrarComentario(asig._id, valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+      <button class="btn btn-danger" style="margin-right: 10px;" (click)="borrarComentario(asig._id, valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+      
+      <button class="btn btn-success" [routerLink]="['/lista-intensificaciones/intensificacion', asig.inteId, 'asignaturas', asig._id, 'editar-opinion', valoracion._id]" max="5"><i class="bi bi-pencil"></i></button>
 
     </div>
   </div>

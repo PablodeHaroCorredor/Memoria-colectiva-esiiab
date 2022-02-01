@@ -18,6 +18,9 @@ const ValoracionSchema = new mongoose.Schema({
     inteId:{
         type: mongoose.Schema.Types.ObjectId, ref:'Intensificacion'
     },
+    directorId:{
+        type: mongoose.Schema.Types.ObjectId, ref:'Director'
+    },
     like:{
         type:Number,
         default:0
