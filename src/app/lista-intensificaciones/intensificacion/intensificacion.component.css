@@ -1,14 +1,7 @@
-
-
-.centered-content{
-    justify-content:center;
-    align-items:flex-start;
-    width: 100%;
-    height: 100%;
-    margin-left: 100px;
-    margin-right: 100px;
+.container{
+  display: block;
+  
   }
-
 li {
   display: inline;
 }

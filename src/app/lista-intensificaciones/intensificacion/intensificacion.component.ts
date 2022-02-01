@@ -1,5 +1,6 @@
 import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AsignaturaService } from 'src/app/servicios/asignatura.service';
 import { LoginService } from 'src/app/servicios/login.service';
 import { AsignaturaComponent } from './asignatura/asignatura.component';
@@ -18,13 +19,15 @@ export class IntensificacionComponent implements OnInit {
   intid:string=""
   isShown: boolean= false;
   intensificacion:any
-  currentRate = 8;
+  currentRate:number = 0;
   numeroLikes = 0
   ruta:any
-
+  media: any
 
   
-  constructor(private asignaturaService:AsignaturaService, private route: ActivatedRoute, private loginService:LoginService, private router:Router) {
+  constructor(private asignaturaService:AsignaturaService, private route: ActivatedRoute, private loginService:LoginService, private router:Router, config: NgbRatingConfig) {
+    config.max = 5;
+    config.readonly = true;
    }
   ngOnInit(){
 
@@ -37,6 +40,7 @@ export class IntensificacionComponent implements OnInit {
         this.asignaturaService.getIntensificacion(params.id).subscribe((intens: any)=>{
           this.intens=intens;
           
+
         }
         
     )})
@@ -51,14 +55,27 @@ export class IntensificacionComponent implements OnInit {
 
       this.route.params.subscribe(
         (params:Params)=>{
-          this.asignaturaService.getValoracionesInte(params.id).subscribe((valoraciones: any)=>{
+          this.asignaturaService.getValoracionesAsig(params.id, this.ruta).subscribe((valoraciones: any)=>{
             this.valoraciones=valoraciones;
+
+            this.media = this.calcularMedia()
         }
   
         )})
 
       }
         
+
+      get sortByLastModifiedDesc() {
+        return this.valoraciones.sort((a: any, b: any) => {
+          return <any>new Date(b.fechaCreacion) - <any>new Date(a.fechaCreacion);
+        });
+      }
+      get sortByLastModifiedAsend() {
+        return this.valoraciones.sort((a: any, b: any) => {
+          return <any>new Date(b.fechaCreacion) - <any>new Date(a.fechaCreacion);
+        });
+      }
   public sumarLike(like:number){
     
    
@@ -66,8 +83,8 @@ export class IntensificacionComponent implements OnInit {
   
    
 
-  public createComentario( comentario:string, puntuacion:string, inte:string){
-    this.asignaturaService.postValoracionInte(inte,comentario, puntuacion, this.loginService.getUserId()).subscribe(()=>{
+  public createComentario( comentario:string, puntuacion:number, asig:string, inte:string){
+    this.asignaturaService.postValoracionAsig(inte, asig,comentario, puntuacion, this.loginService.getUserId()).subscribe(()=>{
 
     })
       
@@ -85,13 +102,19 @@ export class IntensificacionComponent implements OnInit {
  
 
 
-  calcularMedia = (intensificacion:string) => {
-    this.asignaturaService.getIntensificacion(intensificacion).subscribe((intens: any)=>{
-      this.intens=intens;
-      
-    })
-    console.log(this.intens);
-
+  public calcularMedia(){
+    var sum =0
+    var avg = 0
+    var contador = 0
+    for(let valor of this.valoraciones){
+       sum =sum +valor.puntuacion
+       contador++
+        
+    }
+    avg = sum / contador
+    console.log(avg)
+     return avg
+     
   /* var total = 0;
   for (var i=0; i<; i++) {
     total +=;

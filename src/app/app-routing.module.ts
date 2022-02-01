@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { CrearOpinionComponent } from './crear-opinion/crear-opinion.component';
 import { DirectorComponent } from './director/director.component';
 import { HomeComponent } from './home/home.component';
 import { ListaDirectoresComponent } from './lista-directores/lista-directores.component';
@@ -20,6 +21,8 @@ const routes: Routes = [
   { path: 'lista-intensificaciones/intensificacion/:id', component: IntensificacionComponent},
   { path: 'lista-intensificaciones/intensificaion/:id/asignaturas', component: IntensificacionComponent },
   { path: 'lista-intensificaciones/intensificacion/:inteId/asignaturas/:id', component: AsignaturaComponent },
+  { path: 'lista-intensificaciones/intensificacion/:inteId/nueva-opinion', component: CrearOpinionComponent },
+  { path: 'lista-intensificaciones/intensificacion/:inteId/asignaturas/:id/nueva-opinion', component: CrearOpinionComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'lista-directores', component: ListaDirectoresComponent },

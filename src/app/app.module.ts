@@ -19,6 +19,8 @@ import { DirectorComponent } from './director/director.component';
 import { OptativaComponent } from './lista-optativas/optativa/optativa.component';
 import { MuiiComponent } from './muii/muii.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { CrearOpinionComponent } from './crear-opinion/crear-opinion.component';
+import { EditarOpinionComponent } from './editar-opinion/editar-opinion.component';
 //import { TokenInterceptor } from './Internceptors/token.interceptor';
 
 
@@ -37,7 +39,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     ListaDirectoresComponent,
     DirectorComponent,
     OptativaComponent,
-    MuiiComponent
+    MuiiComponent,
+    CrearOpinionComponent,
+    EditarOpinionComponent
     
   ],
   imports: [

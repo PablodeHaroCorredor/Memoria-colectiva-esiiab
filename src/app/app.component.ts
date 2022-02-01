@@ -15,13 +15,16 @@ export class AppComponent {
   title = 'Memoria Colectiva Esiiab';
   router: any;
   today: number = Date.now();
+  nombreUsuario: any
 
   constructor(private loginService: LoginService){
+
+    this.nombreUsuario = loginService.getUserName()
   }
 
-cerrarSesion(){
+  cerrarSesion(){
   this.loginService.logout();
-}
+  }
 
  
 }

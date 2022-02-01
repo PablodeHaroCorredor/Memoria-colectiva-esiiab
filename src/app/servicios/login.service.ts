@@ -28,6 +28,7 @@ export class LoginService {
       tap((res: HttpResponse<any>) => {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id);
+        this.setUserName(res.body.username)
         console.log("LOGGED IN!");
       })
     )
@@ -68,9 +69,16 @@ export class LoginService {
     return localStorage.getItem('user-id');
     
   }
+  getUserName(){
+    return localStorage.getItem('username' ||null);
+  }
 
   setAccessToken(accessToken: string) {
     localStorage.setItem('x-access-token', accessToken)
+  }
+
+  setUserName(username:string){
+    localStorage.setItem('username', username)
   }
   
   private setSession(userId: string) {
@@ -91,7 +99,8 @@ export class LoginService {
     return this.http.get(`${this.webService.ROOT_URL}/users/me/access-token`, {
       headers: {
         'x-refresh-token': this.getRefreshToken()||'{}',
-        '_id': this.getUserId()||'{}'
+        '_id': this.getUserId()||'{}',
+        'username': this.getUserName()||'{}'
       },
       observe: 'response'
     }).pipe(

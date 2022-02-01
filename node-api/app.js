@@ -291,6 +291,8 @@ app.delete('/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id',(
     });
 })
 
+
+//Sign up
 app.post('/usuarios',(req, res) => {
     // User sign up
 

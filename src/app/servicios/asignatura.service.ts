@@ -29,20 +29,31 @@ export class AsignaturaService {
     return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}`);
   }
 
-  getValoracionesInte(idInte:string){
+/*   getValoracionesInte(idInte:string){
     return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/valoraciones`);
-  }
+  } */
 
   getValoracionesAsig(idInte:string, idAsig:string){
-    return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}/valoraciones`);
+    if(idAsig!=null){
+      return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}/valoraciones`);
+    }else{
+      return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/valoraciones`);
+    }
+    
   }
 
-  postValoracionInte(idInte:string, comentario:string, puntuacion:string, usuario:string|null){
+ /*  postValoracionInte(idInte:string, comentario:string, puntuacion:number, usuario:string|null){
     return this.apiCallService.post(`lista-intensificaciones/intensificacion/${idInte}/valoraciones`, {idInte,comentario,puntuacion,usuario});
-  } 
+  }  */
 
-  postValoracionAsig(idInte:string,idAsig:string, comentario:string, puntuacion:string, usuario:string|null){
-    return this.apiCallService.post(`lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}/valoraciones`, {idAsig,comentario,puntuacion,usuario});
+  postValoracionAsig(idInte:string,idAsig:string, comentario:string, puntuacion:number, usuario:string|null){
+    if(idAsig!=null){
+      return this.apiCallService.post(`lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}/valoraciones`, {idAsig,comentario,puntuacion,usuario});
+    }
+    else{
+      return this.apiCallService.post(`lista-intensificaciones/intensificacion/${idInte}/valoraciones`, {idInte,comentario,puntuacion,usuario});
+    }
+    
   } 
 
   updateAsignatura(asignatura:string, valoraciones:string[]){

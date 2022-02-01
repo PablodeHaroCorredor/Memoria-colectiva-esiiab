@@ -1,0 +1,27 @@
+
+  
+<form class="shadow-lg p-3 mb-5 bg-white rounded" style="width: 40%; padding: 200px; margin-left: 500px;
+margin-right: 500px;
+margin-top: 70px;
+margin-bottom: 200px;
+padding:100px;">
+    <div class="form-group">
+        <label  class="centered-content" style="font-size: xx-large;" for="exampleFormControlInput1">Da una valoración</label>
+      </div>
+    <div class="form-group form-floating">
+      <label style="font-size: x-large;" for="exampleFormControlInput1">Escribe aquí tu comentario</label>
+      <textarea #inputComentario  placeholder="Escribe aquí" class="form-control" style="width: 50%; height: 100px;" aria-label="Opina" id="floatingTextarea"></textarea>
+    </div>
+    <div class="form-group">
+        <br>
+      <label style="font-size: x-large;" for="exampleFormControlSelect2">Valoración general</label>
+      <br>
+      <ngb-rating [(rate)]="currentRate" style="font-size: xx-large;"></ngb-rating>
+    </div>
+    <div class="form-group buttons is-right">
+        <button  type="button" class="btn btn-primary" style="margin-right: 10px;" [routerLink]="['../']"><i class="bi bi-arrow-return-left"></i> Volver</button>
+        <button  type="button" class="btn btn-primary"  (click)="createComentario(inputComentario.value, currentRate,inteId, asigId)"><i class="bi bi-chat-square-text"></i> Enviar</button>
+        
+    </div>
+  </form>
+<router-outlet></router-outlet>

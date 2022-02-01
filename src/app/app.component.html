@@ -1,10 +1,15 @@
 
-<ul class="nav justify-content-center p-3 mb-2 bg-light text-dark">
+<ul class="nav justify-content-center p-4 mb-4 bg-light text-dark">
   <li class="nav-item">
     <a class="nav-link active font-weight-bold" href="/home">Inicio</a>
   </li>
+  
+
+  <li class="nav-item justify-content-end" style="margin-left:80%;">
+    Bienvenido <h4 class= font-weight-bold> {{ nombreUsuario}} </h4>
+  </li>
   <li class="nav-item justify-content-end">
-    <a   class=" nav-link"(click)="cerrarSesion()">Cerrar Sesión</a>
+    <button   class=" nav-link button"(click)="cerrarSesion()">Cerrar Sesión</button>
   </li>
   
 </ul>

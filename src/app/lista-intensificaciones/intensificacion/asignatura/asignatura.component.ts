@@ -13,9 +13,10 @@ export class AsignaturaComponent implements OnInit {
   asigs:any;
   id:string=""
   valoraciones:any
+  media: any
+  currentRate:number =0
 
   constructor(private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) { 
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
 
   ngOnInit(): void {
@@ -31,6 +32,7 @@ export class AsignaturaComponent implements OnInit {
             console.log(params)
             this.asignaturaService.getValoracionesAsig(params.inteId,params.id).subscribe((valoraciones: any)=>{
               this.valoraciones=valoraciones;
+              this.media = this.calcularMedia()
           }
     
           )})
@@ -42,9 +44,11 @@ export class AsignaturaComponent implements OnInit {
 
 
  //metodo para que cuando crees una valoracion se meta en la lista de las asignaturas
-  public createComentario( comentario:string, puntuacion:string, asig:string, inte:string){
+  public createComentario( comentario:string, puntuacion:number,asig:string, inte:string){
     this.asignaturaService.postValoracionAsig(inte,asig,comentario, puntuacion, this.loginService.getUserId()).subscribe((valoracion: any) => {
    })
+
+
 
   }
 
@@ -56,21 +60,31 @@ export class AsignaturaComponent implements OnInit {
   }
 
 
- /*  calcularMedia = (asignatura:string) => {
-    this.asignaturaService.getAsignatura(asignatura).subscribe((asigs: any)=>{
-      this.asigs=asigs;
-      let valoraciones = this.asigs.valoraciones
-      console.log(valoraciones); 
-    }) */
-      
-    
+  public calcularMedia(){
+    var sum = 0
+    var avg = 0
+    var contador = 0
+    for(let valor of this.valoraciones){
+       sum =sum +valor.puntuacion
+       contador++
+        
+    }
+    avg = sum / contador
+    console.log(avg)
+     return avg
+  
+} 
 
-  /* var total = 0;
-  for (var i=0; i<; i++) {
-    total +=;
-  }
-    var suma = total;
-    return suma / ; */
+get sortByLastModifiedDesc() {
+  return this.valoraciones.sort((a: any, b: any) => {
+    return <any>new Date(b.fechaCreacion) - <any>new Date(a.fechaCreacion);
+  });
+}
+get sortByLastModifiedAsend() {
+  return this.valoraciones.sort((a: any, b: any) => {
+    return <any>new Date(b.fechaCreacion) - <any>new Date(a.fechaCreacion);
+  });
+}
   
 } 
 
