@@ -17,6 +17,7 @@ export class IntensificacionComponent implements OnInit {
   valoraciones:any;
   flag2=false;
   intid:string=""
+  asigId:any
   isShown: boolean= false;
   intensificacion:any
   currentRate:number = 0;
@@ -48,6 +49,7 @@ export class IntensificacionComponent implements OnInit {
     this.route.params.subscribe(
       (params:Params)=>{
         this.asignaturaService.getListaAsignaturas(params.id).subscribe((asigs: any)=>{
+          this.asigId = params._id;
           this.asigs=asigs;
       }
 
@@ -76,9 +78,12 @@ export class IntensificacionComponent implements OnInit {
           return <any>new Date(b.fechaCreacion) - <any>new Date(a.fechaCreacion);
         });
       }
-  public sumarLike(like:number){
-    
+  public sumarLike(inteId:string, asigId:string, valoracionId:string, like:Number){
+    this.asignaturaService.editValoracionLike(inteId, asigId,valoracionId,like).subscribe(()=>{
+      
+    })
    
+    window.location.reload();
   }
   
    

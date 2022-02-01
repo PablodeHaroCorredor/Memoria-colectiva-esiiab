@@ -1,7 +1,4 @@
-.container{
-    display: block;
-    
-    }
+
   li {
     display: inline;
   }
@@ -29,8 +26,9 @@
   }
   
   .container{
+    display: block;
     position:static;
-    padding: 40px;
+    padding: 400px;
     border-radius: 6px;
     margin-right: 10px;
     margin-left: 10px;

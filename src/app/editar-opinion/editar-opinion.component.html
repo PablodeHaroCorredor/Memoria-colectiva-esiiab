@@ -6,7 +6,7 @@ padding:100px;">
     <div class="form-group">
         <label  class="centered-content" style="font-size: xx-large;" for="exampleFormControlInput1">Cambia tu valoración</label>
       </div>
-    <div class="form-group form-floating">
+    <div class="form-group ">
       <label style="font-size: x-large;" for="exampleFormControlInput1">Modifica aquí tu comentario</label>
       <textarea #inputComentario  placeholder="Escribe aquí" class="form-control" style="width: 50%; height: 100px;" aria-label="Opina" id="floatingTextarea"></textarea>
     </div>
@@ -17,9 +17,9 @@ padding:100px;">
       <ngb-rating [(rate)]="currentRate" style="font-size: xx-large;"></ngb-rating>
     </div>
     <div class="form-group buttons is-right">
-        <button  type="button" class="btn btn-primary" style="margin-right: 10px;" [routerLink]="['../']"><i class="bi bi-arrow-return-left"></i> Volver</button>
-        <button  type="button" class="btn btn-primary"  (click)="editComentario(inputComentario.value, currentRate,inteId, asigId, valoracionId, dateNow)"><i class="bi bi-chat-square-text"></i> Actualizar</button>
-        
+        <button  type="button" class="btn btn-primary" style="margin-right: 10px;" [routerLink]="['../../']"><i class="bi bi-arrow-return-left"></i> Volver</button>
+        <button *ngIf="directorId == null" type="button" class="btn btn-primary"  (click)="editComentario(inputComentario.value, currentRate,inteId, asigId, valoracionId, dateNow)"><i class="bi bi-chat-square-text"></i> Actualizar</button>
+        <button *ngIf="directorId" type="button" class="btn btn-primary"  (click)="editComentarioDirector(directorId,valoracionId, inputComentario.value, currentRate, dateNow)"><i class="bi bi-chat-square-text"></i> Actualizar </button>
     </div>
   </form>
 <router-outlet></router-outlet>

@@ -66,6 +66,14 @@ export class AsignaturaService {
     }  
   }
 
+  editValoracionLike(idInte:string,idAsig:string,idValoracion:string, like:Number){
+    if(idAsig!=null){
+      return this.apiCallService.patch(`lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}/valoraciones/${idValoracion}`, {like});
+    }
+    else{
+      return this.apiCallService.patch(`lista-intensificaciones/intensificacion/${idInte}/valoraciones/${idValoracion}`, {like});
+    }  
+  }
   updateAsignatura(asignatura:string, valoraciones:string[]){
     return this.apiCallService.put(`asignaturas/${asignatura}`, {valoraciones});
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AsignaturaService } from '../servicios/asignatura.service';
 import { DirectorService } from '../servicios/director.service';
 import { LoginService } from '../servicios/login.service';
@@ -19,17 +20,23 @@ export class DirectorComponent implements OnInit {
   media:any
   valoraciones:any
   director:any
+  directorId:any
   currentRate = 8;
   etiquetas:any
 
-  constructor(private directorService:DirectorService, private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) {
-   }
+  constructor(private directorService:DirectorService, config: NgbRatingConfig, private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) {
+    config.max = 5;
+    
+    config.readonly = true;
+  }
+   
   ngOnInit(){
 
     this.route.params.subscribe(
       (params:Params)=>{
         this.directId = params.directId;
         console.log(params);
+
         this.directorService.getDirector(params.directId).subscribe((director: any)=>{
           this.director=director;
         }
@@ -61,18 +68,28 @@ export class DirectorComponent implements OnInit {
 
 
 
+  public sumarLike(directorId:string, valoracionId:string, like:Number){
+    this.directorService.editValoracionLike(directorId,valoracionId,like).subscribe(()=>{
+      
+    })
+   
+    window.location.reload();
+  }
+
   public borrarComentario(asigId:string, comentarioId:string){
     this.asignaturaService.borrarComentario(asigId, comentarioId).subscribe(()=>{
 
-      window.location.reload();
+     
     });
+    window.location.reload();
   }
 
   public actualizarDirector(directorId:string, etiqueta:string){
     this.directorService.updateDirector(directorId, etiqueta).subscribe(()=>{
 
-      window.location.reload();
+      
     });
+    window.location.reload();
   }
 
  

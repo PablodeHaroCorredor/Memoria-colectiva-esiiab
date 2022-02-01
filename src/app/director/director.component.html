@@ -1,4 +1,4 @@
-<div class=" container shadow-lg p-3 mb-5 bg-white rounded buttons is-right" *ngFor="let direc of director">
+<div class=" container shadow-lg p-3 mb-5 bg-white rounded buttons is-right" style="padding: 1000px;" *ngFor="let direc of director">
   <h2 >
     {{ direc.nombre }} 
 
@@ -20,7 +20,6 @@
 <div class="col shadow-lg p-3 mb-5 bg-white rounded" style="overflow-y: scroll; height:400px">
   <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of valoraciones" >
     <h3 class="font-weight-bold">
-      {{valoracion.lastModified}}
     {{valoracion.comentario}}
     
     </h3>
@@ -34,9 +33,7 @@
   
     <button class="btn btn-danger" (click)="borrarComentario(directId, valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
     <button class="btn btn-success" [routerLink]="['/lista-directores/director/', directId, 'editar-opinion', valoracion._id]" max="5"><i class="bi bi-pencil"></i></button>
-
-
-    <button class="btn btn-primary"   max="5"><i class="bi bi-hand-thumbs-up"></i></button> 
+    <button class="btn btn-primary" (click)="sumarLike(directId, valoracion._id, valoracion.like +1)"  max="5"><i class="bi bi-hand-thumbs-up"></i></button> 
     {{valoracion.like}}
   </div>
   

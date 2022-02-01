@@ -264,8 +264,8 @@ app.put('/lista-directores/director/:directId', (req,res)=>{
 
 
 //PATCH comentarios directores
-app.patch('/lista-directores/director/:id/valoraciones/:id', (req,res)=>{    
-    Director.findOneAndUpdate({_id:req.params.id},{
+app.patch('/lista-directores/director/:directId/valoraciones/:id', (req,res)=>{    
+    Valoracion.findOneAndUpdate({_id:req.params.id},{
         $set:req.body
     }).then(()=>{
         res.send({'message': 'actualiado correctamente'})

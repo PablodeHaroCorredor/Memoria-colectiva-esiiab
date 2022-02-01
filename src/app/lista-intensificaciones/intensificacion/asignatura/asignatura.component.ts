@@ -41,7 +41,13 @@ export class AsignaturaComponent implements OnInit {
   }
 
   
-
+  public sumarLike(inteId:string, asigId:string, valoracionId:string, like:Number){
+    this.asignaturaService.editValoracionLike(inteId, asigId,valoracionId,like).subscribe(()=>{
+      
+    })
+   
+    window.location.reload();
+  }
 
  //metodo para que cuando crees una valoracion se meta en la lista de las asignaturas
   public createComentario( comentario:string, puntuacion:number,asig:string, inte:string){
@@ -55,8 +61,9 @@ export class AsignaturaComponent implements OnInit {
   public borrarComentario(asigId:string, comentarioId:string){
     this.asignaturaService.borrarComentario(asigId, comentarioId).subscribe(()=>{
 
-      window.location.reload();
+     
     });
+    window.location.reload();
   }
 
 

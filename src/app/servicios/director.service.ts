@@ -34,4 +34,17 @@ postValoracionesDirector(directId:string, comentario:string, puntuacion:number, 
   return this.apiCallService.post(`lista-directores/director/${directId}/valoraciones`, {directId,comentario,puntuacion,usuario});
 }
   
+
+editValoracionDirector(directId:string,idValoracion:string,  comentario:string, puntuacion:number, fechaCreacion:Date, usuario:string|null){
+  
+    return this.apiCallService.patch(`lista-directores/director/${directId}/valoraciones/${idValoracion}`, {comentario,puntuacion,fechaCreacion});
+  
+}
+
+
+editValoracionLike(directorId:string,idValoracion:string, like:Number){
+  
+  return this.apiCallService.patch(`lista-directores/director/${directorId}/valoraciones/${idValoracion}`, {like});
+
+}
 }
