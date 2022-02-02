@@ -11,7 +11,10 @@
           <i class="fas fa-envelope"></i>
         </span>
       </p>
-      
+  <div *ngIf="alert" class="alert alert-warning alert-dismissible fade show" role="alertEmail">
+    <strong>Wrong Email!</strong> Enter a correct Email.
+    <button type="button"  (click)="closeAlert()" class="btn-close" data-bs-dismiss="alertEmail" aria-label="Close"></button>
+  </div>
     </div>
     <div class="field">
       <p class="control has-icons-left">
@@ -20,6 +23,10 @@
           <i class="fas fa-lock"></i>
         </span>
       </p>
+      <div *ngIf="alertPass" class="alert alert-warning alert-dismissible fade show" role="alertCon">
+        <strong>Wrong Password!</strong> Enter a correct password.
+        <button type="button"  (click)="closeAlertPass()" class="btn-close" data-bs-dismiss="alertCon" aria-label="Close"></button>
+      </div>
     </div>
     <div class="field" style="display: flex; justify-content: flex-end;">
       <p class="control">
@@ -34,9 +41,6 @@
 
     <p class="has-text-black">¿Aún no tienes una cuenta? <a routerLink="/register">Regístrate</a> ahora!</p>
 
-  </div>
-  <div *ngIf="emailInput.value != email" class="alert alert-warning" role="alert">
-    Please enter correct Email
   </div>
 
 </div>

@@ -30,6 +30,7 @@ export class LoginService {
         this.setSession(res.body._id);
         this.setUserName(res.body.username)
         this.setEmail(res.body.email)
+        this.setContraseña(res.body.contraseña)
         console.log("LOGGED IN!");
       })
     )
@@ -78,6 +79,9 @@ export class LoginService {
     return localStorage.getItem('email' ||null);
   
   }
+  getContraseña(){
+    return localStorage.getItem('contraseña' ||null);
+  }
 
   setAccessToken(accessToken: string) {
     localStorage.setItem('x-access-token', accessToken)
@@ -89,6 +93,11 @@ export class LoginService {
   setUserName(username:string){
     localStorage.setItem('username', username)
   }
+
+  setContraseña(contraseña:string){
+    localStorage.setItem('contraseña', contraseña)
+  
+  }
   
   private setSession(userId: string) {
     localStorage.setItem('user-id', userId);
@@ -98,7 +107,9 @@ export class LoginService {
 
   private removeSession() {
     localStorage.removeItem('user-id');
-    localStorage.removeItem('username')/* 
+    localStorage.removeItem('username')
+    localStorage.removeItem('contraseña')
+    localStorage.removeItem('email')/* 
     localStorage.removeItem('x-access-token');
     localStorage.removeItem('x-refresh-token'); */
   }
@@ -106,7 +117,7 @@ export class LoginService {
   
 
   getNewAccessToken() {
-    return this.http.get(`${this.webService.ROOT_URL}api/users/me/access-token`, {
+    return this.http.get(`${this.webService.ROOT_URL}/api/users/me/access-token`, {
       headers: {
         'x-refresh-token': this.getRefreshToken()||'{}',
         '_id': this.getUserId()||'{}',

@@ -37,7 +37,7 @@ export class ApiCallServiceService {
 
 
   login(email: string, contraseña: string) {
-    return this.http.post(`${this.ROOT_URL}api/usuarios/login`, {
+    return this.http.post(`${this.ROOT_URL}/api/usuarios/login`, {
       email,
       contraseña
     }, {
@@ -47,7 +47,7 @@ export class ApiCallServiceService {
 
   signup(email: string, contraseña:string, username:string) {
     
-    return this.http.post(`${this.ROOT_URL}api/usuarios`, {
+    return this.http.post(`${this.ROOT_URL}/api/usuarios`, {
       
       email,
       contraseña,
@@ -62,7 +62,7 @@ export class ApiCallServiceService {
   }
 
   sendEmail( payload:{}) {
-    return this.http.post(`${this.ROOT_URL}api/sendmail`, payload);
+    return this.http.post(`${this.ROOT_URL}/api/sendmail`, payload);
   }
 
    
