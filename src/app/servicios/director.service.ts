@@ -9,42 +9,42 @@ export class DirectorService {
   constructor(private apiCallService: ApiCallServiceService) { }
 
   getDirectores(){
-    return this.apiCallService.get('lista-directores');
+    return this.apiCallService.get('api/lista-directores');
     
   }
 
   getDirector(directId:string){
-    return this.apiCallService.get(`lista-directores/director/${directId}`);
+    return this.apiCallService.get(`api/lista-directores/director/${directId}`);
     
   }
 
   getEtiquetasDirector(directId:string){
-    return this.apiCallService.get(`lista-directores/director/${directId}/etiquetas`);
+    return this.apiCallService.get(`api/lista-directores/director/${directId}/etiquetas`);
   }
 
   updateDirector(directId:string, nombre:string){
-    return this.apiCallService.post(`lista-directores/director/${directId}/etiquetas`, {directId,nombre});
+    return this.apiCallService.post(`api/lista-directores/director/${directId}/etiquetas`, {directId,nombre});
   }
 
   getValoracionesDirector(directId:string){
-    return this.apiCallService.get(`lista-directores/director/${directId}/valoraciones`);
+    return this.apiCallService.get(`api/lista-directores/director/${directId}/valoraciones`);
   }
 
 postValoracionesDirector(directId:string, comentario:string, puntuacion:number, usuario:string|null){
-  return this.apiCallService.post(`lista-directores/director/${directId}/valoraciones`, {directId,comentario,puntuacion,usuario});
+  return this.apiCallService.post(`api/lista-directores/director/${directId}/valoraciones`, {directId,comentario,puntuacion,usuario});
 }
   
 
 editValoracionDirector(directId:string,idValoracion:string,  comentario:string, puntuacion:number, fechaCreacion:Date, usuario:string|null){
   
-    return this.apiCallService.patch(`lista-directores/director/${directId}/valoraciones/${idValoracion}`, {comentario,puntuacion,fechaCreacion});
+    return this.apiCallService.patch(`api/lista-directores/director/${directId}/valoraciones/${idValoracion}`, {comentario,puntuacion,fechaCreacion});
   
 }
 
 
 editValoracionLike(directorId:string,idValoracion:string, like:Number){
   
-  return this.apiCallService.patch(`lista-directores/director/${directorId}/valoraciones/${idValoracion}`, {like});
+  return this.apiCallService.patch(`api/lista-directores/director/${directorId}/valoraciones/${idValoracion}`, {like});
 
 }
 }

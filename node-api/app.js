@@ -107,7 +107,7 @@ let verifySession = (req, res, next) => {
 
 
   //GET lista de intensificaciones
-  app.get('/lista-intensificaciones',(req,res)=>{
+  app.get('/api/lista-intensificaciones',(req,res)=>{
     Intensificacion.find({}).then((intensificaciones)=>{
         res.send(intensificaciones);
     });
@@ -115,7 +115,7 @@ let verifySession = (req, res, next) => {
 })
 
 //GET una intensificacion de la lista
-app.get('/lista-intensificaciones/intensificacion/:id',(req,res)=>{
+app.get('/api/lista-intensificaciones/intensificacion/:id',(req,res)=>{
     Intensificacion.find({_id:req.params.id}).then((intensificaciones)=>{
         res.send(intensificaciones);
     });
@@ -123,14 +123,14 @@ app.get('/lista-intensificaciones/intensificacion/:id',(req,res)=>{
 })
 
 //GET asignaturas de la lista
-app.get('/lista-intensificaciones/intensificacion/:inteId/asignaturas',(req,res)=>{
+app.get('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas',(req,res)=>{
     Asignatura.find({inteId:req.params.inteId}).then((asignaturas)=>{
         res.send(asignaturas);
     });
     
 })
 
-app.get('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id',(req,res)=>{
+app.get('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id',(req,res)=>{
     Asignatura.find({_id:req.params.id}).then((asignaturas)=>{
         res.send(asignaturas);
     });
@@ -138,7 +138,7 @@ app.get('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id',(req,
 })
 
 //GET valoraciones de una intensificacion
-app.get('/lista-intensificaciones/intensificacion/:inteId/valoraciones',(req,res)=>{
+app.get('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones',(req,res)=>{
     Valoracion.find({inteId:req.params.inteId}).then((valoraciones)=>{
         res.send(valoraciones);
     });
@@ -146,7 +146,7 @@ app.get('/lista-intensificaciones/intensificacion/:inteId/valoraciones',(req,res
 })
 
 //GET valoraciones de una asignatura
-app.get('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id/valoraciones',(req,res)=>{
+app.get('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id/valoraciones',(req,res)=>{
     Valoracion.find({asigId:req.params.id}).then((valoraciones)=>{
         res.send(valoraciones);
     });
@@ -155,7 +155,7 @@ app.get('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id/valora
 
 
 //GET valoraciones de director
-app.get('/lista-directores/director/:direcId/valoraciones',(req,res)=>{
+app.get('/api/lista-directores/director/:direcId/valoraciones',(req,res)=>{
     Valoracion.find({directorId:req.params.direcId}).then((valoraciones)=>{
         res.send(valoraciones);
     });
@@ -163,7 +163,7 @@ app.get('/lista-directores/director/:direcId/valoraciones',(req,res)=>{
 })
 
 //UPDATE intes
-app.put('/lista-intensificaciones/:id', (req, res)=> {
+app.put('/api/lista-intensificaciones/:id', (req, res)=> {
     Intensificacion.findOneAndUpdate({_id:req.params.id},{
         $push:req.body
     }).then(()=>{
@@ -173,7 +173,7 @@ app.put('/lista-intensificaciones/:id', (req, res)=> {
 
 
 //GET lista de asignaturas
-app.get('/asignaturas', (req,res)=>{
+app.get('/api/asignaturas', (req,res)=>{
     Asignatura.find({}).then((asignaturas)=>{
         res.send(asignaturas);
     });
@@ -181,7 +181,7 @@ app.get('/asignaturas', (req,res)=>{
 })
 
 //GET todas las etiquetas
-app.get('/etiquetas', (req,res)=>{
+app.get('/api/etiquetas', (req,res)=>{
     Etiqueta.find({}).then((etiquetas)=>{
         res.send(etiquetas);
     });
@@ -190,7 +190,7 @@ app.get('/etiquetas', (req,res)=>{
 
 
 //GET todas las etiquetas de un director
-app.get('/lista-directores/director/:directId/etiquetas', (req,res)=>{
+app.get('/api/lista-directores/director/:directId/etiquetas', (req,res)=>{
     Etiqueta.find({directorId: req.params.directId}).then((etiquetas)=>{
         res.send(etiquetas);
     });
@@ -199,7 +199,7 @@ app.get('/lista-directores/director/:directId/etiquetas', (req,res)=>{
 
 
 //POST etiquetas de un director
-app.post('/lista-directores/director/:directId/etiquetas', (req,res)=>{
+app.post('/api/lista-directores/director/:directId/etiquetas', (req,res)=>{
     let newEtiqueta = new Etiqueta({
         nombre:req.body.nombre,
         directorId:req.params.directId
@@ -211,7 +211,7 @@ app.post('/lista-directores/director/:directId/etiquetas', (req,res)=>{
 })
 
 //GET las asginaturas de una intensificacion
-app.get('/lista-intensificaciones/:id/asignaturas', (req,res)=>{
+app.get('/api/lista-intensificaciones/:id/asignaturas', (req,res)=>{
     Asignatura.find({_id: req.params.id}).then((asignaturas)=>{
         res.send(asignaturas);
     });
@@ -219,7 +219,7 @@ app.get('/lista-intensificaciones/:id/asignaturas', (req,res)=>{
 })
 
 //GET una asignatura de la una intensificacion
-app.get('/lista-intensificaciones/:id/asignaturas/:id', (req,res)=>{
+app.get('/api/lista-intensificaciones/:id/asignaturas/:id', (req,res)=>{
     Asignatura.find({_id: req.params.id}).then((asignaturas)=>{
         res.send(asignaturas);
     });
@@ -227,7 +227,7 @@ app.get('/lista-intensificaciones/:id/asignaturas/:id', (req,res)=>{
 })
 
 //GET Directores
-app.get('/lista-directores', (req,res)=>{
+app.get('/api/lista-directores', (req,res)=>{
     Director.find({}).then((directores)=>{
         res.send(directores);
     });
@@ -235,7 +235,7 @@ app.get('/lista-directores', (req,res)=>{
 })
 
 //GET Directores
-app.get('/lista-directores/director/:direcId', (req,res)=>{
+app.get('/api/lista-directores/director/:direcId', (req,res)=>{
     Director.find({_id:req.params.direcId}).then((directores)=>{
         res.send(directores);
     });
@@ -243,7 +243,7 @@ app.get('/lista-directores/director/:direcId', (req,res)=>{
 })
 
 //POST Directores
-app.post('/lista-directores/director', (req,res)=>{    
+app.post('/api/lista-directores/director', (req,res)=>{    
     let newDirector = new Director({
         nombre:req.body.nombre
     });
@@ -254,7 +254,7 @@ app.post('/lista-directores/director', (req,res)=>{
 
 
 //PATCH Directores
-app.put('/lista-directores/director/:directId', (req,res)=>{    
+app.put('/api/lista-directores/director/:directId', (req,res)=>{    
     Director.findOneAndUpdate({_id:req.params.directId},{
         $push:req.body
     }).then(()=>{
@@ -264,7 +264,7 @@ app.put('/lista-directores/director/:directId', (req,res)=>{
 
 
 //PATCH comentarios directores
-app.patch('/lista-directores/director/:directId/valoraciones/:id', (req,res)=>{    
+app.patch('/api/lista-directores/director/:directId/valoraciones/:id', (req,res)=>{    
     Valoracion.findOneAndUpdate({_id:req.params.id},{
         $set:req.body
     }).then(()=>{
@@ -273,7 +273,7 @@ app.patch('/lista-directores/director/:directId/valoraciones/:id', (req,res)=>{
 })
 
 //POST intensificacion
-app.post('/lista-intensificaciones/intensificacion', (req, res)=> {
+app.post('/api/lista-intensificaciones/intensificacion', (req, res)=> {
     let newIntensificacion = new Intensificacion({
         nombre:req.body.nombre,
         descripcion:req.body.descripcion
@@ -283,8 +283,18 @@ app.post('/lista-intensificaciones/intensificacion', (req, res)=> {
     })
 })
 
+//PATCH intensificacion
+app.patch('/api/lista-intensificaciones/intensificacion/:id', (req, res)=> {
+    Intensificacion.findOneAndUpdate({_id:req.params.id},{
+        $set:req.body
+    }).then(()=>{
+        res.send({'message': 'actualiado correctamente'})
+    });
+})
+
+
 //POST asignatura
-app.post('/lista-intensificaciones/intensificacion/:inteId/asignaturas', (req, res)=> {
+app.post('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas', (req, res)=> {
     let newAsignatura = new Asignatura({
         nombre:req.body.nombre,
         descripcion:req.body.descripcion,
@@ -295,7 +305,7 @@ app.post('/lista-intensificaciones/intensificacion/:inteId/asignaturas', (req, r
     })
 })
 
-app.put('/asignaturas/:id', (req, res)=> {
+app.put('/api/asignaturas/:id', (req, res)=> {
     Asignatura.findOneAndUpdate({_id:req.params.id},{
         $push:req.body
     }).then(()=>{
@@ -307,7 +317,7 @@ app.put('/asignaturas/:id', (req, res)=> {
 
 
 //POST valoraciones de intensificacion
-app.post('/lista-intensificaciones/intensificacion/:inteId/valoraciones', (req, res)=> {
+app.post('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones', (req, res)=> {
     let newValoracion = new Valoracion({
         inteId:req.params.inteId,
         comentario:req.body.comentario,
@@ -322,7 +332,7 @@ app.post('/lista-intensificaciones/intensificacion/:inteId/valoraciones', (req, 
 
 
 //POST valoraciones de Director
-app.post('/lista-directores/director/:directId/valoraciones', (req, res)=> {
+app.post('/api/lista-directores/director/:directId/valoraciones', (req, res)=> {
     let newValoracion = new Valoracion({
         directorId:req.params.directId,
         comentario:req.body.comentario,
@@ -335,7 +345,7 @@ app.post('/lista-directores/director/:directId/valoraciones', (req, res)=> {
 })
 
 //patch comentario intensificacion  
-app.patch('/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id', (req, res)=> {
+app.patch('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id', (req, res)=> {
     Valoracion.findOneAndUpdate({_id:req.params.id},{
         $set:req.body
     }).then(()=>{
@@ -344,7 +354,7 @@ app.patch('/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id', (
 })
 
 //patch comentario asignatura  
-app.patch('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asigId/valoraciones/:id', (req, res)=> {
+app.patch('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asigId/valoraciones/:id', (req, res)=> {
     Valoracion.findOneAndUpdate({_id:req.params.id},{
         $set:req.body
     }).then(()=>{
@@ -353,7 +363,7 @@ app.patch('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asigId/
 })
 
 //POST valoraciones de asignatura
-app.post('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asigId/valoraciones', (req, res)=> {
+app.post('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asigId/valoraciones', (req, res)=> {
     let newValoracion = new Valoracion({
         asigId:req.params.asigId,
         comentario:req.body.comentario,
@@ -366,7 +376,7 @@ app.post('/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asigId/v
 })
 
 
-app.patch('/valoraciones/:id', (req, res)=> {
+app.patch('/api/valoraciones/:id', (req, res)=> {
     Valoracion.findOneAndUpdate({_id:req.params.id},{
         $set:req.body
     }).then(()=>{
@@ -374,7 +384,7 @@ app.patch('/valoraciones/:id', (req, res)=> {
     });
 })
 
-app.delete('/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id',(req, res)=> {
+app.delete('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id',(req, res)=> {
     Valoracion.findOneAndRemove({
         _id:req.params.id
     }).then((removedValoracionDoc)=>{
@@ -384,7 +394,7 @@ app.delete('/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id',(
 
 
 //Sign up
-app.post('/usuarios',(req, res) => {
+app.post('/api/usuarios',(req, res) => {
     // User sign up
 
     let body = req.body;
@@ -416,7 +426,7 @@ app.post('/usuarios',(req, res) => {
  * POST /users/login
  * Purpose: Login
  */
-app.post('/usuarios/login', (req, res) => {
+app.post('/api/usuarios/login', (req, res) => {
     let email = req.body.email;
     let contraseña = req.body.contraseña;
      Usuario.findByCredentials(email, contraseña).then((user) => {
@@ -456,7 +466,7 @@ app.post('/usuarios/login', (req, res) => {
 
 
 
-app.post("/sendmail", (req, res) => {
+app.post("/api/sendmail", (req, res) => {
     console.log("request came");
     let transporter = nodemailer.createTransport({
         host: "smtp.gmail.com",

@@ -66,7 +66,9 @@ export class DirectorComponent implements OnInit {
       )})
   }
 
-
+public borrarEtiqueta(){
+  
+}
 
   public sumarLike(directorId:string, valoracionId:string, like:Number){
     this.directorService.editValoracionLike(directorId,valoracionId,like).subscribe(()=>{

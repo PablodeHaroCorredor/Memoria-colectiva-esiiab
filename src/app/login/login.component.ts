@@ -10,9 +10,11 @@ import { HttpResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
   loginUserData={}
+  email:any
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
+    this.email= this.loginService.getEmail()
   }
 
 

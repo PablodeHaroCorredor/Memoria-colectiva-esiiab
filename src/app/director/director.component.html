@@ -4,11 +4,9 @@
 
     <h3 ><i class="bi bi-star-fill"></i>{{media| number:'1.0-2'}}</h3>
 
-    
-   
 </h2>
 <div *ngFor="let eti of etiquetas">
-  <span class="badge rounded-pill bg-secondary" style="font-size: larger; margin: 5px">{{eti.nombre}}</span>
+  <button class="badge rounded-pill bg-secondary" (click)="borrarEtiqueta()" style="font-size: larger; margin: 5px">{{eti.nombre}}</button>
  
 </div>
 <br>
@@ -19,7 +17,7 @@
 <h2 >Comentarios</h2>
 <div class="col shadow-lg p-3 mb-5 bg-white rounded" style="overflow-y: scroll; height:400px">
   <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of valoraciones" >
-    <h3 class="font-weight-bold">
+    <h3 class="">
     {{valoracion.comentario}}
     
     </h3>

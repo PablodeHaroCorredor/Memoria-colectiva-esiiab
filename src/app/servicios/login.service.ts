@@ -29,6 +29,7 @@ export class LoginService {
         // the auth tokens will be in the header of this response
         this.setSession(res.body._id);
         this.setUserName(res.body.username)
+        this.setEmail(res.body.email)
         console.log("LOGGED IN!");
       })
     )
@@ -73,10 +74,18 @@ export class LoginService {
     return localStorage.getItem('username' ||null);
   }
 
+  getEmail(){
+    return localStorage.getItem('email' ||null);
+  
+  }
+
   setAccessToken(accessToken: string) {
     localStorage.setItem('x-access-token', accessToken)
   }
 
+  setEmail(email:string){
+    localStorage.setItem('email', email)
+  }
   setUserName(username:string){
     localStorage.setItem('username', username)
   }
@@ -97,7 +106,7 @@ export class LoginService {
   
 
   getNewAccessToken() {
-    return this.http.get(`${this.webService.ROOT_URL}/users/me/access-token`, {
+    return this.http.get(`${this.webService.ROOT_URL}api/users/me/access-token`, {
       headers: {
         'x-refresh-token': this.getRefreshToken()||'{}',
         '_id': this.getUserId()||'{}',
