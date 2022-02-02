@@ -12,7 +12,7 @@ import { LoginService } from '../servicios/login.service';
 })
 export class RegisterComponent implements OnInit {
 
-  
+  alertEmail: boolean = false
   loading = false;
   buttionText = "Submit";
   constructor(private loginService: LoginService, private router: Router, private http:AsignaturaService, private webService:ApiCallServiceService) { }
@@ -54,6 +54,13 @@ export class RegisterComponent implements OnInit {
     );
     this.router.navigate(['/login']);
     }
+    else{
+      this.alertEmail = true
+    }
   }
 
+
+  closeAlert(){
+    this.alertEmail = false
+  }
 }

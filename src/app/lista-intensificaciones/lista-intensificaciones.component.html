@@ -6,11 +6,12 @@
     
 </div> -->
 <router-outlet></router-outlet>
+<h1 style="margin-left:650px;">Intesificaciones</h1>
 <table class="centered-content" >
-    <div class="card text-center " style="width: 18rem;" *ngFor="let inte of intens" >
+    <div class="card text-center " style="width: 300px; height: 170px; margin: 30px;" *ngFor="let inte of intens" >
         <div class="card-body">
           <h5 class="card-title"> {{ inte.nombre }}</h5>
-          <button class="btn btn-primary" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id]" >Ver</button>
+          <button class="btn btn-primary"  [routerLink]="['/lista-intensificaciones/intensificacion', inte._id]" >Ver</button>
         </div>
     </div>
 </table>

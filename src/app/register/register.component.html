@@ -15,7 +15,11 @@
           <span class="icon is-small is-left">
             <i class="fas fa-envelope"></i>
           </span>
-        
+        </p>
+        <div *ngIf="alertEmail" class="alert alert-warning alert-dismissible fade show" role="alertEmail">
+          <strong>Invalid Email!</strong> Email should be of type: @alu.uclm.es.
+          <button type="button"  (click)="closeAlert()" class="btn-close" data-bs-dismiss="alertEmail" aria-label="Close"></button>
+        </div>
       </div>
       <div class="field" style="display: flex; justify-content: flex-end;">
         <p class="control">

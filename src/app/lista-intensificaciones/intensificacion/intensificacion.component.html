@@ -3,25 +3,26 @@
         <h2 >
           {{ inte.nombre }} 
 
-          <h3 ><i class="bi bi-star-fill"></i>{{media| number:'1.0-2'}}</h3>
+          <h3 >{{media| number:'1.0-2'}}<i class="bi bi-star-fill"></i></h3>
       </h2>
      <br>
       {{ inte.descripcion }}
 
-      
-
-      <div class="container shadow-lg p-3 mb-5 bg-white rounded " *ngFor="let inte of intens">
+    
+    
+      <div class=" shadow-lg p-3 mb-5 bg-white rounded " *ngFor="let inte of intens">
         <h2>Asignaturas</h2>
+        <table class="centered-content">
           <div *ngFor="let asig of asigs">
-            <button style="margin: 3px;"class="btn btn-info" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'asignaturas', asig._id]">
+            <button style="margin: 3px; width: 100%;"class="btn btn-info" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'asignaturas', asig._id]">
             {{asig.nombre}}
-            
             </button>
-            
-            
           </div>
+        </table>
       
     </div>
+    
+  
       <h2 >Comentarios</h2>
       <div class="col shadow-lg p-3 mb-5 bg-white rounded" style="overflow-y: scroll; height:400px">
         <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of sortByLastModifiedAsend" >
@@ -38,11 +39,11 @@
           Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}</h4>
         
         
-          <button class="btn btn-danger" (click)="borrarComentario(inte._id, valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
-          <button class="btn btn-success" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'editar-opinion', valoracion._id]" max="5"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-danger" style="margin: 5px;" (click)="borrarComentario(inte._id, valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+          <button class="btn btn-success" style="margin: 5px;" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'editar-opinion', valoracion._id]" max="5"><i class="bi bi-pencil"></i></button>
 
 
-        <button class="btn btn-primary"  (click)="sumarLike(inte._id, asigId,valoracion._id,valoracion.like +1)" max="5"><i class="bi bi-hand-thumbs-up"></i></button> 
+        <button class="btn btn-primary" style="margin: 5px;" (click)="sumarLike(inte._id, asigId,valoracion._id,valoracion.like +1)" max="5">{{valoracion.like}}<i class="bi bi-hand-thumbs-up"></i></button> 
           {{valoracion.like}}
         
 

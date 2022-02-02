@@ -12,6 +12,7 @@ export class LoginComponent implements OnInit {
   loginUserData={}
   alert:boolean = false
   alertPass:boolean = false
+  title = ' Bienvenido a Memoria Colectiva Esiiab';
   email:any
   contraseña:any
   constructor(private loginService: LoginService, private router: Router) { }

@@ -293,12 +293,24 @@ app.patch('/api/lista-intensificaciones/intensificacion/:id', (req, res)=> {
 })
 
 
-//POST asignatura
+//POST asignatura de una intensificacion
 app.post('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas', (req, res)=> {
     let newAsignatura = new Asignatura({
         nombre:req.body.nombre,
         descripcion:req.body.descripcion,
         inteId: req.params.inteId
+    });
+    newAsignatura.save().then((asignaturaDoc) =>{
+        res.send(asignaturaDoc);
+    })
+})
+
+app.post('/api/asignaturas', (req, res)=> {
+
+    let newAsignatura = new Asignatura({
+        nombre:req.body.nombre,
+        descripcion:req.body.descripcion,
+        inteId: 0
     });
     newAsignatura.save().then((asignaturaDoc) =>{
         res.send(asignaturaDoc);
