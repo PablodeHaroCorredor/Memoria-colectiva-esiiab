@@ -24,7 +24,7 @@ export class IntensificacionComponent implements OnInit {
   numeroLikes = 0
   ruta:any
   media: any
-
+  usuarioLogged:any
   
   constructor(private asignaturaService:AsignaturaService, private route: ActivatedRoute, private loginService:LoginService, private router:Router, config: NgbRatingConfig) {
     config.max = 5;
@@ -32,7 +32,7 @@ export class IntensificacionComponent implements OnInit {
    }
   ngOnInit(){
 
-
+    this.usuarioLogged = this.loginService.getUserId()
     this.isShown = false; //hidden every time subscribe detects change
     this.route.params.subscribe(
       (params:Params)=>{

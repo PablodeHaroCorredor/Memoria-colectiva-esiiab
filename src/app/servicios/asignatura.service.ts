@@ -43,6 +43,15 @@ export class AsignaturaService {
     
   }
 
+  getValoraciones(valoracionId:string){
+    return this.apiCallService.get(`api/valoraciones/${valoracionId}`);
+  
+}
+
+  getValoracionesMuii(idAsig:string){
+      return this.apiCallService.get(`api/muii/${idAsig}/valoraciones`);
+    
+  }
  /*  postValoracionInte(idInte:string, comentario:string, puntuacion:number, usuario:string|null){
     return this.apiCallService.post(`lista-intensificaciones/intensificacion/${idInte}/valoraciones`, {idInte,comentario,puntuacion,usuario});
   }  */
@@ -79,6 +88,7 @@ export class AsignaturaService {
   }
 
   borrarComentario(idInte:string, valoracion:string){
+    
    return this.apiCallService.delete(`api/lista-intensificaciones/intensificacion/${idInte}/valoraciones/${valoracion}`);
   }
 

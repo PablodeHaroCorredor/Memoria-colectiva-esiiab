@@ -162,6 +162,13 @@ app.get('/api/lista-directores/director/:direcId/valoraciones',(req,res)=>{
     
 })
 
+app.get('/api/valoraciones/:id',(req,res)=>{
+    Valoracion.find({_id:req.params.id}).then((valoraciones)=>{
+        res.send(valoraciones);
+    });
+    
+})
+
 //UPDATE intes
 app.put('/api/lista-intensificaciones/:id', (req, res)=> {
     Intensificacion.findOneAndUpdate({_id:req.params.id},{
@@ -212,7 +219,7 @@ app.post('/api/lista-directores/director/:directId/etiquetas', (req,res)=>{
 
 //GET las asginaturas de una intensificacion
 app.get('/api/lista-intensificaciones/:id/asignaturas', (req,res)=>{
-    Asignatura.find({_id: req.params.id}).then((asignaturas)=>{
+    Asignatura.find({asigId: req.params.id}).then((asignaturas)=>{
         res.send(asignaturas);
     });
     
@@ -305,6 +312,8 @@ app.post('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas', (re
     })
 })
 
+
+
 app.post('/api/asignaturas', (req, res)=> {
 
     let newAsignatura = new Asignatura({
@@ -341,6 +350,27 @@ app.post('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones', (r
     })
 })
 
+
+//POST valoraciones de Muii
+app.post('/api/muii/valoraciones', (req, res)=> {
+    let newValoracion = new Valoracion({
+        asigId: 1,
+        comentario:req.body.comentario,
+        puntuacion:req.body.puntuacion,
+        userId:req.body.usuario
+    });
+    newValoracion.save().then((valoracionDoc) =>{
+        res.send(valoracionDoc);
+    })
+})
+
+
+//get valoraciones de Muii
+app.get('/api/muii/:id/valoraciones', (req, res)=> {
+    Valoracion.find({asigId: req.params.id}).then((Valoraciones)=>{
+        res.send(Valoraciones);
+    });
+})
 
 
 //POST valoraciones de Director

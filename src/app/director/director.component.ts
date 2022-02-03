@@ -23,7 +23,7 @@ export class DirectorComponent implements OnInit {
   directorId:any
   currentRate = 8;
   etiquetas:any
-
+  usuarioLogged:any
   constructor(private directorService:DirectorService, config: NgbRatingConfig, private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) {
     config.max = 5;
     
@@ -31,6 +31,8 @@ export class DirectorComponent implements OnInit {
   }
    
   ngOnInit(){
+
+    this.usuarioLogged = this.loginService.getUserId()
 
     this.route.params.subscribe(
       (params:Params)=>{

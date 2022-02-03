@@ -25,7 +25,7 @@
   
       <h2 >Comentarios</h2>
       <div class="col shadow-lg p-3 mb-5 bg-white rounded" style="overflow-y: scroll; height:400px">
-        <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of sortByLastModifiedAsend" >
+        <div class="col shadow-lg p-3 mb-5 bg-white rounded"id="coments" *ngFor="let valoracion of sortByLastModifiedDesc" >
           <h3 class="">
             {{valoracion.lastModified}}
           {{valoracion.comentario}}
@@ -39,12 +39,12 @@
           Fecha: {{valoracion.fechaCreacion | date: 'dd-MM-yyyy'}}</h4>
         
         
-          <button class="btn btn-danger" style="margin: 5px;" (click)="borrarComentario(inte._id, valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
-          <button class="btn btn-success" style="margin: 5px;" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'editar-opinion', valoracion._id]" max="5"><i class="bi bi-pencil"></i></button>
+          <button class="btn btn-danger" *ngIf="valoracion.userId == usuarioLogged " style="margin: 5px;" (click)="borrarComentario(inte._id, valoracion._id)" max="5"><i class="bi bi-trash"></i></button>
+          <button class="btn btn-success" *ngIf="valoracion.userId == usuarioLogged " style="margin: 5px;" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'editar-opinion', valoracion._id]" max="5"><i class="bi bi-pencil"></i></button>
 
 
         <button class="btn btn-primary" style="margin: 5px;" (click)="sumarLike(inte._id, asigId,valoracion._id,valoracion.like +1)" max="5">{{valoracion.like}}<i class="bi bi-hand-thumbs-up"></i></button> 
-          {{valoracion.like}}
+          
         
 
 </div>

@@ -15,11 +15,14 @@ export class AsignaturaComponent implements OnInit {
   valoraciones:any
   media: any
   currentRate:number =0
+  usuarioLogged:any
 
   constructor(private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) { 
   }
 
   ngOnInit(): void {
+
+    this.usuarioLogged = this.loginService.getUserId()
       this.route.params.subscribe(
         (params:Params)=>{
           this.asignaturaService.getAsignatura(params.inteId,params.id).subscribe((asigs: any)=>{

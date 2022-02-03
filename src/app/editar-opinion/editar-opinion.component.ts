@@ -18,6 +18,8 @@ export class EditarOpinionComponent implements OnInit {
   valoracionId:any
   currentRate:number =0
   dateNow:any
+  comentario:any
+  puntuacion:any
   directorId:any
 
   constructor(config: NgbRatingConfig,private directorService: DirectorService, private asignaturaService: AsignaturaService,private route:ActivatedRoute ,private loginService:LoginService, private router: Router) { 
@@ -37,7 +39,34 @@ export class EditarOpinionComponent implements OnInit {
     })
 
    this.dateNow = new Date()
+
+   this.route.params.subscribe(
+    (params:Params)=>{
+      console.log(params)
+      this.asignaturaService.getValoraciones(params.id).subscribe((valoraciones: any)=>{
+        this.valoraciones=valoraciones;
+        for(let valor of this.valoraciones){
+          this.comentario= valor.comentario
+          this.puntuacion = valor.puntuacion
+        }
+      }
+
+    )})
+
+    
+    
+   
+     
+  /* var total = 0;
+  for (var i=0; i<; i++) {
+    total +=;
   }
+    var suma = total;
+    return suma / ; */
+  
+} 
+  
+
 
 
 
