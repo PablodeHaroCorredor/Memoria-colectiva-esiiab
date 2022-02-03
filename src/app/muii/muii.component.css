@@ -1,0 +1,43 @@
+.container{
+    display: block;
+    
+    }
+    h2{
+        font-size: xx-large;
+      }
+    
+    
+    
+    .container{
+        padding: 10px;
+        border-radius: 6px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+      position: relative;
+      }
+    
+      #coments{
+        background-color: #ffffff;
+        padding: 10px;
+        border-radius: 6px;
+        margin-top: 10px;
+        margin-bottom: 10px;
+        }
+    
+        input{
+            border-radius: 10px;
+            border-color: #e27a7a;
+            border-width: 2px;
+            margin-bottom: 5px;
+          }
+          
+          input:hover{
+            color: #e27a7a;
+            background-color: white;
+            border-color: black;
+          }
+          input:active{
+            color: #e27a7a;
+            background-color: white;
+            border-color: black;
+          }

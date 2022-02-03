@@ -36,7 +36,7 @@ const routes: Routes = [
   { path: 'lista-directores/director/:directId', component: DirectorComponent },
   { path: 'lista-optativas', component: ListaOptativasComponent },
   { path: 'optativa', component: OptativaComponent },
-  { path: 'muii', component: MuiiComponent },
+  { path: 'muii/:id', component: MuiiComponent },
 ];
 
 @NgModule({

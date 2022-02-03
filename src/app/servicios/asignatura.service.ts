@@ -30,6 +30,10 @@ export class AsignaturaService {
     return this.apiCallService.get(`api/lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}`);
   }
 
+  getMuii(idAsig:string){
+    return this.apiCallService.get(`api/asignaturas/${idAsig}`);
+  }
+
 /*   getValoracionesInte(idInte:string){
     return this.apiCallService.get(`lista-intensificaciones/intensificacion/${idInte}/valoraciones`);
   } */
@@ -88,7 +92,7 @@ export class AsignaturaService {
   }
 
   borrarComentario(idInte:string, valoracion:string){
-    
+
    return this.apiCallService.delete(`api/lista-intensificaciones/intensificacion/${idInte}/valoraciones/${valoracion}`);
   }
 

@@ -15,16 +15,25 @@ export class MuiiComponent implements OnInit {
   valoraciones:any
   media: any
   currentRate:number =0
+  usuarioLogged:any
 
   constructor(private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) { 
   }
 
   ngOnInit(): void {
+
+    this.usuarioLogged = this.loginService.getUserId()
+      this.route.params.subscribe(
+        (params:Params)=>{
+          this.asignaturaService.getMuii(params.id).subscribe((asigs: any)=>{
+            this.asigs=asigs;
+        }
   
+        )})
         this.route.params.subscribe(
           (params:Params)=>{
             console.log(params)
-            this.asignaturaService.getValoracionesMuii("1").subscribe((valoraciones: any)=>{
+            this.asignaturaService.getValoracionesMuii(params.id).subscribe((valoraciones: any)=>{
               this.valoraciones=valoraciones;
               this.media = this.calcularMedia()
           }
@@ -86,4 +95,5 @@ get sortByLastModifiedAsend() {
     return <any>new Date(b.fechaCreacion) - <any>new Date(a.fechaCreacion);
   });
 }
+  
 }

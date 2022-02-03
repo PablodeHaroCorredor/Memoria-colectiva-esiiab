@@ -187,6 +187,14 @@ app.get('/api/asignaturas', (req,res)=>{
     
 })
 
+//GET lista de asignaturas
+app.get('/api/asignaturas/:id', (req,res)=>{
+    Asignatura.find({_id:req.params.id}).then((asignaturas)=>{
+        res.send(asignaturas);
+    });
+    
+})
+
 //GET todas las etiquetas
 app.get('/api/etiquetas', (req,res)=>{
     Etiqueta.find({}).then((etiquetas)=>{
@@ -319,12 +327,13 @@ app.post('/api/asignaturas', (req, res)=> {
     let newAsignatura = new Asignatura({
         nombre:req.body.nombre,
         descripcion:req.body.descripcion,
-        inteId: 0
+        inteId: req.body.inteId
     });
     newAsignatura.save().then((asignaturaDoc) =>{
         res.send(asignaturaDoc);
     })
 })
+
 
 app.put('/api/asignaturas/:id', (req, res)=> {
     Asignatura.findOneAndUpdate({_id:req.params.id},{
