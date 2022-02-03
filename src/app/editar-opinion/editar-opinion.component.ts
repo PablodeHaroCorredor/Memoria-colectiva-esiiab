@@ -4,6 +4,7 @@ import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AsignaturaService } from '../servicios/asignatura.service';
 import { DirectorService } from '../servicios/director.service';
 import { LoginService } from '../servicios/login.service';
+import { Location } from '@angular/common'
 
 @Component({
   selector: 'app-editar-opinion',
@@ -22,7 +23,14 @@ export class EditarOpinionComponent implements OnInit {
   puntuacion:any
   directorId:any
 
-  constructor(config: NgbRatingConfig,private directorService: DirectorService, private asignaturaService: AsignaturaService,private route:ActivatedRoute ,private loginService:LoginService, private router: Router) { 
+  constructor(config: NgbRatingConfig,
+    private directorService: DirectorService,
+    private asignaturaService: AsignaturaService,
+    private route:ActivatedRoute ,
+    private loginService:LoginService,
+    private router: Router,
+    private location: Location
+    ) { 
     config.max = 5;
     
     config.readonly = false;
@@ -66,20 +74,25 @@ export class EditarOpinionComponent implements OnInit {
   
 } 
   
+public editComentarioInte( comentario:string, puntuacion:number, inte:string, valoracion:string, fechaMod:Date){
+  this.asignaturaService.editValoracionInte(inte, valoracion,comentario, puntuacion, fechaMod, this.loginService.getUserId()).subscribe(()=>{
+  }) 
+     
+    this.location.back()
+
+    
+}
 
 
 
 
-
-  public editComentario( comentario:string, puntuacion:number, inte:string, asig:string, valoracion:string, fechaMod:Date){
-    this.asignaturaService.editValoracion(inte,asig, valoracion,comentario, puntuacion, fechaMod, this.loginService.getUserId()).subscribe(()=>{
+  public editComentarioAsig( comentario:string, puntuacion:number, inte:string, asig:string, valoracion:string, fechaMod:Date){
+    this.asignaturaService.editValoracionAsig(asig, valoracion,comentario, puntuacion, fechaMod, this.loginService.getUserId()).subscribe(()=>{
     }) 
-    if(asig!=null){
-        this.router.navigate(['lista-intensificaciones/intensificacion/',inte,'asignaturas',asig])
+    
+        this.location.back()
 
-      }else{
-        this.router.navigate(['lista-intensificaciones/intensificacion/',inte])
-      }
+     
 
       
   }

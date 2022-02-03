@@ -78,13 +78,13 @@ export class IntensificacionComponent implements OnInit {
           return <any>new Date(b.fechaCreacion) - <any>new Date(a.fechaCreacion);
         });
       }
-  public sumarLike(inteId:string, asigId:string, valoracionId:string, like:Number){
+ /*  public sumarLike(inteId:string, asigId:string, valoracionId:string, like:Number){
     this.asignaturaService.editValoracionLike(inteId, asigId,valoracionId,like).subscribe(()=>{
       
     })
    
     window.location.reload();
-  }
+  } */
   
    
 

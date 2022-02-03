@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AsignaturaService } from '../servicios/asignatura.service';
 import { LoginService } from '../servicios/login.service';
 
@@ -14,10 +15,15 @@ export class MuiiComponent implements OnInit {
   id:string=""
   valoraciones:any
   media: any
+  asigId:any
   currentRate:number =0
   usuarioLogged:any
+  likes:any
+  sumaLikes:any
 
-  constructor(private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) { 
+  constructor(config: NgbRatingConfig,private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) { 
+    config.max = 5;
+    config.readonly = true;
   }
 
   ngOnInit(): void {
@@ -25,6 +31,7 @@ export class MuiiComponent implements OnInit {
     this.usuarioLogged = this.loginService.getUserId()
       this.route.params.subscribe(
         (params:Params)=>{
+          this.asigId = params.id
           this.asignaturaService.getMuii(params.id).subscribe((asigs: any)=>{
             this.asigs=asigs;
         }
@@ -36,21 +43,46 @@ export class MuiiComponent implements OnInit {
             this.asignaturaService.getValoracionesMuii(params.id).subscribe((valoraciones: any)=>{
               this.valoraciones=valoraciones;
               this.media = this.calcularMedia()
-          }
+          })
+
+          this.asignaturaService.getLikesValoracion(params.id).subscribe((likes: any)=>{
+            this.likes=likes;
+            this.sumaLikes = this.sumarLikes(likes)
     
-          )})
-        
-      
+          })
+          })
+          
+
+    
+
   }
 
   
-  public sumarLike(inteId:string, asigId:string, valoracionId:string, like:Number){
-    this.asignaturaService.editValoracionLike(inteId, asigId,valoracionId,like).subscribe(()=>{
-      
-    })
-   
-    window.location.reload();
+
+
+  public sumarLikes(likes:any){
+    var sum= 0
+    console.log(likes)
+    for(let like of likes){
+      sum = sum +like.puntuacion
+   }
+
+   return sum
   }
+
+  
+  public darLike(valoracionId:string){
+    
+    console.log("dar like")
+    this.asignaturaService.darValoracionLike(valoracionId,this.loginService.getUserId() ).subscribe(()=>{
+    })
+
+    //this.asignaturaService.editValoracionAsigLike().subscribe(()=>{
+    //})
+
+    
+  }
+  
 
  //metodo para que cuando crees una valoracion se meta en la lista de las asignaturas
   public createComentario( comentario:string, puntuacion:number,asig:string, inte:string){

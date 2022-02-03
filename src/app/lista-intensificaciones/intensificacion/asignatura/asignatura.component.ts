@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
+import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AsignaturaService } from 'src/app/servicios/asignatura.service';
 import { LoginService } from 'src/app/servicios/login.service';
 
@@ -17,7 +18,9 @@ export class AsignaturaComponent implements OnInit {
   currentRate:number =0
   usuarioLogged:any
 
-  constructor(private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) { 
+  constructor(config: NgbRatingConfig,private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) { 
+    config.max = 5;
+    config.readonly = true;
   }
 
   ngOnInit(): void {
@@ -44,13 +47,13 @@ export class AsignaturaComponent implements OnInit {
   }
 
   
-  public sumarLike(inteId:string, asigId:string, valoracionId:string, like:Number){
+ /*  public sumarLike(inteId:string, asigId:string, valoracionId:string, like:Number){
     this.asignaturaService.editValoracionLike(inteId, asigId,valoracionId,like).subscribe(()=>{
       
     })
    
     window.location.reload();
-  }
+  } */
 
  //metodo para que cuando crees una valoracion se meta en la lista de las asignaturas
   public createComentario( comentario:string, puntuacion:number,asig:string, inte:string){

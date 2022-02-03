@@ -1,3 +1,4 @@
+const {Like} = require('./like.model');
 const {Asignatura} = require('./asignatura.model');
 const {Valoracion} = require('./valoracion.model');
 const {Intensificacion} = require('./intensificacion.model');
@@ -12,5 +13,6 @@ module.exports = {
     Intensificacion,
     Usuario,
     Director,
-    Etiqueta
+    Etiqueta,
+    Like
 };

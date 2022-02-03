@@ -70,22 +70,23 @@ export class AsignaturaService {
   } 
 
 
-  editValoracion(idInte:string,idAsig:string,idValoracion:string,  comentario:string, puntuacion:number, fechaCreacion:Date, usuario:string|null){
-    if(idAsig!=null){
-      return this.apiCallService.patch(`api/lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}/valoraciones/${idValoracion}`, {comentario,puntuacion, fechaCreacion});
-    }
-    else{
-      return this.apiCallService.patch(`api/lista-intensificaciones/intensificacion/${idInte}/valoraciones/${idValoracion}`, {comentario,puntuacion, fechaCreacion});
-    }  
+  editValoracionInte(idInte:string,idValoracion:string, comentario:string, puntuacion:number, fechaCreacion:Date, usuario:string|null){
+      return this.apiCallService.patch(`api/lista-intensificaciones/intensificacion/${idInte}/valoraciones/${idValoracion}`, {comentario,puntuacion,  fechaCreacion});
+      
   }
 
-  editValoracionLike(idInte:string,idAsig:string,idValoracion:string, like:Number){
-    if(idAsig!=null){
-      return this.apiCallService.patch(`api/lista-intensificaciones/intensificacion/${idInte}/asignaturas/${idAsig}/valoraciones/${idValoracion}`, {like});
-    }
-    else{
-      return this.apiCallService.patch(`api/lista-intensificaciones/intensificacion/${idInte}/valoraciones/${idValoracion}`, {like});
-    }  
+  editValoracionAsig(idAsig:string,idValoracion:string,  comentario:string, puntuacion:number, fechaCreacion:Date, usuario:string|null){
+   
+      return this.apiCallService.patch(`api/lista-intensificaciones/intensificacion/asignaturas/${idAsig}/valoraciones/${idValoracion}`, {comentario,puntuacion, fechaCreacion});
+    
+    
+  }
+
+ 
+
+
+  darValoracionLike(idValoracion:string, usuario:string|null){
+      return this.apiCallService.post(`api/${idValoracion}/likes`, {idValoracion, usuario});
   }
   updateAsignatura(asignatura:string, valoraciones:string[]){
     return this.apiCallService.put(`api/asignaturas/${asignatura}`, {valoraciones});
@@ -93,8 +94,14 @@ export class AsignaturaService {
 
   borrarComentario(idInte:string, valoracion:string){
 
-   return this.apiCallService.delete(`api/lista-intensificaciones/intensificacion/${idInte}/valoraciones/${valoracion}`);
+   return this.apiCallService.delete(`api/lista-intensificaciones/intensificacion/${idInte}/valoraciones/borrar/${valoracion}`);
   }
+
+
+  getLikesValoracion( valoracion:string){
+
+    return this.apiCallService.get(`api/likes/${valoracion}`);
+   }
 
  
 

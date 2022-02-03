@@ -21,10 +21,9 @@ const ValoracionSchema = new mongoose.Schema({
     directorId:{
         type: mongoose.Schema.Types.ObjectId, ref:'Director'
     },
-    like:{
-        type:Number,
-        default:0
-    },
+    likes:[{
+        type: mongoose.Schema.Types.ObjectId, ref:'Like'
+    }],
     fechaCreacion:{
         type:Date,
         required:true,

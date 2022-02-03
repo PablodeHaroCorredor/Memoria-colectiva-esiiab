@@ -4,7 +4,7 @@ const { mongoose } = require('./db/mongoose');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
 const bcrypt = require("bcryptjs")
-const {Asignatura, Valoracion, Intensificacion, Usuario, Director, Etiqueta} = require('./db/models'); 
+const {Asignatura, Valoracion, Intensificacion, Like,Usuario, Director, Etiqueta} = require('./db/models'); 
 const { get } = require('http');
 const { send } = require('process');
 const nodemailer = require('nodemailer');
@@ -164,6 +164,13 @@ app.get('/api/lista-directores/director/:direcId/valoraciones',(req,res)=>{
 
 app.get('/api/valoraciones/:id',(req,res)=>{
     Valoracion.find({_id:req.params.id}).then((valoraciones)=>{
+        res.send(valoraciones);
+    });
+    
+})
+
+app.get('/api/valoraciones',(req,res)=>{
+    Valoracion.find({}).then((valoraciones)=>{
         res.send(valoraciones);
     });
     
@@ -373,6 +380,47 @@ app.post('/api/muii/valoraciones', (req, res)=> {
     })
 })
 
+//get likes
+app.get('/api/likes', (req, res)=> {
+    Valoracion.find({asigId: req.params.id}).then((Valoraciones)=>{
+        res.send(Valoraciones);
+    });
+})
+
+//get likes de una valoraciones
+app.get('/api/:valoracionId/likes', (req, res)=> {
+    Like.find({asigId: req.params.valoracionId}).then((likes)=>{
+        res.send(Valoraciones);
+    });
+})
+
+//get likes de una valoraciones
+app.get('/api/likes/:id', (req, res)=> {
+    Like.find({valoracionId: req.params.id}).then((likes)=>{
+        res.send(likes);
+    });
+})
+
+//get likes de una valoraciones
+app.post('/api/:valoracionId/likes', (req, res)=> {
+    let newLike = new Like({
+        puntuacion: 1,
+        userId:req.body.usuario,
+        valoracionId: req.params.valoracionId
+    });
+    newLike.save().then((likeDoc) =>{
+        res.send(likeDoc);
+    })
+})
+
+//delete likes de una valoraciones
+app.delete('/api/likes/borrar/:id', (req, res)=> {
+    Like.findOneAndRemove({
+        _id:req.params.id
+    }).then((removedLikeDoc)=>{
+        res.sendStatus(removedLikeDoc)
+    });
+})
 
 //get valoraciones de Muii
 app.get('/api/muii/:id/valoraciones', (req, res)=> {
@@ -405,7 +453,7 @@ app.patch('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id
 })
 
 //patch comentario asignatura  
-app.patch('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asigId/valoraciones/:id', (req, res)=> {
+app.patch('/api/lista-intensificaciones/intensificacion/asignaturas/:asigId/valoraciones/:id', (req, res)=> {
     Valoracion.findOneAndUpdate({_id:req.params.id},{
         $set:req.body
     }).then(()=>{
@@ -435,7 +483,7 @@ app.patch('/api/valoraciones/:id', (req, res)=> {
     });
 })
 
-app.delete('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones/:id',(req, res)=> {
+app.delete('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones/borrar/:id',(req, res)=> {
     Valoracion.findOneAndRemove({
         _id:req.params.id
     }).then((removedValoracionDoc)=>{
