@@ -1,6 +1,12 @@
 # MemoriaColectivaEsiiab
 
+Enlace a la aplicación desplegada: https://memoria-colectiva-esiiab.herokuapp.com
+
+Enlace a la herramienta Zenhub: https://app.zenhub.com/workspaces/memoria-colectiva-60e964091a7d74000ec7b6b3/board?repos=384651695
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 12.2.3.
+
+
 
 ## Development server
 
