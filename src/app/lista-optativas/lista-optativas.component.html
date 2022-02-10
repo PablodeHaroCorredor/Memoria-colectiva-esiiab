@@ -1,88 +1,16 @@
-<h1 style="margin-left: 10%;font-size:x-large ;">
-   ASIGNATURAS OPTATIVAS
+<h1  class="centered-content" >
+   Asignaturas Optativas
   </h1>
   <br>
-      <div style="margin-left: 10%;">
-        <div class="" style="width: 18rem;">
-            <div class="body">
-              
-              <button  class="btn btn-light " href="#"  routerLink="/optativa">Visión Artificial y Reconocimiento de Patrones</button>
+
+        <div class="centered-content"  *ngFor="let opta of optativas; let i = index">
+            <div *ngIf="i % 5 == 0" class="row body">
+              <button style="width: 150px; height: 100px; margin: 10px;" class="btn btn-light" href="#"  routerLink="/optativa" >{{opta}}</button> 
+              <button style="width: 150px; height: 100px; margin: 10px;" class="btn btn-light" href="#"  routerLink="/optativa" *ngIf="i + 1 < optativas.length">{{optativas[i + 1]}}</button> 
+              <button style="width: 150px; height: 100px; margin: 10px;" class="btn btn-light" href="#"  routerLink="/optativa" *ngIf="i + 2 < optativas.length">{{optativas[i + 2]}}</button> 
+              <button style="width: 150px; height: 100px; margin: 10px;" class="btn btn-light" href="#"  routerLink="/optativa" *ngIf="i + 3 < optativas.length">{{optativas[i + 3]}}</button> 
+              <button style="width: 150px; height: 100px; margin: 10px;" class="btn btn-light" href="#"  routerLink="/optativa" *ngIf="i + 4 < optativas.length">{{optativas[i + 4]}}</button> 
             </div>
           </div>
-      
-          <br>
-          <div class=" " style="width: 18rem; ">
-            <div class="body">
-              <a  class="btn btn-light" href="#"   routerLink="/optativa">Criptografia</a>
-            </div>
-          </div>
-          <br>
-        
-          <div class=" " style="width: 18rem;">
-            <div class="body">
-              <a class="btn btn-light" href="#"  routerLink="/optativa">Robótica Autónoma</a>
-            </div>
-          </div>
-      
-          <br>
-          <div class="" style="width: 18rem;">
-            <div class="body">
-              <a class="btn btn-light" href="#"  routerLink="/optativa">Auditoría en Sistemas de Información</a>
-            </div>
-          </div>
-      
-          <br>
-          <div class="" style="width: 18rem;">
-            <div class="body">
-              <a class="btn btn-light" href="#"  routerLink="/optativa">Ingeniería Web y de Servicios</a>
-            </div>
-          </div>
-        
-  
-        <br>
-          <div class="" style="width: 18rem;">
-            <div class="body">
-              <a class="btn btn-light" href="#"  routerLink="/optativa">Dispositivos y Redes Inalámbricos</a>
-            </div>
-          </div>
-        
-  
-        <br>
-          <div class="" style="width: 18rem;">
-            <div class="body">
-              <a class="btn btn-light" href="#"  routerLink="/optativa">Aceleradores Gráficos</a>
-            </div>
-          </div>
-        
-  
-  
-        <br>
-          <div class="" style="width: 18rem;">
-            <div class="body">
-              <a class="btn btn-light" href="#"  routerLink="/optativa">Diseño Gráfico y Animación</a>
-            </div>
-          </div>
-        
-  
-        <br>
-          <div class="" style="width: 18rem;">
-            <div class="body">
-              <a class="btn btn-light" href="#"  routerLink="/optativa">Inteligencia Artificial en Videojuegos</a>
-            </div>
-          </div>
-       
-  
-        <br>
-          <div class="" style="width: 18rem;">
-            <div class="body">
-              <a class="btn btn-light" href="#"  routerLink="/optativa">Videojuegos y Realidad Virtual</a>
-            </div>
-          </div>
-        
-        
+
     
-  
-  
-        </div>
-    <br>
-    <br><br><br><br>

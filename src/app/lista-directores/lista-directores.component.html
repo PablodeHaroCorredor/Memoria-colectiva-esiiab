@@ -1,13 +1,13 @@
 
 <router-outlet></router-outlet>
-
-<table class="centered-content" *ngIf="flag">
-  <h1 class="centered-content" style="font-size:xx-large;">
-    DIRECTORES
-  </h1>
-    <div class=" text-center " style="width: 18rem;" *ngFor="let director of directores" >
-        <div class="body">
-          <button class="btn btn-light" style="width: 70%; margin: 10px;" [routerLink]="['/lista-directores/director', director._id]" >{{director.nombre}}</button>
-        </div>
+<h1 class="centered-content" >
+  Directores
+</h1>
+<br>
+<table  class="centered-content" >
+    <div  *ngFor="let director of directores" >
+        <div  class="">
+          <button class="btn btn-light" style="width: 130px;margin: 10px; height: 100px;" [routerLink]="['/lista-directores/director', director._id]" >{{director.nombre}}</button>
+           </div>
     </div>
-</table>
+    </table>

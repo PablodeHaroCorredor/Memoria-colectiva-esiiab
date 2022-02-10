@@ -1,9 +1,9 @@
 
 <div class=" container shadow-lg p-3 mb-5 bg-white rounded buttons is-right" *ngFor="let inte of intens">
         <h2 >
-          {{ inte.nombre }} 
+          {{ inte.nombre }}  <a style="color: rgb(253, 209, 11);margin-left: 10px;">{{media| number:'1.0-2'}}</a><i class="bi bi-star-fill" style="color: rgb(253, 209, 11); "></i>
 
-          <h3 >{{media| number:'1.0-2'}}<i class="bi bi-star-fill"></i></h3>
+         
       </h2>
      <br>
       {{ inte.descripcion }}
@@ -12,9 +12,9 @@
     
       <div class=" shadow-lg p-3 mb-5 bg-white rounded " *ngFor="let inte of intens">
         <h2>Asignaturas</h2>
-        <table class="centered-content">
+        <table class="centered-content" >
           <div *ngFor="let asig of asigs">
-            <button style="margin: 3px; width: 100%;"class="btn btn-info" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'asignaturas', asig._id]">
+            <button style="margin: 10px; width: 140px;height: 110px;"class="btn btn-info" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'asignaturas', asig._id]">
             {{asig.nombre}}
             </button>
           </div>
@@ -54,7 +54,7 @@
       <br>
       <div class=" buttons is-right">
         <button  type="button" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;" [routerLink]="['/lista-intensificaciones']"><i class="bi bi-arrow-return-left"></i> Volver</button>
-        <button  class="btn btn-primary" style="margin-bottom: 10px;" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'nueva-opinion']"><i class="bi bi-chat-square-text"></i> Escribe tu opinión</button>
+        <button  class="btn btn-success" style="margin-bottom: 10px;" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'nueva-opinion']"><i class="bi bi-chat-square-text"></i> Escribe tu opinión</button>
 
       </div>
       

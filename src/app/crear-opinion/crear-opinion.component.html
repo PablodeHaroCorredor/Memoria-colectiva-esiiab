@@ -20,9 +20,9 @@ padding:100px;">
     </div>
     <div class="form-group buttons is-right">
         <button  type="button" class="btn btn-primary" style="margin-right: 10px;" [routerLink]="['../']"><i class="bi bi-arrow-return-left"></i> Volver</button>
-        <button *ngIf="directorId == null" type="button" class="btn btn-primary"  (click)="createComentario(inputComentario.value, currentRate,inteId, asigId)"><i class="bi bi-chat-square-text"></i> Enviar</button>
+        <button *ngIf="directorId == null" type="button" class="btn btn-success"  (click)="createComentario(inputComentario.value, currentRate,inteId, asigId)"><i class="bi bi-chat-square-text"></i> Enviar</button>
         
-        <button *ngIf="directorId" type="button" class="btn btn-primary"  (click)="createComentarioDirector(inputComentario.value, currentRate, directorId)"><i class="bi bi-chat-square-text"></i> Enviar </button>
+        <button *ngIf="directorId" type="button" class="btn btn-success"  (click)="createComentarioDirector(inputComentario.value, currentRate, directorId)"><i class="bi bi-chat-square-text"></i> Enviar </button>
         
     </div>
   </form>
