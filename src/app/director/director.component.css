@@ -6,7 +6,14 @@
       font-size: xx-large;
     }
   
-  
+  .btn-light{
+    font-size: small;
+    width: 110px;
+    height: 50px;
+    margin: 10px;
+    
+    
+  }
   
   .container{
       padding: 100px;
