@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { NgbRatingConfig } from '@ng-bootstrap/ng-bootstrap';
 import { AsignaturaService } from 'src/app/servicios/asignatura.service';
+import { DirectorService } from 'src/app/servicios/director.service';
 import { LoginService } from 'src/app/servicios/login.service';
 
 @Component({
@@ -15,10 +16,12 @@ export class AsignaturaComponent implements OnInit {
   id:string=""
   valoraciones:any
   media: any
+  etiquetas:any
   currentRate:number =0
   usuarioLogged:any
+  nombresEtiqueta:string[]= ["Fácil","Difícil","Buen profesor","Interesante","Aburrida","Teórica","Práctica","Innovadora"]
 
-  constructor(config: NgbRatingConfig,private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute,  private router: Router) { 
+  constructor(config: NgbRatingConfig,private asignaturaService:AsignaturaService, private loginService: LoginService, private route:ActivatedRoute, private directorService:DirectorService, private router: Router) { 
     config.max = 5;
     config.readonly = true;
   }
@@ -42,10 +45,28 @@ export class AsignaturaComponent implements OnInit {
           }
     
           )})
+
+          this.route.params.subscribe(
+            (params:Params)=>{
+              console.log(params);
+              this.asignaturaService.getEtiquetasAsignaturas(params.id).subscribe((etiquetas: any)=>{
+                this.etiquetas=etiquetas;
+                console.log(etiquetas)
+              }
+              
+          )})
         
       
   }
 
+
+  public actualizarAsignatura(asigId:string, etiqueta:string){
+    this.asignaturaService.updateAsginatura(asigId, etiqueta).subscribe(()=>{
+
+      
+    });
+    window.location.reload();
+  }
   
  /*  public sumarLike(inteId:string, asigId:string, valoracionId:string, like:Number){
     this.asignaturaService.editValoracionLike(inteId, asigId,valoracionId,like).subscribe(()=>{
@@ -72,6 +93,13 @@ export class AsignaturaComponent implements OnInit {
     window.location.reload();
   }
 
+
+  public borrarEtiqueta(etiId:string){
+    this.directorService.borrarEtiqueta(etiId).subscribe(()=>{
+
+    })
+    window.location.reload();
+}
 
   public calcularMedia(){
     var sum = 0

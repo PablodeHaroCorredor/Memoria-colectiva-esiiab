@@ -6,8 +6,21 @@ h2{
     font-size: xx-large;
   }
 
-
-
+  .btn-light{
+    font-size: small;
+    width: 110px;
+    height: 50px;
+    margin: 10px;
+    
+    
+  }
+  .centered-content{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding-right: 30px;
+  }
 .container{
     padding: 10px;
     border-radius: 6px;

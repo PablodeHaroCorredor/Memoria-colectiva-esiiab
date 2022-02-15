@@ -13,7 +13,9 @@ import { LoginService } from '../servicios/login.service';
 export class DirectorComponent implements OnInit {
 
   intens: any;
-  flag2=false;
+  nombresEtiqueta:string[]=["Apreciado","Dominio Técnico","Buen Ambiente","Respode rápido","Dudas detalladas",
+  "Empático","Profesional","Ordenado","Resolutivo","Innovador","Ingenioso","Flexible","Ayuda con referencias",
+  "Estricto","Ausente","Poco comunicativo","Desorganizado", "Inflexible", "Mal Ambiente", "Crítico"]
   id:string=""
   isShown: boolean= false;
   directId:any
@@ -68,8 +70,11 @@ export class DirectorComponent implements OnInit {
       )})
   }
 
-public borrarEtiqueta(){
-    
+public borrarEtiqueta(etiId:string){
+    this.directorService.borrarEtiqueta(etiId).subscribe(()=>{
+
+    })
+    window.location.reload();
 }
 
   public sumarLike(directorId:string, valoracionId:string, like:Number){

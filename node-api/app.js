@@ -219,9 +219,18 @@ app.get('/api/lista-directores/director/:directId/etiquetas', (req,res)=>{
     
 })
 
+//GET todas las etiquetas de una asignatura
+app.get('/api/lista-directores/director/:asigId/etiquetas', (req,res)=>{
+    Etiqueta.find({asignaturaId: req.params.asigId}).then((etiquetas)=>{
+        res.send(etiquetas);
+    });
+    
+})
+
+
 
 //POST etiquetas de un director
-app.post('/api/lista-directores/director/:directId/etiquetas', (req,res)=>{
+app.post('/api/asignaturas/:directId/etiquetas', (req,res)=>{
     let newEtiqueta = new Etiqueta({
         nombre:req.body.nombre,
         directorId:req.params.directId
@@ -229,6 +238,28 @@ app.post('/api/lista-directores/director/:directId/etiquetas', (req,res)=>{
     newEtiqueta.save().then((etiquetaDoc) =>{
         res.send(etiquetaDoc);
     })
+    
+})
+
+//POST etiquetas de asignatura
+app.post('/api/asignatura/:asigId/etiquetas', (req,res)=>{
+    let newEtiqueta = new Etiqueta({
+        nombre:req.body.nombre,
+        asignaturaId:req.params.asigId
+    });
+    newEtiqueta.save().then((etiquetaDoc) =>{
+        res.send(etiquetaDoc);
+    })
+    
+})
+
+//DELETE etiquetas 
+app.delete('/api/etiquetas/:id', (req,res)=>{
+    Etiqueta.findOneAndRemove({
+        _id:req.params.id
+    }).then((removedLikeDoc)=>{
+        res.sendStatus(removedLikeDoc)
+    });
     
 })
 

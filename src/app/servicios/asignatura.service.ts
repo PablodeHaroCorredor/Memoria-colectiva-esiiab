@@ -81,9 +81,13 @@ export class AsignaturaService {
     
     
   }
-
+  getEtiquetasAsignaturas(asigd:string){
+    return this.apiCallService.get(`api/lista-directores/director/${asigd}/etiquetas`);
+  }
  
-
+  updateAsginatura(asigId:string, nombre:string){
+    return this.apiCallService.post(`api/asignaturas/${asigId}/etiquetas`, {asigId,nombre});
+  }
 
   darValoracionLike(idValoracion:string, usuario:string|null){
       return this.apiCallService.post(`api/${idValoracion}/likes`, {idValoracion, usuario});

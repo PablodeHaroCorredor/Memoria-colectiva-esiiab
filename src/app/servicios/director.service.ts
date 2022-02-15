@@ -18,6 +18,11 @@ export class DirectorService {
     
   }
 
+  borrarEtiqueta(id:string){
+    return this.apiCallService.delete(`api/etiquetas/${id}`);
+  }
+
+
   getEtiquetasDirector(directId:string){
     return this.apiCallService.get(`api/lista-directores/director/${directId}/etiquetas`);
   }

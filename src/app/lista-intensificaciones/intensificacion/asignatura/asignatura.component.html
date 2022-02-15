@@ -5,9 +5,18 @@
     {{ asig.nombre }} <a style="color: rgb(253, 209, 11);margin-left: 10px;">{{media| number:'1.0-2'}}</a><i class="bi bi-star-fill" style="color: rgb(253, 209, 11); "></i>
    
   </h2>
+  <table class="centered-content">
+    <div *ngFor="let eti of etiquetas">
+      <div class="body">
+        <button class="badge rounded-pill bg-secondary" (click)="borrarEtiqueta(eti._id)" style="font-size: larger; margin: 5px">{{eti.nombre}}</button>
+      </div>
+    </div>
+  </table>
  <br>
  {{ asig.descripcion }}
   
+
+ 
   <div class="row">
     <div class="col">
       <br>
@@ -42,6 +51,16 @@
   </div>
   </div>
     <br>
+
+    <h2 >Etiquetas</h2>
+ <table class="centered-content"  >
+    <div  *ngFor="let nombres of nombresEtiqueta">
+      <div class="body">
+        <button class="btn btn-light" (click)="actualizarAsignatura(asig._id, nombres)">{{nombres}}</button> 
+      </div>
+</div>
+</table> 
+<br>
     <div class=" buttons is-right">
       <button  type="button" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;" [routerLink]="['/lista-intensificaciones/intensificacion', asig.inteId]"><i class="bi bi-arrow-return-left"></i> Volver</button>
       <button  class="btn btn-success" style="margin-bottom: 10px;" [routerLink]="['/lista-intensificaciones/intensificacion', asig.inteId, 'asignaturas', asig._id, 'nueva-opinion']"><i class="bi bi-chat-square-text"></i> Escribe tu opinión</button>
