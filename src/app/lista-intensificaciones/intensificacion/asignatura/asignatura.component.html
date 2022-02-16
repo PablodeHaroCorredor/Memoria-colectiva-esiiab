@@ -8,7 +8,11 @@
   <table class="centered-content">
     <div *ngFor="let eti of etiquetas">
       <div class="body">
-        <button class="badge rounded-pill bg-secondary" (click)="borrarEtiqueta(eti._id)" style="font-size: larger; margin: 5px">{{eti.nombre}}</button>
+        <h6 class="badge rounded-pill bg-secondary"  style="font-size: larger; margin: 5px">{{eti.nombre}}
+          <button type="button" *ngIf="eti.userId == usuarioLogged" (click)="borrarEtiqueta(eti._id)" class="close" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </h6>
       </div>
     </div>
   </table>
