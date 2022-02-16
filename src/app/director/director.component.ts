@@ -94,7 +94,7 @@ public borrarEtiqueta(etiId:string){
   }
 
   public actualizarDirector(directorId:string, etiqueta:string){
-    this.directorService.updateDirector(directorId, etiqueta).subscribe(()=>{
+    this.directorService.updateDirector(directorId, etiqueta, this.loginService.getUserId()).subscribe(()=>{
 
       
     });

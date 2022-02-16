@@ -9,7 +9,11 @@
 <table class="centered-content">
   <div *ngFor="let eti of etiquetas">
     <div class="body">
-      <button class="badge rounded-pill bg-secondary" (click)="borrarEtiqueta(eti._id)" style="font-size: larger; margin: 5px">{{eti.nombre}}</button>
+      <h6 class="badge rounded-pill bg-secondary"  style="font-size: larger; margin: 5px">{{eti.nombre}}
+        <button class="centered-content" *ngIf="eti.userId == usuarioLogged" (click)="borrarEtiqueta(eti._id)" type="button" class="close" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </h6>
     </div>
   </div>
 </table>
@@ -43,13 +47,16 @@
 
 
 <h2 >Etiquetas</h2>
-  
-<div class="centered-content" *ngFor="let nombres of nombresEtiqueta; let i = index">
+  <div style="overflow-y: scroll; height:100px; width: 200px;">
+<div class="centered-content" *ngFor="let nombres of nombresEtiqueta; let i = index" >
   <div   class="row body">
     <button   class="btn btn-light"  (click)="actualizarDirector(directId, nombres)">{{nombres}}</button> 
     </div>
 </div>
-    
+</div>
+
+
+
  
   <div class=" buttons is-right">
     <button  type="button" class="btn btn-primary" style="margin-right: 10px; margin-bottom: 10px;" [routerLink]="['/lista-directores']"><i class="bi bi-arrow-return-left"></i> Volver</button>

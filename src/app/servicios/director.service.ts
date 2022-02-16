@@ -27,8 +27,8 @@ export class DirectorService {
     return this.apiCallService.get(`api/lista-directores/director/${directId}/etiquetas`);
   }
 
-  updateDirector(directId:string, nombre:string){
-    return this.apiCallService.post(`api/lista-directores/director/${directId}/etiquetas`, {directId,nombre});
+  updateDirector(directId:string, nombre:string, userId:string|null){
+    return this.apiCallService.post(`api/asignaturas/${directId}/etiquetas`, {directId,nombre, userId});
   }
 
   getValoracionesDirector(directId:string){

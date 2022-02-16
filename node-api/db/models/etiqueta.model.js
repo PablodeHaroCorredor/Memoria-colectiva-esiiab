@@ -12,6 +12,9 @@ const EtiquetaSchema = new mongoose.Schema({
     },
     asignaturaId:{
         type: mongoose.Schema.Types.ObjectId, ref:'Asignatura'
+    },
+    userId:{
+        type: mongoose.Schema.Types.ObjectId, ref:'Usuario'
     }
     
 })

@@ -233,7 +233,8 @@ app.get('/api/lista-directores/director/:asigId/etiquetas', (req,res)=>{
 app.post('/api/asignaturas/:directId/etiquetas', (req,res)=>{
     let newEtiqueta = new Etiqueta({
         nombre:req.body.nombre,
-        directorId:req.params.directId
+        directorId:req.params.directId,
+        userId: req.body.userId
     });
     newEtiqueta.save().then((etiquetaDoc) =>{
         res.send(etiquetaDoc);
@@ -245,7 +246,8 @@ app.post('/api/asignaturas/:directId/etiquetas', (req,res)=>{
 app.post('/api/asignatura/:asigId/etiquetas', (req,res)=>{
     let newEtiqueta = new Etiqueta({
         nombre:req.body.nombre,
-        asignaturaId:req.params.asigId
+        asignaturaId:req.params.asigId,
+        userId: req.body.userId
     });
     newEtiqueta.save().then((etiquetaDoc) =>{
         res.send(etiquetaDoc);

@@ -61,7 +61,7 @@ export class AsignaturaComponent implements OnInit {
 
 
   public actualizarAsignatura(asigId:string, etiqueta:string){
-    this.asignaturaService.updateAsginatura(asigId, etiqueta).subscribe(()=>{
+    this.asignaturaService.updateAsginatura(asigId, etiqueta, this.loginService.getUserId()).subscribe(()=>{
 
       
     });
