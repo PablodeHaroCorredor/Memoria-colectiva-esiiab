@@ -46,7 +46,7 @@
           <button class="btn btn-success" *ngIf="valoracion.userId == usuarioLogged " style="margin: 5px;" [routerLink]="['/lista-intensificaciones/intensificacion', inte._id, 'editar-opinion', valoracion._id]" max="5"><i class="bi bi-pencil"></i></button>
 
 
-        <button class="btn btn-primary" style="margin: 5px;"  max="5">{{valoracion.like}}<i class="bi bi-hand-thumbs-up"></i></button> 
+        <button class="btn btn-primary" style="margin: 5px;" (click)="darLike(valoracion._id, valoracion.likes +1)" max="5">{{valoracion.likes}}<i class="bi bi-hand-thumbs-up"></i></button> 
           
         
 

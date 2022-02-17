@@ -139,7 +139,7 @@ app.get('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id',(
 
 //GET valoraciones de una intensificacion
 app.get('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones',(req,res)=>{
-    Valoracion.find({inteId:req.params.inteId}).then((valoraciones)=>{
+    Valoracion.find({inteId:req.params.inteId}).populate('likes').then((valoraciones)=>{
         res.send(valoraciones);
     });
     
@@ -147,7 +147,7 @@ app.get('/api/lista-intensificaciones/intensificacion/:inteId/valoraciones',(req
 
 //GET valoraciones de una asignatura
 app.get('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id/valoraciones',(req,res)=>{
-    Valoracion.find({asigId:req.params.id}).then((valoraciones)=>{
+    Valoracion.find({asigId:req.params.id}).populate('likes').then((valoraciones)=>{
         res.send(valoraciones);
     });
     
@@ -156,21 +156,21 @@ app.get('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas/:id/va
 
 //GET valoraciones de director
 app.get('/api/lista-directores/director/:direcId/valoraciones',(req,res)=>{
-    Valoracion.find({directorId:req.params.direcId}).then((valoraciones)=>{
+    Valoracion.find({directorId:req.params.direcId}).populate('likes').then((valoraciones)=>{
         res.send(valoraciones);
     });
     
 })
 
 app.get('/api/valoraciones/:id',(req,res)=>{
-    Valoracion.find({_id:req.params.id}).then((valoraciones)=>{
+    Valoracion.find({_id:req.params.id}).populate('likes').then((valoraciones)=>{
         res.send(valoraciones);
     });
     
 })
 
 app.get('/api/valoraciones',(req,res)=>{
-    Valoracion.find({}).then((valoraciones)=>{
+    Valoracion.find({}).populate('likes').then((valoraciones)=>{
         res.send(valoraciones);
     });
     
@@ -413,9 +413,12 @@ app.post('/api/muii/valoraciones', (req, res)=> {
     })
 })
 
+
+
+
 //get likes
 app.get('/api/likes', (req, res)=> {
-    Valoracion.find({asigId: req.params.id}).then((Valoraciones)=>{
+    Like.find({}).then((Valoraciones)=>{
         res.send(Valoraciones);
     });
 })
@@ -457,7 +460,7 @@ app.delete('/api/likes/borrar/:id', (req, res)=> {
 
 //get valoraciones de Muii
 app.get('/api/muii/:id/valoraciones', (req, res)=> {
-    Valoracion.find({asigId: req.params.id}).then((Valoraciones)=>{
+    Valoracion.find({asigId: req.params.id}).populate('likes').then((Valoraciones)=>{
         res.send(Valoraciones);
     });
 })
@@ -507,7 +510,7 @@ app.post('/api/lista-intensificaciones/intensificacion/:inteId/asignaturas/:asig
     })
 })
 
-
+//actualizar lista likes valoracion
 app.patch('/api/valoraciones/:id', (req, res)=> {
     Valoracion.findOneAndUpdate({_id:req.params.id},{
         $set:req.body

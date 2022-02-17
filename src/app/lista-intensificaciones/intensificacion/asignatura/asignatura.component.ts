@@ -59,6 +59,18 @@ export class AsignaturaComponent implements OnInit {
       
   }
 
+  public darLike(valoracionId:string, like:Number){
+
+    
+    console.log("dar like")
+    this.asignaturaService.darValoracionLike(valoracionId, like).subscribe(()=>{
+    })
+    window.location.reload();
+    
+    //this.asignaturaService.editValoracionAsigLike().subscribe(()=>{
+    //})
+    
+  }
 
   public actualizarAsignatura(asigId:string, etiqueta:string){
     this.asignaturaService.updateAsginatura(asigId, etiqueta, this.loginService.getUserId()).subscribe(()=>{

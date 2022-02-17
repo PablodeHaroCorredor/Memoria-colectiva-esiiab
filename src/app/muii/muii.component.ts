@@ -43,43 +43,32 @@ export class MuiiComponent implements OnInit {
             this.asignaturaService.getValoracionesMuii(params.id).subscribe((valoraciones: any)=>{
               this.valoraciones=valoraciones;
               this.media = this.calcularMedia()
+              
           })
-
-          this.asignaturaService.getLikesValoracion(params.id).subscribe((likes: any)=>{
-            this.likes=likes;
-            this.sumaLikes = this.sumarLikes(likes)
-    
-          })
+        
+         
           })
           
-
+          
+          
     
 
   }
 
   
 
-
-  public sumarLikes(likes:any){
-    var sum= 0
-    console.log(likes)
-    for(let like of likes){
-      sum = sum +like.puntuacion
-   }
-
-   return sum
-  }
-
+ 
   
-  public darLike(valoracionId:string){
+  public darLike(valoracionId:string, like:Number){
+
     
     console.log("dar like")
-    this.asignaturaService.darValoracionLike(valoracionId,this.loginService.getUserId() ).subscribe(()=>{
+    this.asignaturaService.darValoracionLike(valoracionId, like).subscribe(()=>{
     })
 
+    window.location.reload();
     //this.asignaturaService.editValoracionAsigLike().subscribe(()=>{
     //})
-
     
   }
   

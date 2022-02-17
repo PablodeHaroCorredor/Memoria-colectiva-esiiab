@@ -89,9 +89,12 @@ export class AsignaturaService {
     return this.apiCallService.post(`api/asignaturas/${asigId}/etiquetas`, {asigId,nombre, userId});
   }
 
-  darValoracionLike(idValoracion:string, usuario:string|null){
-      return this.apiCallService.post(`api/${idValoracion}/likes`, {idValoracion, usuario});
+  darValoracionLike(idValoracion:string, likes:Number){
+      return this.apiCallService.patch(`api/valoraciones/${idValoracion}`, {idValoracion, likes});
   }
+
+
+
   updateAsignatura(asignatura:string, valoraciones:string[]){
     return this.apiCallService.put(`api/asignaturas/${asignatura}`, {valoraciones});
   }
@@ -102,9 +105,9 @@ export class AsignaturaService {
   }
 
 
-  getLikesValoracion( valoracion:string){
+  getLikesValoracion(valoracionId:string){
 
-    return this.apiCallService.get(`api/likes/${valoracion}`);
+    return this.apiCallService.get(`api/likes/${valoracionId}`);
    }
 
  
