@@ -35,7 +35,7 @@ export class RegisterComponent implements OnInit {
     this.buttionText = "Submiting...";
     let contraseña =  this.loginService.generatePassword()
     if(email.endsWith("@alu.uclm.es")){
-      this.loginService.signup(email,contraseña, username).subscribe((res: HttpResponse<any>) => {
+      this.loginService.signup(email.toLowerCase(),contraseña, username).subscribe((res: HttpResponse<any>) => {
         console.log(res);
         
       });

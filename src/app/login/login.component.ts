@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
 
 
   onLoginButtonClicked(email: string, contraseña: string) {
-    this.loginService.login(email, contraseña).subscribe((res: HttpResponse<any>) => {
+    this.loginService.login(email.toLowerCase(), contraseña).subscribe((res: HttpResponse<any>) => {
       
       if (res.status === 200) {
         // we have logged in successfully
